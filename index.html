@@ -49,9 +49,10 @@
             margin: 0 auto; /* Center the container */
             padding: 20px; /* Padding for content */
         }
-        @media (min-width: 768px) {
+        @media (min-width: 768px) and (max-width: 1499px) {
             .container {
-                padding: 20px; /* Padding for desktop */
+                padding: 20px;
+                margin: 0 60px; /* Margin for desktops narrower than 1500px */
             }
         }
     </style>
