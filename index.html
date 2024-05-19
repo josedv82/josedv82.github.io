@@ -44,13 +44,15 @@
             margin-top: 3px;
             text-decoration: none;
         }
-        .container {
-            margin: 0 10px;
+       .container {
+            max-width: 800px; /* Maximum width for desktop */
+            margin: 0 auto; /* Center the container */
+            padding: 0 10px; /* Padding for mobile */
         }
-        @media (min-width: 500) {
-        .container {
-            margin: 0 60px;
-          }
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 100px; /* Increased padding for desktop */
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
