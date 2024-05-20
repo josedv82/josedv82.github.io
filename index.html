@@ -249,18 +249,6 @@
 <p>&copy; 2024 Jose Fernandez.</p>
 </footer>
 
-
- /* method to shuffle the list of reflections every time the page loads */
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ul = document.getElementById('reflections');
-            const items = Array.from(ul.children);
-            items.sort(() => Math.random() - 0.5);
-            ul.innerHTML = '';
-            items.forEach(item => ul.appendChild(item));
-        });
-</script>
-
     
     
 </body>
