@@ -46,14 +46,14 @@
             text-decoration: none;
         }
         .container {
-            max-width: 1500px; /* Maximum width for desktop */
-            margin: 0 auto; /* Center the container */
-            padding: 20px; /* Padding for content */
+            max-width: 1500px; 
+            margin: 0 auto; 
+            padding: 20px; 
         }
         @media (min-width: 768px) and (max-width: 1499px) {
             .container {
                 padding: 20px;
-                margin: 0 60px; /* Margin for desktops narrower than 1500px */
+                margin: 0 60px; 
             }
         }
         footer {
@@ -107,7 +107,7 @@
     <h3 style="margin-bottom:0; padding-bottom:0; display:block;">Random Reflections</h3>
     <p class="dark-gray" style="margin-top:0; padding-top:0; display:block;">Ongoing list of thoughts and takeaways from my career in High-Performance sporting environments.</p>
   
- <ul>
+ <ul id="reflections">
         <li>In most domains (S&C, Data Analysis, etc.) 80% is basics done well. Experiment with the other 20%. Integrate success from that 20% into the 80% over time.</li>
         <div class="half-break3"></div>
         <li>You are only as good as what you can get your athletes (or others) to do. - Carl Valle</li>
@@ -248,6 +248,20 @@
 <footer>
 <p>&copy; 2024 Jose Fernandez.</p>
 </footer>
+
+
+ /* method to shuffle the list of reflections every time the page loads */
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ul = document.getElementById('reflections');
+            const items = Array.from(ul.children);
+            items.sort(() => Math.random() - 0.5);
+            ul.innerHTML = '';
+            items.forEach(item => ul.appendChild(item));
+        });
+</script>
+
+    
     
 </body>
 </html>
