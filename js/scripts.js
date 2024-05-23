@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var span = document.getElementsByClassName("close")[0];
     var modalText = document.getElementById("modal-text");
     var copyIcon = document.getElementById("copy-icon");
+    var twitterIcon = document.getElementById("twitter-icon");
     var toast = document.getElementById("toast");
 
     // Close modal when the user clicks on <span> (x)
@@ -47,6 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Twitter share functionality
+    twitterIcon.onclick = function() {
+        var textToShare = modalText.innerText + ' @jfernadez__';
+        var twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`;
+        window.open(twitterUrl, '_blank');
+    }
+
     // Show toast message
     function showToast(message) {
         toast.innerText = message;
@@ -54,3 +62,4 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
     }
 });
+
