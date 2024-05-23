@@ -57,14 +57,24 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 12px;  /* Ensure consistent font size */
 }
-.github-link {
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.footer-content p, .footer-content a {
+  margin: 0;
+  padding: 0;
   color: gray;
+  font-size: 12px;  /* Ensure consistent font size */
   text-decoration: none;
 }
-.github-link:hover {
+.footer-content a:hover {
   color: black;
 }
+
 
 
 /* Modal CSS */
