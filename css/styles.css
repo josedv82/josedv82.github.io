@@ -76,7 +76,6 @@ footer {
 }
 
 
-
 /* Modal CSS */
 .modal {
   display: none; 
@@ -109,17 +108,20 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
-.copy-icon {
+#modal-text-container {
+  display: flex;
+  align-items: center;
+}
+.copy-icon, .twitter-icon {
   margin-left: 10px;
   font-size: 24px;
   color: gray;
   cursor: pointer;
-  vertical-align: middle;
 }
 .copy-icon.clicked {
   color: green;
 }
-.copy-icon:hover {
+.copy-icon:hover, .twitter-icon:hover {
   color: black;
 }
 
