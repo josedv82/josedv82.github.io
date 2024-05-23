@@ -104,11 +104,11 @@ footer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 10px; 
+  padding-top: 20px; 
 }
 .copy-icon, .twitter-icon {
-  margin-left: 10px;
-  font-size: 20px; 
+  margin-left: 5px;
+  font-size: 15px; 
   color: gray;
   cursor: pointer;
   position: relative; 
@@ -118,31 +118,6 @@ footer {
 }
 .copy-icon:hover, .twitter-icon:hover {
   color: black;
-}
-
-/* Tooltip CSS */
-.copy-icon:hover::after, .twitter-icon:hover::after {
-  content: attr(title);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 100%;
-  margin-bottom: 8px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #333;
-  color: white;
-  white-space: nowrap;
-  font-size: 12px;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.copy-icon:hover::after {
-  opacity: 1;
-}
-.twitter-icon:hover::after {
-  opacity: 1;
 }
 
 
