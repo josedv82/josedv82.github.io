@@ -39,10 +39,20 @@ document.addEventListener('DOMContentLoaded', function () {
     copyIcon.onclick = function() {
         var textToCopy = modalText.innerText;
         navigator.clipboard.writeText(textToCopy).then(function() {
-            alert('Text copied to clipboard');
+            showToast('Text copied to clipboard');
+            copyIcon.classList.add('clicked');
         }).catch(function(err) {
-            alert('Failed to copy text: ', err);
+            showToast('Failed to copy text');
         });
     }
+
+    // Show toast message
+    function showToast(message) {
+        var toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.className = "show";
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+    }
 });
+
 
