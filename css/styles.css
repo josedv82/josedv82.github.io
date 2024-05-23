@@ -88,6 +88,17 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
+.copy-icon {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+}
+.copy-icon:hover {
+  color: #000;
+}
 
 
 /* Change bullet point color on hover */
