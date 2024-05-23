@@ -88,3 +88,9 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
+
+
+/* Change bullet point color on hover */
+ul#reflections li:hover {
+    color: blue;
+}
