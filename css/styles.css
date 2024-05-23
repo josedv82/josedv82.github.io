@@ -54,6 +54,16 @@ footer {
   position: relative;
   bottom: 0;
   width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.github-link {
+  color: gray;
+  text-decoration: none;
+}
+.github-link:hover {
+  color: black;
 }
 
 
