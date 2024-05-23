@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById("modal");
     var span = document.getElementsByClassName("close")[0];
     var modalText = document.getElementById("modal-text");
+    var copyIcon = document.getElementById("copy-icon");
 
     // Close modal when the user clicks on <span> (x)
     span.onclick = function() {
@@ -33,4 +34,15 @@ document.addEventListener('DOMContentLoaded', function () {
             clearTimeout(timer);
         });
     });
+
+    // Copy to clipboard functionality
+    copyIcon.onclick = function() {
+        var textToCopy = modalText.innerText;
+        navigator.clipboard.writeText(textToCopy).then(function() {
+            alert('Text copied to clipboard');
+        }).catch(function(err) {
+            alert('Failed to copy text: ', err);
+        });
+    }
 });
+
