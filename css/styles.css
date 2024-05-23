@@ -95,6 +95,7 @@ footer {
   border: 1px solid #888;
   width: 80%;
   position: relative;
+  border-radius: 12px; /* Rounded corners */
 }
 .close {
   color: #aaa;
@@ -109,14 +110,19 @@ footer {
   cursor: pointer;
 }
 #modal-text-container {
+  margin-bottom: 10px;
+}
+.icon-container {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 .copy-icon, .twitter-icon {
   margin-left: 10px;
-  font-size: 24px;
+  font-size: 20px; /* Slightly smaller size */
   color: gray;
   cursor: pointer;
+  position: relative; /* Needed for tooltip */
 }
 .copy-icon.clicked {
   color: green;
