@@ -1,15 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById("modal");
-    var span = document.getElementsByClassName("close")[0];
     var modalText = document.getElementById("modal-text");
     var copyIcon = document.getElementById("copy-icon");
     var twitterIcon = document.getElementById("twitter-icon");
     var toast = document.getElementById("toast");
 
-    // Close modal when the user clicks on <span> (x)
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
 
     // Close modal when the user clicks anywhere outside of the modal
     window.onclick = function(event) {
