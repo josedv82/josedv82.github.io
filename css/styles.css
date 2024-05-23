@@ -95,19 +95,7 @@ footer {
   border: 1px solid #888;
   width: 80%;
   position: relative;
-  border-radius: 12px; /* Rounded corners */
-}
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+  border-radius: 12px; 
 }
 #modal-text-container {
   margin-bottom: 10px;
@@ -116,13 +104,14 @@ footer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding-top: 10px; 
 }
 .copy-icon, .twitter-icon {
   margin-left: 10px;
-  font-size: 20px; /* Slightly smaller size */
+  font-size: 20px; 
   color: gray;
   cursor: pointer;
-  position: relative; /* Needed for tooltip */
+  position: relative; 
 }
 .copy-icon.clicked {
   color: green;
@@ -130,6 +119,32 @@ footer {
 .copy-icon:hover, .twitter-icon:hover {
   color: black;
 }
+
+/* Tooltip CSS */
+.copy-icon:hover::after, .twitter-icon:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100%;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.copy-icon:hover::after {
+  opacity: 1;
+}
+.twitter-icon:hover::after {
+  opacity: 1;
+}
+
 
 
 /* Toast message CSS */
