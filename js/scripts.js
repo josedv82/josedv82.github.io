@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var span = document.getElementsByClassName("close")[0];
     var modalText = document.getElementById("modal-text");
     var copyIcon = document.getElementById("copy-icon");
+    var toast = document.getElementById("toast");
 
     // Close modal when the user clicks on <span> (x)
     span.onclick = function() {
@@ -48,9 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show toast message
     function showToast(message) {
-        var toast = document.getElementById("toast");
         toast.innerText = message;
-        toast.className = "show";
+        toast.className = "toast show";
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
     }
 });
