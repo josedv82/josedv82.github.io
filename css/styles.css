@@ -44,7 +44,9 @@ p, li {font-size: 12px; text-align: justify;}
     color: gray;
     margin-left: 5px;
     cursor: pointer;
+    display: inline;
 }
+
 
 .container {
     max-width: 1500px; 
