@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (icon) {
                     icon.style.display = 'none';
                 }
-                modalText.innerHTML = item.innerText; // Use innerText to avoid copying HTML tags
+                modalText.innerText = item.innerText; // Use innerText to avoid copying HTML tags
                 
                 if (icon) {
                     icon.style.display = 'inline';
@@ -119,6 +119,3 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
     }
 });
-
-});
-
