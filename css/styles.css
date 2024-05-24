@@ -37,6 +37,15 @@ p, li {font-size: 12px; text-align: justify;}
     margin-top: 3px;
     text-decoration: none;
 }
+
+/* Text icon next to quotes with illustrations */
+.text-icon {
+    font-size: 14px;
+    color: gray;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 .container {
     max-width: 1500px; 
     margin: 0 auto; 
