@@ -1,10 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById("modal");
     var modalText = document.getElementById("modal-text");
+    var modalIllustration = document.getElementById("modal-illustration");
     var copyIcon = document.getElementById("copy-icon");
     var twitterIcon = document.getElementById("twitter-icon");
     var toast = document.getElementById("toast");
 
+    // Function to check if an image exists
+    function imageExists(imageUrl, callback) {
+        var img = new Image();
+        img.onload = function() { callback(true); };
+        img.onerror = function() { callback(false); };
+        img.src = imageUrl;
+    }
 
     // Close modal when the user clicks anywhere outside of the modal
     window.onclick = function(event) {
@@ -19,7 +27,17 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('mousedown', function () {
             timer = setTimeout(function () {
                 modalText.innerHTML = item.innerHTML;
-                modal.style.display = "block";
+                var illustrationUrl = `illustrations/${item.id}.png`; // Assuming illustrations are named by unique IDs
+                
+                imageExists(illustrationUrl, function(exists) {
+                    if (exists) {
+                        modalIllustration.src = illustrationUrl;
+                        modalIllustration.style.display = "block";
+                    } else {
+                        modalIllustration.style.display = "none";
+                    }
+                    modal.style.display = "block";
+                });
             }, 1000); // 1000ms for long press
         });
 
@@ -57,4 +75,3 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
     }
 });
-
