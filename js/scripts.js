@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         imageExists(illustrationUrl, function(exists) {
             if (exists) {
                 var icon = document.createElement('i');
-                icon.className = 'fas fa-image text-icon';
+                icon.className = 'fas fa-pencil text-icon';
                 icon.style.display = 'none'; // Ensure icon is hidden by default
                 item.appendChild(icon);
                 item.setAttribute('data-illustration', 'true');
