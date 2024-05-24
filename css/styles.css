@@ -1,9 +1,22 @@
-body {font-family: 'Consolas', 'Monaco', monospace;}
-p, li {font-size: 12px; text-align: justify;}
-.dark-gray {color: #696969;}
-.blue {color: #2A629A;}
-.half-break {margin: 0.1em 0;}
-.half-break3 {margin: 0.3em 0;}
+body {
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+p, li {
+    font-size: 12px;
+    text-align: justify;
+}
+.dark-gray {
+    color: #696969;
+}
+.blue {
+    color: #2A629A;
+}
+.half-break {
+    margin: 0.1em 0;
+}
+.half-break3 {
+    margin: 0.3em 0;
+}
 .profile-pic {
     width: 140px;
     height: 140px;
@@ -47,149 +60,151 @@ p, li {font-size: 12px; text-align: justify;}
     display: none; /* Hide by default */
 }
 
+ul#reflections li:hover .text-icon {
+    display: inline; /* Show on hover */
+}
+
 .container {
-    max-width: 1500px; 
-    margin: 0 auto; 
-    padding: 20px; 
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
 }
 @media (min-width: 768px) and (max-width: 1499px) {
     .container {
         padding: 20px;
-        margin: 0 60px; 
+        margin: 0 60px;
     }
 }
 footer {
-  color: gray;
-  padding: 10px 20px;
-  position: relative;
-  bottom: 0;
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;  /* Ensure consistent font size */
+    color: gray;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 0;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;  /* Ensure consistent font size */
 }
 .footer-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 .footer-content p, .footer-content a {
-  margin: 0;
-  padding: 0;
-  color: gray;
-  font-size: 12px;  /* Ensure consistent font size */
-  text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: gray;
+    font-size: 12px;  /* Ensure consistent font size */
+    text-decoration: none;
 }
 .footer-content a:hover {
-  color: black;
+    color: black;
 }
-
 
 /* Modal CSS */
 .modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.4); 
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  position: relative;
-  border-radius: 12px; 
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    border-radius: 12px;
+    text-align: center; /* Center the content */
 }
 
 #modal-illustration {
-  display: none;
-  max-width: 100%;
-  margin-top: 10px;
+    display: none;
+    max-width: 100%;
+    margin-top: 10px;
 }
 
 #modal-text-container {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 .icon-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 20px; 
+    display: flex;
+    justify-content: center; /* Center the icons */
+    align-items: center;
+    padding-top: 20px;
 }
+
 .copy-icon, .twitter-icon {
-  margin-left: 5px;
-  font-size: 15px; 
-  color: gray;
-  cursor: pointer;
-  position: relative; 
+    margin-left: 5px;
+    font-size: 15px;
+    color: gray;
+    cursor: pointer;
+    position: relative;
 }
+
 .copy-icon.clicked {
-  color: green;
+    color: green;
 }
+
 .copy-icon:hover, .twitter-icon:hover {
-  color: black;
+    color: black;
 }
-
-
 
 /* Toast message CSS */
 .toast {
-  visibility: hidden;
-  min-width: 250px;
-  background-color: #333;
-  color: #00FF00; /* Bright green text */
-  text-align: center;
-  border-radius: 12px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  top: 20px;
-  transform: translateX(-50%);
-  font-size: 17px;
-  font-family: Consolas, 'Courier New', monospace;
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #00FF00; /* Bright green text */
+    text-align: center;
+    border-radius: 12px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    font-size: 17px;
+    font-family: Consolas, 'Courier New', monospace;
 }
 
 .toast.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 @-webkit-keyframes fadein {
-  from {opacity: 0;} 
-  to {opacity: 1;}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 @keyframes fadein {
-  from {opacity: 0;}
-  to {opacity: 1;}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-  from {opacity: 1;} 
-  to {opacity: 0;}
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {opacity: 1;}
-  to {opacity: 0;}
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
-
-
 
 /* Change bullet point color on hover */
 ul#reflections li:hover {
     color: blue;
 }
 
-ul#reflections li:hover .text-icon {
-    display: inline; /* Show on hover */
-}
