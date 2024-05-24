@@ -14,30 +14,45 @@ document.addEventListener('DOMContentLoaded', function () {
         img.src = imageUrl;
     }
 
-    // Close modal when the user clicks anywhere outside of the modal
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+    // Function to check and append icon if illustration exists
+    function checkAndAppendIcon(item) {
+        var illustrationUrl = `illustrations/${item.id}.png`;
+        imageExists(illustrationUrl, function(exists) {
+            if (exists) {
+                var icon = document.createElement('i');
+                icon.className = 'fas fa-image text-icon';
+                item.appendChild(icon);
+                item.setAttribute('data-illustration', 'true');
+            } else {
+                item.setAttribute('data-illustration', 'false');
+            }
+        });
     }
 
-    var timer;
-
+    // Initialize and check each quote
     document.querySelectorAll('ul#reflections li').forEach(function (item) {
+        checkAndAppendIcon(item);
+
+        var timer;
         item.addEventListener('mousedown', function () {
             timer = setTimeout(function () {
                 modalText.innerHTML = item.innerHTML;
                 var illustrationUrl = `illustrations/${item.id}.png`; // Assuming illustrations are named by unique IDs
                 
-                imageExists(illustrationUrl, function(exists) {
-                    if (exists) {
-                        modalIllustration.src = illustrationUrl;
-                        modalIllustration.style.display = "block";
-                    } else {
-                        modalIllustration.style.display = "none";
-                    }
-                    modal.style.display = "block";
-                });
+                if (item.getAttribute('data-illustration') === 'true') {
+                    imageExists(illustrationUrl, function(exists) {
+                        if (exists) {
+                            modalIllustration.src = illustrationUrl;
+                            modalIllustration.style.display = "block";
+                        } else {
+                            modalIllustration.style.display = "none";
+                        }
+                    });
+                } else {
+                    modalIllustration.style.display = "none";
+                }
+                
+                modal.style.display = "block";
             }, 1000); // 1000ms for long press
         });
 
@@ -49,6 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
             clearTimeout(timer);
         });
     });
+
+    // Close modal when the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     // Copy to clipboard functionality
     copyIcon.onclick = function() {
@@ -75,3 +97,4 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
     }
 });
+
