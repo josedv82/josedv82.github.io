@@ -44,9 +44,8 @@ p, li {font-size: 12px; text-align: justify;}
     color: gray;
     margin-left: 5px;
     cursor: pointer;
-    display: inline;
+    display: none; /* Hide by default */
 }
-
 
 .container {
     max-width: 1500px; 
@@ -108,6 +107,13 @@ footer {
   position: relative;
   border-radius: 12px; 
 }
+
+#modal-illustration {
+  display: none;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
 #modal-text-container {
   margin-bottom: 10px;
 }
@@ -182,4 +188,8 @@ footer {
 /* Change bullet point color on hover */
 ul#reflections li:hover {
     color: blue;
+}
+
+ul#reflections li:hover .text-icon {
+    display: inline; /* Show on hover */
 }
