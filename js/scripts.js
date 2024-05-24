@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (exists) {
                 var icon = document.createElement('i');
                 icon.className = 'fas fa-image text-icon';
+                icon.style.display = 'none'; // Ensure icon is hidden by default
                 item.appendChild(icon);
                 item.setAttribute('data-illustration', 'true');
             } else {
@@ -33,12 +34,33 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('ul#reflections li').forEach(function (item) {
         checkAndAppendIcon(item);
 
+        item.addEventListener('mouseenter', function () {
+            if (item.getAttribute('data-illustration') === 'true') {
+                item.querySelector('.text-icon').style.display = 'inline';
+            }
+        });
+
+        item.addEventListener('mouseleave', function () {
+            if (item.getAttribute('data-illustration') === 'true') {
+                item.querySelector('.text-icon').style.display = 'none';
+            }
+        });
+
         var timer;
         item.addEventListener('mousedown', function () {
             timer = setTimeout(function () {
-                modalText.innerHTML = item.innerHTML;
-                var illustrationUrl = `illustrations/${item.id}.png`; // Assuming illustrations are named by unique IDs
+                // Remove the icon temporarily to avoid copying it to the modal text
+                var icon = item.querySelector('.text-icon');
+                if (icon) {
+                    icon.style.display = 'none';
+                }
+                modalText.innerHTML = item.innerText; // Use innerText to avoid copying HTML tags
                 
+                if (icon) {
+                    icon.style.display = 'inline';
+                }
+
+                var illustrationUrl = `illustrations/${item.id}.png`;
                 if (item.getAttribute('data-illustration') === 'true') {
                     imageExists(illustrationUrl, function(exists) {
                         if (exists) {
@@ -96,5 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         toast.className = "toast show";
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
     }
+});
+
 });
 
