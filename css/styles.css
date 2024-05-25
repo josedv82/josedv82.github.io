@@ -104,6 +104,22 @@ footer {
     color: black;
 }
 
+
+/* Link colors */
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: #3ecd8d;
+    text-decoration: none; /* Remove underline if desired */
+}
+
+a:hover {
+    text-decoration: underline; /* Optional: underline on hover */
+}
+
+
 /* Modal CSS */
 .modal {
     display: none;
