@@ -7,6 +7,9 @@ p, li {
     font-size: 12px;
     text-align: justify;
 }
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* White color for headers */
+}
 .dark-gray {
     color: #696969;
 }
