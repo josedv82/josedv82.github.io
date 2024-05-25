@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #696969;
 }
 .blue {
-    color: #2A629A;
+    color: #3ecd8d;
 }
 .half-break {
     margin: 0.1em 0;
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Text icon next to quotes with illustrations */
 .text-icon {
     font-size: 14px;
-    color: gray;
+    color: #ffffff;
     margin-left: 5px;
     cursor: pointer;
     display: none; /* Hide by default */
