@@ -1,7 +1,7 @@
 body {
     font-family: 'Consolas', 'Monaco', monospace;
     background-color: #1c1c1c;
-    color: #f0f0f0; /* Light text color for readability */
+    color: #636363; /* Light text color for readability */
 }
 p, li {
     font-size: 12px;
