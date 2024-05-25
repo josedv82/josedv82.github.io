@@ -1,20 +1,18 @@
 body {
     font-family: 'Consolas', 'Monaco', monospace;
-    background-color: #1c1c1c;
-    color: #b3b2b0; /* Light text color for readability */
 }
 p, li {
     font-size: 12px;
     text-align: justify;
 }
 h1, h2, h3, h4, h5, h6 {
-    color: #ffffff; /* White color for headers */
+    color: #020122;
 }
 .dark-gray {
-    color: #696969;
+    color: #04023b;
 }
 .blue {
-    color: #848484;
+    color: #04023b;
 }
 .half-break {
     margin: 0.1em 0;
@@ -59,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Text icon next to quotes with illustrations */
 .text-icon {
     font-size: 14px;
-    color: #ffffff;
+    color: #030127;
     margin-left: 5px;
     cursor: pointer;
     display: none; /* Hide by default */
@@ -111,7 +109,7 @@ a:link,
 a:visited,
 a:hover,
 a:active {
-    color: #36996b;
+    color: #ff521b;
     text-decoration: none; /* Remove underline if desired */
 }
 
@@ -134,7 +132,6 @@ a:hover {
 }
 .modal-content {
     background-color: #232323;
-    color: #b3b2b0;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -169,21 +166,16 @@ a:hover {
     cursor: pointer;
     position: relative;
 }
-
-.copy-icon.clicked {
-    color: green;
-}
-
 .copy-icon:hover, .twitter-icon:hover {
-    color: black;
+    color: #ff521b;
 }
 
 /* Toast message CSS */
 .toast {
     visibility: hidden;
     min-width: 250px;
-    background-color: #333;
-    color: #00FF00; /* Bright green text */
+    background-color: #ff521b;
+    color: #030127;
     text-align: center;
     border-radius: 12px;
     padding: 16px;
@@ -224,5 +216,5 @@ a:hover {
 
 /* Change bullet point color on hover */
 ul#reflections li:hover {
-    color: #3ecd8d;
+    color: #030127;
 }
