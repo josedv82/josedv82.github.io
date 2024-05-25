@@ -223,5 +223,5 @@ a:hover {
 
 /* Change bullet point color on hover */
 ul#reflections li:hover {
-    color: blue;
+    color: #3ecd8d;
 }
