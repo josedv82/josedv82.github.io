@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
     color: white; /* Set icon color to white */
     background-color: #ff521b; /* Set background color to orange */
     margin-left: 5px;
-    padding: 8px 12px; /* Reduce padding for smaller button appearance */
+    padding: 4px 8px; /* Reduce padding for smaller button appearance */
     border-radius: 50px; /* Make icons rounded */
     text-align: center;
     display: inline-block; /* Ensure proper block-level display */
