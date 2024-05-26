@@ -46,9 +46,6 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.3s ease; /* Optional: Add transition for smooth background color change */
 }
 
-.icon-container a:hover {
-    background-color: darkorange; /* Optional: Change background color on hover */
-}
 
 .profile-container {
     display: flex;
@@ -60,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 .x-icon {
     font-family: sans-serif;
     font-size: 24px;
-    color: gray;
+    color: white;
     margin-left: 5px;
     margin-top: 3px;
     text-decoration: none;
