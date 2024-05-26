@@ -28,8 +28,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .profile-pic {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     border-radius: 5%;
     object-fit: cover;
     float: left;
