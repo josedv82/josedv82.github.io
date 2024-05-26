@@ -11,7 +11,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #020122;
 }
 
-.dark-gray, .blue {
+.dark-gray {
+    color: #070363;
+}
+
+.blue {
     color: #070363;
 }
 
@@ -41,32 +45,35 @@ h1, h2, h3, h4, h5, h6 {
 
 .icon-container {
     display: flex;
-    margin-top: 0;
+    margin-top: 0px;
 }
 
-.icon-container a {
-    width: 20px;
+.icon-container a,
+.modal-icon {
+    width: 20px; /* Ensure equal width and height */
     height: 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #ff521b;
+    font-size: 16px; /* Reduce font size */
+    color: white; /* Set icon color to white */
+    background-color: #ff521b; /* Set background color to orange */
     margin-left: 5px;
-    padding: 4px 8px;
-    border-radius: 50px;
+    padding: 4px 8px; /* Reduce padding for smaller button appearance */
+    border-radius: 50px; /* Make icons rounded */
     text-align: center;
-    display: inline-block;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    border: none;
-    cursor: pointer;
+    display: inline-block; /* Ensure proper block-level display */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
 }
 
-.icon-container a i {
-    color: white;
+.icon-container a i,
+.modal-icon i {
+    color: white; /* Set icon color to white */
 }
 
-.icon-container a:hover {
-    background-color: #070363;
+.icon-container a:hover,
+.modal-icon:hover {
+    background-color: #070363; /* Change background color on hover */
 }
 
 .profile-container {
@@ -74,19 +81,20 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: flex-start;
     float: left;
-    margin-right: 0;
+    margin-right: 0px;
 }
 
+/* Text icon next to quotes with illustrations */
 .text-icon {
     font-size: 14px;
     color: #030127;
     margin-left: 5px;
     cursor: pointer;
-    display: none;
+    display: none; /* Hide by default */
 }
 
 ul#reflections li:hover .text-icon {
-    display: inline;
+    display: inline; /* Show on hover */
 }
 
 .container {
@@ -111,7 +119,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: 12px;  /* Ensure consistent font size */
 }
 
 .footer-content {
@@ -124,19 +132,25 @@ footer {
     margin: 0;
     padding: 0;
     color: gray;
-    font-size: 12px;
+    font-size: 12px;  /* Ensure consistent font size */
     text-decoration: none;
 }
 
-a, a:link, a:visited, a:hover, a:active {
+/* Link colors */
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
     color: #ff521b;
-    text-decoration: none;
+    text-decoration: none; /* Remove underline if desired */
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Optional: underline on hover */
 }
 
+/* Modal CSS */
 .modal {
     display: none;
     position: fixed;
@@ -158,7 +172,7 @@ a:hover {
     max-width: 600px;
     position: relative;
     border-radius: 12px;
-    text-align: center;
+    text-align: center; /* Center the content */
 }
 
 #modal-illustration {
@@ -173,7 +187,7 @@ a:hover {
 
 .icon-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center the icons */
     align-items: center;
     padding-top: 20px;
 }
@@ -190,6 +204,7 @@ a:hover {
     color: #ff521b;
 }
 
+/* Toast message CSS */
 .toast {
     visibility: hidden;
     min-width: 250px;
@@ -233,6 +248,8 @@ a:hover {
     to {opacity: 0;}
 }
 
+/* Change bullet point color on hover */
 ul#reflections li:hover {
     color: #ff521b;
 }
+
