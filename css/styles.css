@@ -37,10 +37,10 @@ h1, h2, h3, h4, h5, h6 {
 .icon-container a {
     font-size: 20px;
     color: white; /* Set icon color to white */
-    background-color: orange; /* Set background color to orange */
+    background-color: #ff521b; /* Set background color to orange */
     margin-left: 5px;
     padding: 10px 15px; /* Add padding for button-like appearance */
-    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+    border-radius: 50px; /* Optional: Add border radius for rounded corners */
     text-align: center;
     display: inline-block; /* Ensure proper block-level display */
     text-decoration: none; /* Remove underline */
