@@ -170,14 +170,14 @@ a:hover {
     padding-top: 20px;
 }
 
-.copy-icon, .ttwitter-icon {
+.copy-icon, .twitter-icon {
     margin-left: 5px;
     font-size: 15px;
     color: gray;
     cursor: pointer;
     position: relative;
 }
-.copy-icon:hover, .ttwitter-icon:hover {
+.copy-icon:hover, .twitter-icon:hover {
     color: #ff521b;
 }
 
@@ -229,4 +229,5 @@ a:hover {
 ul#reflections li:hover {
     color: #ff521b;
 }
+
 
