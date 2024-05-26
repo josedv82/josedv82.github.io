@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 var icon = document.createElement('i');
                 icon.className = 'fas fa-pencil text-icon';
                 icon.style.display = 'none'; // Ensure icon is hidden by default
+                icon.addEventListener('click', function() {
+                    openModal(item);
+                });
                 item.appendChild(icon);
                 item.setAttribute('data-illustration', 'true');
             } else {
@@ -49,32 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var timer;
         item.addEventListener('mousedown', function () {
             timer = setTimeout(function () {
-                // Remove the icon temporarily to avoid copying it to the modal text
-                var icon = item.querySelector('.text-icon');
-                if (icon) {
-                    icon.style.display = 'none';
-                }
-                modalText.innerText = item.innerText; // Use innerText to avoid copying HTML tags
-                
-                if (icon) {
-                    icon.style.display = 'inline';
-                }
-
-                var illustrationUrl = `illustrations/${item.id}.png`;
-                if (item.getAttribute('data-illustration') === 'true') {
-                    imageExists(illustrationUrl, function(exists) {
-                        if (exists) {
-                            modalIllustration.src = illustrationUrl;
-                            modalIllustration.style.display = "block";
-                        } else {
-                            modalIllustration.style.display = "none";
-                        }
-                    });
-                } else {
-                    modalIllustration.style.display = "none";
-                }
-                
-                modal.style.display = "block";
+                openModal(item);
             }, 1000); // 1000ms for long press
         });
 
@@ -86,6 +64,35 @@ document.addEventListener('DOMContentLoaded', function () {
             clearTimeout(timer);
         });
     });
+
+    function openModal(item) {
+        // Remove the icon temporarily to avoid copying it to the modal text
+        var icon = item.querySelector('.text-icon');
+        if (icon) {
+            icon.style.display = 'none';
+        }
+        modalText.innerText = item.innerText; // Use innerText to avoid copying HTML tags
+        
+        if (icon) {
+            icon.style.display = 'inline';
+        }
+
+        var illustrationUrl = `illustrations/${item.id}.png`;
+        if (item.getAttribute('data-illustration') === 'true') {
+            imageExists(illustrationUrl, function(exists) {
+                if (exists) {
+                    modalIllustration.src = illustrationUrl;
+                    modalIllustration.style.display = "block";
+                } else {
+                    modalIllustration.style.display = "none";
+                }
+            });
+        } else {
+            modalIllustration.style.display = "none";
+        }
+        
+        modal.style.display = "block";
+    }
 
     // Close modal when the user clicks anywhere outside of the modal
     window.onclick = function(event) {
