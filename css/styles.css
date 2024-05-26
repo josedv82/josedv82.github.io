@@ -35,8 +35,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .icon-container a {
     font-size: 20px;
-    color: white; /* Change icon color to white */
-    background-color: orange; /* Set background color to orange */
+    color: white; 
+    background-color: #ff521b;
     margin-left: 5px;
     padding: 10px; /* Add padding for button-like appearance */
     border-radius: 5px; /* Optional: Add border radius for rounded corners */
