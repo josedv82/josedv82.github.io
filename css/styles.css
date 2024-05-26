@@ -46,6 +46,9 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.3s ease; /* Optional: Add transition for smooth background color change */
 }
 
+.icon-container a i {
+    color: white; /* Set icon color to white */
+}
 
 .profile-container {
     display: flex;
