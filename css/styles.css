@@ -35,11 +35,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon-container a {
-    font-size: 20px;
+    font-size: 15px;
     color: white; /* Set icon color to white */
     background-color: #ff521b; /* Set background color to orange */
     margin-left: 5px;
-    padding: 10px 15px; /* Add padding for button-like appearance */
+    padding: 5px 10px; /* Add padding for button-like appearance */
     border-radius: 50px; /* Make icons rounded */
     text-align: center;
     display: inline-block; /* Ensure proper block-level display */
