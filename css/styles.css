@@ -35,9 +35,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 .icon-container a {
     font-size: 20px;
-    color: gray;
+    color: white; /* Change icon color to white */
+    background-color: orange; /* Set background color to orange */
     margin-left: 5px;
+    padding: 10px; /* Add padding for button-like appearance */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+    text-align: center;
+    display: inline-block; /* Ensure proper block-level display */
+    text-decoration: none; /* Remove underline if any */
+    transition: background-color 0.3s ease; /* Optional: Add transition for smooth background color change */
 }
+
+.icon-container a:hover {
+    background-color: darkorange; /* Optional: Change background color on hover */
+}
+
 .profile-container {
     display: flex;
     flex-direction: column;
