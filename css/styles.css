@@ -33,17 +33,20 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     margin-top: 0px;
 }
+
 .icon-container a {
     font-size: 20px;
-    color: white; 
-    background-color: #ff521b;
+    color: white; /* Set icon color to white */
+    background-color: orange; /* Set background color to orange */
     margin-left: 5px;
-    padding: 10px; /* Add padding for button-like appearance */
-    border-radius: 25px; /* Optional: Add border radius for rounded corners */
+    padding: 10px 15px; /* Add padding for button-like appearance */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
     text-align: center;
     display: inline-block; /* Ensure proper block-level display */
-    text-decoration: none; /* Remove underline if any */
-    transition: background-color 0.3s ease; /* Optional: Add transition for smooth background color change */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
 }
 
 .icon-container a i {
@@ -56,14 +59,6 @@ h1, h2, h3, h4, h5, h6 {
     align-items: flex-start;
     float: left;
     margin-right: 0px;
-}
-.x-icon {
-    font-family: sans-serif;
-    font-size: 24px;
-    color: white;
-    margin-left: 5px;
-    margin-top: 3px;
-    text-decoration: none;
 }
 
 /* Text icon next to quotes with illustrations */
