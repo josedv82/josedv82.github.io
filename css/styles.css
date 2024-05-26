@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon-container a:hover {
-    background-color: darkorange; /* Change background color on hover */
+    background-color: #070363; /* Change background color on hover */
 }
 
 .profile-container {
