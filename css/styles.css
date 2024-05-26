@@ -1,25 +1,28 @@
 body {
     font-family: 'Consolas', 'Monaco', monospace;
 }
+
 p, li {
     font-size: 12px;
     text-align: justify;
 }
+
 h1, h2, h3, h4, h5, h6 {
     color: #020122;
 }
-.dark-gray {
+
+.dark-gray, .blue {
     color: #070363;
 }
-.blue {
-    color: #070363;
-}
+
 .half-break {
     margin: 0.1em 0;
 }
+
 .half-break3 {
     margin: 0.3em 0;
 }
+
 .profile-pic {
     width: 140px;
     height: 140px;
@@ -29,39 +32,41 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 15px;
     padding-top: 7px;
 }
+
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .icon-container {
     display: flex;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .icon-container a {
-    width: 20px; /* Ensure equal width and height */
+    width: 20px;
     height: 20px;
-    font-size: 16px; /* Reduce font size */
-    color: white; /* Set icon color to white */
-    background-color: #ff521b; /* Set background color to orange */
+    font-size: 16px;
+    color: white;
+    background-color: #ff521b;
     margin-left: 5px;
-    padding: 4px 8px; /* Reduce padding for smaller button appearance */
-    border-radius: 50px; /* Make icons rounded */
+    padding: 4px 8px;
+    border-radius: 50px;
     text-align: center;
-    display: inline-block; /* Ensure proper block-level display */
-    text-decoration: none; /* Remove underline */
-    transition: background-color 0.3s ease; /* Smooth transition for background color change */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
+    display: inline-block;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .icon-container a i {
-    color: white; /* Set icon color to white */
+    color: white;
 }
 
 .icon-container a:hover {
-    background-color: #070363; /* Change background color on hover */
+    background-color: #070363;
 }
 
 .profile-container {
@@ -69,20 +74,19 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: flex-start;
     float: left;
-    margin-right: 0px;
+    margin-right: 0;
 }
 
-/* Text icon next to quotes with illustrations */
 .text-icon {
     font-size: 14px;
     color: #030127;
     margin-left: 5px;
     cursor: pointer;
-    display: none; /* Hide by default */
+    display: none;
 }
 
 ul#reflections li:hover .text-icon {
-    display: inline; /* Show on hover */
+    display: inline;
 }
 
 .container {
@@ -90,12 +94,14 @@ ul#reflections li:hover .text-icon {
     margin: 0 auto;
     padding: 20px;
 }
+
 @media (min-width: 768px) and (max-width: 1499px) {
     .container {
         padding: 20px;
         margin: 0 60px;
     }
 }
+
 footer {
     color: gray;
     padding: 10px 20px;
@@ -105,38 +111,32 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;  /* Ensure consistent font size */
+    font-size: 12px;
 }
+
 .footer-content {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
+
 .footer-content p, .footer-content a {
     margin: 0;
     padding: 0;
     color: gray;
-    font-size: 12px;  /* Ensure consistent font size */
+    font-size: 12px;
     text-decoration: none;
 }
 
-
-/* Link colors */
-a,
-a:link,
-a:visited,
-a:hover,
-a:active {
+a, a:link, a:visited, a:hover, a:active {
     color: #ff521b;
-    text-decoration: none; /* Remove underline if desired */
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline; /* Optional: underline on hover */
+    text-decoration: underline;
 }
 
-
-/* Modal CSS */
 .modal {
     display: none;
     position: fixed;
@@ -148,6 +148,7 @@ a:hover {
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
 }
+
 .modal-content {
     background-color: white;
     margin: 15% auto;
@@ -157,7 +158,7 @@ a:hover {
     max-width: 600px;
     position: relative;
     border-radius: 12px;
-    text-align: center; /* Center the content */
+    text-align: center;
 }
 
 #modal-illustration {
@@ -172,7 +173,7 @@ a:hover {
 
 .icon-container {
     display: flex;
-    justify-content: center; /* Center the icons */
+    justify-content: center;
     align-items: center;
     padding-top: 20px;
 }
@@ -184,11 +185,11 @@ a:hover {
     cursor: pointer;
     position: relative;
 }
+
 .copy-icon:hover, .twitter-icon:hover {
     color: #ff521b;
 }
 
-/* Toast message CSS */
 .toast {
     visibility: hidden;
     min-width: 250px;
@@ -232,9 +233,6 @@ a:hover {
     to {opacity: 0;}
 }
 
-/* Change bullet point color on hover */
 ul#reflections li:hover {
     color: #ff521b;
 }
-
-
