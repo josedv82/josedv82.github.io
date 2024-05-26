@@ -40,6 +40,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon-container a {
+    width: 40px; /* Ensure equal width and height */
+    height: 40px;
     font-size: 16px; /* Reduce font size */
     color: white; /* Set icon color to white */
     background-color: #ff521b; /* Set background color to orange */
