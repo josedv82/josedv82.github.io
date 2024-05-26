@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #ff521b;
     margin-left: 5px;
     padding: 10px; /* Add padding for button-like appearance */
-    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+    border-radius: 25px; /* Optional: Add border radius for rounded corners */
     text-align: center;
     display: inline-block; /* Ensure proper block-level display */
     text-decoration: none; /* Remove underline if any */
