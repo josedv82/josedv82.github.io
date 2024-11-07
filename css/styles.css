@@ -1,3 +1,4 @@
+/* Main Body Styling */
 body {
     font-family: 'Consolas', 'Monaco', monospace;
 }
@@ -23,7 +24,6 @@ p, li {
     background: #ff521b; /* Fallback to block line if doesn't support radial gradient background */
     background: radial-gradient(circle, rgba(255,82,27,1) 0%, rgba(255,82,27,0) 100%);
 }
-
 
 h1, h2, h3, h4, h5, h6 {
     color: #020122;
@@ -68,37 +68,50 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 10px; 
 }
 
+/* Social Icon Tooltip Styling */
+.top-right-icons .group {
+    position: relative;
+    display: inline-block;
+}
+
+.top-right-icons .group svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.top-right-icons .group:hover svg {
+    transform: scale(1.25);
+    stroke: #070363;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #070363;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: transform 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.group:hover .tooltip {
+    transform: translateX(-50%) scale(1);
+    z-index: 10;
+}
+
 .icon-container {
     display: flex;
-    margin-top: 0px;
-}
-
-.icon-container a,
-.modal-icon {
-    width: 20px; 
-    height: 20px;
-    font-size: 16px; 
-    color: white; 
-    background-color: #ff521b; 
-    margin-left: 5px;
-    padding: 4px 8px; 
-    border-radius: 50px; 
-    text-align: center;
-    display: inline-block; 
-    text-decoration: none; 
-    transition: background-color 0.3s ease; 
-    border: none; 
-    cursor: pointer;
-}
-
-.icon-container a i,
-.modal-icon i {
-    color: white; 
-}
-
-.icon-container a:hover,
-.modal-icon:hover {
-    background-color: #070363; 
+    justify-content: center; 
+    align-items: center;
+    padding-top: 20px;
 }
 
 .profile-container {
@@ -109,7 +122,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 0px;
 }
 
-/* Text icon next to quotes with illustrations */
 .text-icon {
     font-size: 14px;
     color: #030127;
@@ -210,13 +222,6 @@ a:hover {
     margin-bottom: 10px;
 }
 
-.icon-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    padding-top: 20px;
-}
-
 .copy-icon, .twitter-icon {
     margin-left: 5px;
     font-size: 15px;
@@ -277,3 +282,4 @@ a:hover {
 ul#reflections li:hover {
     color: #ff521b;
 }
+
