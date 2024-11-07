@@ -62,26 +62,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .top-right-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-right: 10px; 
+    gap: 5px;
 }
 
-/* Social Icon Tooltip Styling */
 .top-right-icons .group {
     position: relative;
     display: inline-block;
 }
 
-.top-right-icons .group svg {
-    width: 20px;
-    height: 20px;
+.top-right-icons .icon {
+    width: 16px; /* Smaller size */
+    height: 16px;
     transition: transform 0.2s ease;
+    color: #070363;
 }
 
-.top-right-icons .group:hover svg {
-    transform: scale(1.25);
+.top-right-icons .group:hover .icon {
+    transform: scale(1.2);
     stroke: #070363;
 }
 
@@ -90,20 +91,22 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%) scale(0);
-    padding: 5px 10px;
+    padding: 5px 8px;
     background-color: #fff;
     color: #070363;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     white-space: nowrap;
     transition: transform 0.3s ease-in-out;
     pointer-events: none;
+    opacity: 0; /* Hide tooltip initially */
 }
 
 .group:hover .tooltip {
     transform: translateX(-50%) scale(1);
+    opacity: 1; /* Show tooltip on hover */
     z-index: 10;
 }
 
@@ -282,4 +285,5 @@ a:hover {
 ul#reflections li:hover {
     color: #ff521b;
 }
+
 
