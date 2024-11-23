@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .half-break3 {
-    margin: 0.3em 0;
+    display: none;
 }
 
 .profile-pic {
@@ -75,30 +75,36 @@ h1, h2, h3, h4, h5, h6 {
 
 .icon-container a,
 .modal-icon {
-    width: 20px; 
-    height: 20px;
-    font-size: 16px; 
-    color: white; 
-    background-color: #ff521b; 
-    margin-left: 5px;
-    padding: 4px 8px; 
-    border-radius: 50px; 
+    width: auto;
+    height: auto;
+    font-size: 14px;
+    color: #888;
+    background-color: transparent;
+    margin-left: 15px;
+    padding: 0;
+    border-radius: 0;
     text-align: center;
-    display: inline-block; 
-    text-decoration: none; 
-    transition: background-color 0.3s ease; 
-    border: none; 
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    border: none;
     cursor: pointer;
 }
 
 .icon-container a i,
 .modal-icon i {
-    color: white; 
+    color: #888;
 }
 
 .icon-container a:hover,
 .modal-icon:hover {
-    background-color: #070363; 
+    background-color: transparent;
+    color: #070363;
+}
+
+.icon-container a:hover i,
+.modal-icon:hover i {
+    color: #070363;
 }
 
 .profile-container {
@@ -116,6 +122,9 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 5px;
     cursor: pointer;
     display: none; 
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 ul#reflections li:hover .text-icon {
@@ -179,7 +188,7 @@ a:hover {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
@@ -231,46 +240,23 @@ a:hover {
 
 /* Toast message CSS */
 .toast {
-    visibility: hidden;
-    min-width: 250px;
-    background-color: #ff521b;
-    color: #030127;
-    text-align: center;
-    border-radius: 12px;
-    padding: 16px;
     position: fixed;
-    z-index: 1;
+    bottom: 20px;
     left: 50%;
-    top: 20px;
     transform: translateX(-50%);
-    font-size: 17px;
-    font-family: Consolas, 'Courier New', monospace;
+    background-color: #333;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10000;
 }
 
 .toast.show {
+    opacity: 1;
     visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@-webkit-keyframes fadein {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-@keyframes fadein {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-    from {opacity: 1;}
-    to {opacity: 0;}
-}
-
-@keyframes fadeout {
-    from {opacity: 1;}
-    to {opacity: 0;}
 }
 
 /* Change bullet point color on hover */
@@ -278,4 +264,262 @@ ul#reflections li:hover {
     color: #ff521b;
 }
 
+/* Thoughts Section Styling */
+#reflections {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0 20px 0 0;
+    margin: 20px 0;
+    max-height: 800px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(136, 136, 136, 0.3) transparent; /* Subtle gray track, transparent background */
+}
 
+/* Modern scrollbar styling */
+#reflections::-webkit-scrollbar {
+    width: 8px;
+}
+
+#reflections::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track */
+    border-radius: 10px;
+}
+
+#reflections::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.3); /* Semi-transparent thumb */
+    border-radius: 10px;
+    border: 2px solid transparent; /* Creates padding effect */
+    background-clip: padding-box;
+}
+
+#reflections::-webkit-scrollbar-thumb:hover {
+    background: rgba(136, 136, 136, 0.5); /* Darker on hover */
+    background-clip: padding-box;
+}
+
+/* Hide scrollbar when not scrolling (optional) */
+#reflections::-webkit-scrollbar-thumb:vertical:hover {
+    background: rgba(136, 136, 136, 0.5);
+    background-clip: padding-box;
+}
+
+#reflections li {
+    background: #fff;
+    padding: 20px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    border: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+#reflections li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    color: #ff521b;
+}
+
+
+/* Search bar styling */
+.thoughts-header {
+    display: block;
+}
+
+.search-container {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+    margin-right: 75px;
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+#thoughtsSearch {
+    width: 100%;
+    padding: 8px 12px 8px 35px; /* Add left padding for icon */
+    border: none;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+/* Add search icon */
+.search-container::before {
+    content: '\f002'; /* FontAwesome search icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Placeholder animation on hover */
+#thoughtsSearch:hover::placeholder {
+    transform: translateX(5px);
+    opacity: 0.7;
+}
+
+#thoughtsSearch::placeholder {
+    transition: all 0.3s ease;
+}
+
+
+.clear-icon {
+    position: absolute;
+    right: -30px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: gray; /* Gray color for the icon */
+    font-size: 12px; /* Adjust size as needed */
+    display: none; /* Initially hidden */
+}
+
+
+.card-actions {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.share-toggle {
+    z-index: 2;
+    cursor: pointer;
+    font-size: 14px;
+    color: #888;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+}
+
+.share-toggle:hover {
+    color: #555;
+}
+
+/* Specific styling for circle-xmark */
+.fa-circle-xmark {
+    color: #ff3b30;
+}
+
+.fa-circle-xmark:hover {
+    color: #dc3545;
+}
+
+.share-options {
+    display: none;
+    gap: 8px;
+    align-items: center;
+    z-index: 1;
+    background-color: #f5f5f5;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    position: relative;
+}
+
+.card-action-icon {
+    font-size: 12px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin-left: 5px;
+}
+
+/* Animation for share options */
+.share-options {
+    opacity: 0;
+    transition: all 0.2s ease;
+    transform: translateX(10px);
+}
+
+.share-options[style*="flex"] {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.card-action-icon:hover {
+    color: #555;
+}
+
+.share-options .card-action-icon:hover {
+    color: #ff521b;
+}
+
+.card-action-icon.fa-bluesky {
+    color: #888;
+    font-size: 11px;
+}
+
+.card-action-icon.fa-bluesky:hover {
+    color: #ff521b;
+}
+
+/* Category label styling */
+.category-label {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 10px;
+    color: #888;
+    background-color: #f5f5f5;
+    padding: 2px 8px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-label .highlight {
+    color: #ff521b;
+    font-weight: bold;
+}
+
+/* Add styling for no results message */
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-style: italic;
+    grid-column: 1 / -1; /* Spans all columns in the grid */
+    display: none; /* Hidden by default */
+}
+
+/* Regular angle-right positioning */
+.fa-angle-right {
+    position: static; /* Reset position when showing angle-right */
+}
+
+
+/* for the podcast area */
+.section-header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    display: block;
+}
+
+/* gor the R packages area */
+.section-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    display: block;
+}
+
+/* gor the research and collaborations area */
+.research-item {
+    margin-bottom: 1.5rem;
+}
+
+/* Ensure the modal backdrop is also above other elements */
+.modal-backdrop {
+    z-index: 9998; /* One less than the modal */
+}
