@@ -238,25 +238,24 @@ a:hover {
     color: white;
 }
 
-/* Toast message CSS */
 .toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 10000;
+    position: fixed; /* Ensure it's fixed to the viewport */
+    bottom: 20px; /* Position it at the bottom */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    background-color: #333; /* Background color */
+    color: white; /* Text color */
+    padding: 8px 16px; /* Padding */
+    border-radius: 4px; /* Rounded corners */
+    display: none; /* Initially hidden */
+    opacity: 0; /* Start with opacity 0 */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+    z-index: 10000; /* Ensure it's above other elements */
 }
 
 .toast.show {
-    opacity: 1;
-    visibility: visible;
+    display: block; /* Show the toast */
+    opacity: 1; /* Fade in */
 }
 
 /* Change bullet point color on hover */

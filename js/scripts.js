@@ -176,11 +176,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Show toast message
+    // Show toast message - consolidated function
     function showToast(message) {
-        toast.innerText = message;
-        toast.className = "toast show";
-        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        console.log("Showing toast with message:", message); // Debug log
+        const toast = document.getElementById('toast');
+        if (!toast) {
+            console.error('Toast element not found');
+            return;
+        }
+        
+        toast.textContent = message;
+        toast.style.display = 'block'; // Ensure the toast is displayed
+        toast.style.opacity = '1'; // Set opacity to 1 for visibility
+
+         // Add a class to trigger CSS transitions
+    toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.style.opacity = '0'; // Fade out
+            setTimeout(() => {
+                toast.style.display = 'none'; // Hide after fade out
+                toast.classList.remove('show');
+            }, 300);
+        }, 2000);
     }
 
     // Update the search functionality
@@ -228,80 +246,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Simplified copy to clipboard function
     function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            // Show toast
-            const toast = document.getElementById('toast');
-            toast.textContent = 'Text copied to clipboard!';
-            toast.classList.add('show');
-            
-            // Hide toast after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-        });
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                showToast('Text copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+                showToast('Failed to copy text');
+            });
     }
-
-    // Add click handlers to all reflection list items
-    const reflections = document.querySelectorAll('#reflections li');
-    reflections.forEach(reflection => {
-        reflection.addEventListener('click', function() {
-            const text = this.textContent;
-            
-            // Visual feedback on the clicked item
-            this.classList.add('highlight');
-            setTimeout(() => {
-                this.classList.remove('highlight');
-            }, 200);
-
-            // Copy text
-            navigator.clipboard.writeText(text)
-                .then(() => {
-                    const toast = document.getElementById('toast');
-                    toast.textContent = 'Copied to clipboard!';
-                    toast.style.display = 'block';
-                    toast.style.opacity = '1';
-                    
-                    setTimeout(() => {
-                        toast.style.opacity = '0';
-                        setTimeout(() => {
-                            toast.style.display = 'none';
-                        }, 300);
-                    }, 2000);
-                })
-                .catch(err => console.error('Failed to copy:', err));
-        });
-    });
 });
 
-function copyToClipboard(text) {
-    // Log for debugging
-    console.log('Copying text:', text);
-    
-    navigator.clipboard.writeText(text)
-        .then(() => {
-            showToast('Text copied to clipboard!');
-            console.log('Text copied successfully');
-        })
-        .catch(err => {
-            showToast('Failed to copy text');
-            console.error('Failed to copy text:', err);
-        });
-}
-
-function showToast(message) {
-    const toast = document.getElementById('toast');
-    // Log for debugging
-    console.log('Toast element:', toast);
-    
-    if (toast) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
-}
