@@ -1,10 +1,15 @@
 body {
     font-family: 'Consolas', 'Monaco', monospace;
+    background-color: #111927;
+    background-image: 
+        radial-gradient(at 47% 33%, hsl(48.40, 60%, 8%) 0, transparent 59%), 
+        radial-gradient(at 82% 65%, hsl(218.00, 39%, 11%) 0, transparent 55%);
 }
 
 p, li {
     font-size: 12px;
     text-align: justify;
+    color: rgb(233, 231, 231);
 }
 
 .orange-line {
@@ -26,15 +31,15 @@ p, li {
 
 
 h1, h2, h3, h4, h5, h6 {
-    color: #020122;
+    color: #ffffff;
 }
 
 .dark-gray {
-    color: #070363;
+    color: #bebec0;
 }
 
 .blue {
-    color: #070363;
+    color: #bebec0;
 }
 
 .half-break {
@@ -99,12 +104,13 @@ h1, h2, h3, h4, h5, h6 {
 .icon-container a:hover,
 .modal-icon:hover {
     background-color: transparent;
-    color: #070363;
+    color: #ffffff;
+    font-size: 12px;
 }
 
 .icon-container a:hover i,
 .modal-icon:hover i {
-    color: #070363;
+    color: #ffffff;
 }
 
 .profile-container {
@@ -118,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Text icon next to quotes with illustrations */
 .text-icon {
     font-size: 14px;
-    color: #030127;
+    color: #ffffff;
     margin-left: 5px;
     cursor: pointer;
     display: none; 
@@ -194,11 +200,13 @@ a:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #111927 !important;
 }
 
-.modal-content {
+.modal-content{
     background-color: white;
+    color: #111927 !important;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -207,6 +215,12 @@ a:hover {
     position: relative;
     border-radius: 12px;
     text-align: center; 
+    opacity: 0.9;
+    
+}
+
+.modal-content p {  
+    color: #111927 !important;  /* Ensure this is applied */
 }
 
 #modal-illustration {
@@ -260,7 +274,7 @@ a:hover {
 
 /* Change bullet point color on hover */
 ul#reflections li:hover {
-    color: #ff521b;
+    color: #ffffff;
 }
 
 /* Thoughts Section Styling */
@@ -274,7 +288,7 @@ ul#reflections li:hover {
     max-height: 800px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: rgba(136, 136, 136, 0.3) transparent; /* Subtle gray track, transparent background */
+    scrollbar-color: rgba(201, 201, 201, 0.404) transparent; /* Subtle gray track, transparent background */
 }
 
 /* Modern scrollbar styling */
@@ -310,18 +324,24 @@ ul#reflections li:hover {
     padding: 20px;
     padding-top: 35px;
     padding-bottom: 35px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
-    border: 1px solid #eee;
+    /* border: 1px solid #eee; */
     transition: background-color 0.2s ease;
+
+    backdrop-filter: blur(17px) saturate(26%);
+    -webkit-backdrop-filter: blur(17px) saturate(26%);
+    background-color: rgba(22, 29, 30, 0.77);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 #reflections li:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    color: #ff521b;
+    color: #fcfcfc;
 }
 
 
@@ -332,11 +352,12 @@ ul#reflections li:hover {
 
 .search-container {
     position: relative;
-    max-width: 300px;
+    max-width: 200px;
     width: 100%;
     margin-right: 75px;
     margin-left: auto;
-    margin-top: 10px;
+    margin-top: 20px;
+    color:#9b9b9b;
 }
 
 #thoughtsSearch {
@@ -345,6 +366,8 @@ ul#reflections li:hover {
     border: none;
     border-radius: 4px;
     background-color: #f5f5f5;
+    color: #9b9b9b;
+    opacity: 0.5;
     transition: all 0.3s ease;
 }
 
@@ -357,7 +380,8 @@ ul#reflections li:hover {
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #666;
+    color: #777777;
+    /* opacity: 0.5; */
 }
 
 /* Placeholder animation on hover */
@@ -377,7 +401,7 @@ ul#reflections li:hover {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: gray; /* Gray color for the icon */
+    color: rgb(240, 240, 240); /* Gray color for the icon */
     font-size: 12px; /* Adjust size as needed */
     display: none; /* Initially hidden */
 }
@@ -395,34 +419,34 @@ ul#reflections li:hover {
     z-index: 2;
     cursor: pointer;
     font-size: 14px;
-    color: #888;
+    color: #f09797;
     position: absolute;
     right: -8px;
     top: -8px;
 }
 
 .share-toggle:hover {
-    color: #555;
+    color: #e91717;
 }
 
 /* Specific styling for circle-xmark */
 .fa-circle-xmark {
     color: #ff3b30;
 }
-
+/* 
 .fa-circle-xmark:hover {
     color: #dc3545;
-}
+} */
 
 .share-options {
     display: none;
     gap: 8px;
     align-items: center;
     z-index: 1;
-    background-color: #f5f5f5;
+    background-color: #444444c2;
     padding: 6px 12px;
     border-radius: 4px;
-    border: 1px solid #eee;
+    border: 1px solid #444444c2;
     position: relative;
 }
 
@@ -433,6 +457,24 @@ ul#reflections li:hover {
     transition: color 0.2s ease;
     margin-left: 5px;
 }
+
+
+
+.card-action-icon {
+    color: #888; /* Default color */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Right Chevron Icon Hover Effect */
+.card-action-icon.fa-angle-right:hover {
+    color: lightgray; /* Change to light gray on hover */
+}
+
+/* Circle Cross Icon Hover Effect */
+.card-action-icon.fa-circle-xmark:hover {
+    color: red; /* Change to red on hover */
+}
+
 
 /* Animation for share options */
 .share-options {
@@ -447,11 +489,11 @@ ul#reflections li:hover {
 }
 
 .card-action-icon:hover {
-    color: #555;
+    color: #f74545;
 }
 
-.share-options .card-action-icon:hover {
-    color: #ff521b;
+.share-options:hover {
+    color: #616161;
 }
 
 .card-action-icon.fa-bluesky {
@@ -469,8 +511,8 @@ ul#reflections li:hover {
     top: -8px;
     left: 10px;
     font-size: 10px;
-    color: #888;
-    background-color: #f5f5f5;
+    color: #ffffff;
+    background-color: #666666;
     padding: 2px 8px;
     margin-bottom: 15px;
     border-radius: 4px;
@@ -479,7 +521,7 @@ ul#reflections li:hover {
 }
 
 .category-label .highlight {
-    color: #ff521b;
+    color: #dd8a0f;
     font-weight: bold;
 }
 
@@ -521,4 +563,16 @@ ul#reflections li:hover {
 /* Ensure the modal backdrop is also above other elements */
 .modal-backdrop {
     z-index: 9998; /* One less than the modal */
+}
+
+.nav-link {
+    margin-left: 15px;  /* Space between links */
+    color: #111927;  /* Link color */
+    text-decoration: none;  /* Remove underline */
+    font-size: 14px;
+}
+
+.nav-link:hover {
+    color: whitesmoke; 
+    text-decoration-line: none;
 }
