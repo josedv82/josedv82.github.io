@@ -32,38 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initialize and check each quote
-    document.querySelectorAll('ul#reflections li').forEach(function (item) {
+    document.querySelectorAll('ul#reflections li').forEach(item => {
         const categoryLabel = document.createElement('span');
         categoryLabel.className = 'category-label';
-        
-        const text = item.innerText.toLowerCase();
-        let category = '';
-        
-        // Consolidated into 6 main categories
-        if (text.includes('data') || text.includes('monitoring') || text.includes('analytics') || text.includes('metrics') || 
-            text.includes('science') || text.includes('research') || text.includes('study')) {
-            category = 'Science & Data';
-        } else if (text.includes('leadership') || text.includes('management') || text.includes('direction') || 
-                   text.includes('team') || text.includes('culture') || text.includes('organization')) {
-            category = 'Leadership';
-        } else if (text.includes('performance') || text.includes('training') || text.includes('strength') || 
-                   text.includes('practice') || text.includes('athlete') || text.includes('coach') || 
-                   text.includes('coaching')) {
-            category = 'Performance';
-        } else if (text.includes('career') || text.includes('job') || text.includes('hiring') || 
-                   text.includes('interview') || text.includes('experience') || text.includes('growth')) {
-            category = 'Career Growth';
-        } else if (text.includes('innovation') || text.includes('technology') || text.includes('solution') || 
-                   text.includes('strategy') || text.includes('planning') || text.includes('system')) {
-            category = 'Innovation';
-        } else {
-            category = 'Philosophy'; // Default category for general insights and philosophical thoughts
-        }
-        
+    
+        // Use manual category if specified, otherwise fallback to auto categorization
+        const category = item.getAttribute('data-category') || getCategory(item.innerText);
+    
         categoryLabel.textContent = category;
         item.insertBefore(categoryLabel, item.firstChild);
-
-        checkAndAppendIcon(item);
+        checkAndAppendIcon(item); // Assuming this function exists
+    });
+    
 
         // Add action buttons
         const actionsDiv = document.createElement('div');
@@ -257,5 +237,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 showToast('Failed to copy text');
             });
     }
-});
+;
 
