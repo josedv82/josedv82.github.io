@@ -35,15 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('ul#reflections li').forEach(item => {
         const categoryLabel = document.createElement('span');
         categoryLabel.className = 'category-label';
-    
-        // Use manual category if specified, otherwise fallback to auto categorization
-        const category = item.getAttribute('data-category') || getCategory(item.innerText);
-    
+
+        // Use manual category if specified
+        const category = item.getAttribute('data-category');
+
         categoryLabel.textContent = category;
         item.insertBefore(categoryLabel, item.firstChild);
-        checkAndAppendIcon(item); // Assuming this function exists
-    });
-    
+        checkAndAppendIcon(item);
 
         // Add action buttons
         const actionsDiv = document.createElement('div');
@@ -81,6 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
             window.open(blueskyUrl, '_blank');
         });
 
+        // Create container for share options
+        const shareOptionsDiv = document.createElement('div');
+        shareOptionsDiv.className = 'share-options';
+        shareOptionsDiv.style.display = 'none'; // Hidden by default
+
         // Share toggle button
         const shareButton = document.createElement('i');
         shareButton.className = 'fa-solid fa-angle-right card-action-icon share-toggle';
@@ -89,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
             const isVisible = shareOptionsDiv.style.display === 'flex';
             shareOptionsDiv.style.display = isVisible ? 'none' : 'flex';
-            
+
             // Toggle between angle-right and circle-xmark
             if (isVisible) {
                 shareButton.className = 'fa-solid fa-angle-right card-action-icon share-toggle';
@@ -98,12 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Create container for share options
-        const shareOptionsDiv = document.createElement('div');
-        shareOptionsDiv.className = 'share-options';
-        shareOptionsDiv.style.display = 'none'; // Hidden by default
-
-        // Add the existing buttons to the share options div instead of actionsDiv
+        // Add the existing buttons to the share options div
         shareOptionsDiv.appendChild(copyButton);
         shareOptionsDiv.appendChild(tweetButton);
         shareOptionsDiv.appendChild(blueskyButton);
@@ -131,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Get text content excluding the category label
         const textWithoutLabel = item.innerText.replace(item.querySelector('.category-label').innerText, '').trim();
         modalText.innerText = textWithoutLabel;
-        
+
         var illustrationUrl = `illustrations/${item.id}.png`;
         if (item.getAttribute('data-illustration') === 'true') {
             imageExists(illustrationUrl, function(exists) {
@@ -145,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             modalIllustration.style.display = "none";
         }
-        
+
         modal.style.display = "block";
     }
 
@@ -164,14 +162,14 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Toast element not found');
             return;
         }
-        
+
         toast.textContent = message;
         toast.style.display = 'block'; // Ensure the toast is displayed
         toast.style.opacity = '1'; // Set opacity to 1 for visibility
 
-         // Add a class to trigger CSS transitions
-    toast.classList.add('show');
-        
+        // Add a class to trigger CSS transitions
+        toast.classList.add('show');
+
         setTimeout(() => {
             toast.style.opacity = '0'; // Fade out
             setTimeout(() => {
@@ -184,19 +182,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update the search functionality
     const thoughtsSearch = document.getElementById('thoughtsSearch');
     const clearSearch = document.getElementById('clearSearch');
-    
+
     if (thoughtsSearch) {
         thoughtsSearch.addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
             const thoughts = document.querySelectorAll('#reflections li');
             const noResults = document.getElementById('noResults');
             let hasVisibleThoughts = false;
-            
+
             thoughts.forEach(thought => {
                 const categoryLabel = thought.querySelector('.category-label');
                 if (categoryLabel) {
                     const categoryText = categoryLabel.textContent.toLowerCase();
-                    
+
                     if (categoryText.includes(searchTerm)) {
                         thought.style.display = 'block'; // Show the thought if the category matches
                         hasVisibleThoughts = true;
@@ -237,5 +235,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 showToast('Failed to copy text');
             });
     }
-;
-
+});
