@@ -639,7 +639,7 @@ ul#reflections li:hover {
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    width: 150px;
+    width: 210px;
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
