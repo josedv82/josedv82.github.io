@@ -1,318 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jose Fernandez</title>
-    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+  <meta charset="UTF-8" />
+  <meta name="description" content="Personal website of Jose Fernandez">
+  <meta name="keywords" content="High Performance, Sport Science, Data Analysis, R Packages, Reflections">
+  <meta name="author" content="Jose Fernandez">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSBHYL543V"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <title>Jose Fernandez - High Performance & Data</title>
 
-      gtag('config', 'G-CSBHYL543V');
-    </script>
+  <!-- Favicon -->
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16" />
 
-    <!-- Link to external CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSBHYL543V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-CSBHYL543V');
+  </script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 </head>
 <body>
 
-<div class="container">
+  <!-- Container -->
+  <div class="container">
+    
     <!-- Navigation Bar -->
     <nav class="top-nav">
-        <button id="menu-toggle" class="menu-button">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="top-right-icons" id="nav-links">
-            <a href="#reflections" class="nav-link">Reflections</a>
-            <a href="#research-collaborations" class="nav-link">Research Collaborations</a>
-            <a href="#my-r-packages" class="nav-link">My R Packages</a>
-            <a href="#podcasts" class="nav-link">Podcasts</a>
-        </div>
+      <div class="nav-logo">
+        <h1 class="site-title">Jose Fernandez</h1>
+      </div>
+      <button id="menu-toggle" class="menu-button">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Nav Links -->
+      <div class="nav-links" id="nav-links">
+        <a href="#reflections" class="nav-item">Reflections</a>
+        <a href="#research-collaborations" class="nav-item">Research</a>
+        <a href="#my-r-packages" class="nav-item">R Packages</a>
+        <a href="#podcasts" class="nav-item">Podcasts</a>
+        <a
+          href="https://github.com/josedv82"
+          class="nav-icon"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/josefernandez1"
+          class="nav-icon"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a
+          href="https://x.com/jfernandez__"
+          class="nav-icon"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
     </nav>
 
-    <div class="header-container">
-        <h1>Jose Fernandez</h1>
-        <div class="top-right-icons">
-            <a href="https://github.com/josedv82" target="_blank" rel="noopener" class="modal-icon">
-                <i class="fab fa-github github-icon"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/josefernandez1" target="_blank" rel="noopener" class="modal-icon">
-                <i class="fab fa-linkedin linked-icon"></i>
-            </a>
-            <a href="https://x.com/jfernandez__" target="_blank" rel="noopener" class="modal-icon">
-                <i class="fab fa-twitter twitter-icon"></i>
-            </a>
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <div class="profile-container">
+        <img
+          src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/11/03/15097044796092.jpg"
+          alt="Jose Fernandez Profile Picture"
+          class="profile-pic"
+        />
+        <div>
+          <p>
+            Born in Spain, I have a formal education in High Performance and Sport
+            Science. I began my career at youth basketball academies, often working
+            with fewer resources, then expanded my experience across Europe and
+            China. After spending more than six years with the Houston Astros in MLB,
+            I now lead performance and R&D at BCSG, a multi-club sport firm managing
+            soccer teams across international leagues. Having worked in basketball,
+            baseball, and football (soccer), I’ve developed a strong interest and
+            skills in data analysis and programming along the way. I'm passionate
+            about building and consider myself an amateur entrepreneur.
+          </p>
         </div>
-    </div>
- 
+      </div>
+    </section>
 
-    <div class="profile-container">
-        <img src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/11/03/15097044796092.jpg" alt="Jose Fernandez" class="profile-pic">
-    </div>
+    <!-- Divider -->
+    <div class="orange-line"></div>
 
-    <p>
-    Born in Spain, I have a formal education in High Performance and Sport Science. I began my career at youth basketball academies, often working with fewer resources, then expanded my experience across Europe and China. After spending more than six years with the Houston Astros in MLB, I now lead performance and R&D at BCSG, a multi-club sport firm managing soccer teams across international leagues. Having worked in basketball, baseball, and football (soccer), I’ve developed a strong interest and skills in data analysis and programming along the way. I'm passionate about building and consider myself an amateur entrepreneur.
-    </p>
+    <!-- Reflections Section -->
+    <section id="reflections" class="reflections-section">
+      <div class="reflections-header">
+        <h2>Thoughts</h2>
+        <p class="tagline">
+          A Personal Take on Various Aspects of High-Performance Environments.
+          My Perspective, Not Universal Truth.
+        </p>
 
-    <br>
-    
-   <!-- Orange Line -->
-        <div class="orange-line"></div>
-
-    <br>
-
-
-<!-- Reflections -->
-
-    <div class="thoughts-header">
-        <h3 style="margin-bottom:0; padding-bottom:0; display:block;">Thoughts</h3>
-        <p class="dark-gray" style="margin-top:0; padding-top:0; display:block;">A Personal Take on Various Aspects of High-Performance Environments. My Perspective, Not Universal Truth.</p>
+        <!-- Search Container -->
         <div class="search-container">
-            <input type="text" id="thoughtsSearch" placeholder="Filter by category...">
-            <span id="clearSearch" class="clear-icon" style="display: none;">&#10006;</span>
+          <input type="text" id="thoughtsSearch" placeholder="Filter by category..." />
+          <span id="clearSearch" class="clear-icon" style="display: none;">&#10006;</span>
         </div>
-    </div>
-    
-    <ul id="reflections">
-        <li data-category="Fundamentals & Philosophy" id="basics">Most success comes from mastering the basics. Experiment with a small percentage, and integrate what works back into your foundation.</li>
-        <li data-category="Performance & Athlete Development" id="carl-valle">You are only as good as what you can get your athletes (or others) to do. - Carl Valle</li>
-        <li data-category="Performance & Athlete Development" id="adjustments">Tech and data don't make the difference. It's the decisions and adjustments you are able to implement with your coaches and athletes.</li>
-        <li data-category="Leadership & Team Dynamics" id="hiring">In the past, I avoided hiring people I thought could be better than me, out of self-protection. This only exposed my insecurities, limited my growth, and made my position less secure in the long run.</li>
-        <li data-category="Data & Systems" id="data">Perhaps, the most important analytical skill is understanding what data CANNOT tell you. - Peter Weyand</li>
-        <li data-category="Performance & Athlete Development" id="health">When working with athletes, health is a requirement, not a goal.</li>
-        <li data-category="Career Growth" id="salary-cut">At certain times, prioritize learning and growth over a higher paycheck if you can. This was one of the best things I did for my career.</li>
-        <li data-category="Solutions & Problem-Solving" id="systems">I’ve been an outsider to the sport I was working with multiple times, and what helped was staying critical, rely on knowledgeable insiders to adapt ideas, and leaving room to experiment.</li>
-        <li data-category="Career Growth" id="opinions">An important skill to develop to help advance your career is the ability to come up with and communicate well-founded opinions to address current challenges.</li>
-        <li data-category="Insights & Values" id="buy-in">An easy way to gain early buy-in and credibility after joining a new organization is to find ways to help others save time on their tasks.</li>
-        <li data-category="Leadership & Team Dynamics" id="buy-in1">3 signs of good leadership: set a clear direction, empower others, and establish a continuous feedback loop.</li>
-        <li data-category="Leadership & Team Dynamics" id="direction">Providing direction is mainly about defining the boundaries within which the members of your team can find possible solutions.</li>
-        <li data-category="Leadership & Team Dynamics" id="balance">Regarding direction, finding the balance between setting clear boundaries and allowing enough space for creativity is key to let new ideas to emerge.</li>
-        <li data-category="Leadership & Team Dynamics" id="direction-speed">Old but relevant: Direction before speed.</li>
-        <li data-category="Career Growth" id="3cs">Master the 3Cs: code, coach, and communicate.</li>
-        <li data-category="Career Growth" id="specialization">Specialization got me into pro sports; but career progression came from general knowledge.</li>
-        <li data-category="Data & Systems" id="monitoring">If you want to speed up learning, monitoring strategies should concentrate on less but more relevant aspects.</li>
-        <li data-category="Data & Systems" id="assessments">Assessments should be relevant, actionable, and integrated into training. Those that can't be embedded better have a significant impact.</li>
-        <li data-category="Solutions & Problem-Solving" id="solutions">The more complex the environment, the simpler the solution. Especially in environments with heavy schedules and high volume of athletes.</li>
-        <li data-category="Performance & Athlete Development" id="in-season">Lifting heavy and often during the season is a priority. Even the busiest schedules have opportunities.</li>
-        <li data-category="Career Growth" id="experience">Meaningful experience comes from trial and error, not just years on the job. When hiring, look for exposures to trial-and-error cycles.</li>
-        <li data-category="Performance & Athlete Development" id="intuition">Get used to making decisions with limited information and high uncertainty. Sport Science requires a lot of intuition.</li>
-        <li data-category="Data & Systems" id="injuries">The main limitation to predict injuries is our ability to collect meaningful data.</li>
-        <li data-category="Performance & Athlete Development" id="worth">Your current athletes don't care about the rings on your shelf.</li>
-        <li data-category="Data & Systems" id="roi">Skill acquisition often comes second to other routine sports science tasks. A key role for sports scientists is to develop systems that streamline decision-making, freeing up time to research and develop critical areas with high ROI.</li>
-        <li data-category="Career Growth" id="networking">My first jobs came through interviews. Networking and connections came into play later after proving value in previous roles. Learning to interview is an essential skill.</li>
-        <li data-category="Career Growth" id="interviewing">I applied to many jobs, even ones I wasn't interested in, just to get better at interviewing.</li>
-        <li data-category="Career Growth" id="vacancies">When hiring, advertise job vacancies, even if you have candidates in mind. You never know what talent is out there.</li>
-        <li data-category="Fundamentals & Philosophy" id="philosophy">When someone asks about your philosophy, they want to know your values, beliefs and priorities as they will drive decisions and ensure consistency.</li>
-        <li data-category="Fundamentals & Philosophy" id="vague">The ability to clearly explain your philosophy matters more than being "right or wrong." Break the field into smaller areas, document your beliefs, and review them regularly for clarity and focus.</li>
-        <li data-category="Leadership & Team Dynamics" id="world-series">The goal is to establish good operational processes; talent, coaching and luck handle the rest.</li>
-        <li data-category="Career Growth" id="experience-time">Arbitrary number but four years in one organization seems like the minimum time for someone to go through meaningful implementation, iteration, and learning.</li>
-        <li data-category="Leadership & Team Dynamics" id="setting-standards">A strong proof that your team is setting the standard is when your coaches become sought after by other organizations.</li>
-        <li data-category="Insights & Values" id="kindness">The sports world is small. I once interviewed someone who had interviewed me six years earlier. Be kind; you never know when you'll cross paths again.</li>
-        <li data-category="Solutions & Problem-Solving" id="startups">Many problems we solved in sport have commercial value. Think about ways to productize your work beyond your job.</li>
-        <li data-category="Insights & Values" id="opportunity">Ask five people in your organization what 'Player X' has to improve. If there's little agreement, you've found a big opportunity.</li>
-        <li data-category="Insights & Values" id="overpaid">When people are overpaid relative to their value, every idea, opinion, and person becomes a threat to them.</li>
-        <li data-category="Leadership & Team Dynamics" id="conversations">Improving how to approach difficult conversations is one of the most important things when progressing to more leadership roles.</li>
-        <li data-category="Solutions & Problem-Solving" id="innovation">If an organization needs a Head of Innovation; it's probably not truly innovative.</li>
-        <li data-category="Leadership & Team Dynamics" id="culture">'Winning Culture' is an overhyped term. You can't build culture; it's a consequence of people aligning with a purpose and finding personal value in the process.</li>
-        <li data-category="Data & Systems" id="data-timing">Better data at meaningful times outweights continuous monitoring.</li>
-        <li data-category="Performance & Athlete Development" id="practice-design">Practice design is often overlooked by sport scientists, yet it’s one of the most impactful areas for coaches and athletes — far beyond just managing GPS metrics.</li> 
-        <!-- <li data-category="Philosophy" id="consultants">Performance consultants are more common now than before but often offer less value, for various reasons including lack of 'skin in the game'. When to engage them? If they bring top 3% expertise in a technical domain, your department needs an audit, or you need to outsource routine, time-consuming tasks.</li> -->
-        <li data-category="Performance & Athlete Development" id="performance">Break performance into smaller, measurable components whenever possible. Athletes are more likely to buy in when they see clear, tangible links to their performance.</li>
-        <li data-category="Fundamentals & Philosophy" id="training-theory">Courses and certifications come and go but training theory and principles are ethernal.</li>
-        <li data-category="Data & Systems" id="legacy">As a sport scientist, one of the most lasting things I can leave behind for an organization is solid data as not many other things last longer than a few generations of employees.</li>
-        <li data-category="Fundamentals & Philosophy" id="skepticism">In many fields — especially sport science — it's better to approach things with healthy skepticism rather than blind optimism.</li>
-        <li data-category="Insights & Values" id="mentors">Exposing yourself to environments that require you to learn and adapt will do more for your growth than any paid mentorship.</li>
-        <li data-category="Solutions & Problem-Solving" id="pick_two">Affordable, reliable, and practical — you can have any two, but almost never all three.</li>
-    </ul>
+      </div>
 
-
-<br>
-
-<!-- Add this after your #reflections ul -->
-<div id="noResults" class="no-results">
-    No matching categories found. Try refining your search.
-</div>
-
-<br>
-
-    
-<!-- Orange Line -->
-     <div class="orange-line"></div>
-
- <br>
-
-<!-- Research Collaborations -->
-<section id="research-collaborations">
-    <h3 class="section-title">Research Collaborations</h3>
-    <ul>
-        <li class="research-item">
-            <code>A systematic review of sport-related packages within the R CRAN repository. <br> <span class="blue">Casals M., <strong>Fernández J.</strong>, Martínez V., Lopez M., Langohr K., & Cortés J. (2022). International Journal of Sports Science & Coaching, 0(0).</span> <a href="https://www.researchgate.net/publication/365360566_A_systematic_review_of_sport-related_packages_within_the_R_CRAN_repository">Link</a></code>
+      <ul class="reflections-list">
+        <!-- Each <li> has a data-category and unique ID -->
+        <li data-category="Fundamentals & Philosophy" id="basics">
+          Most success comes from mastering the basics. Experiment with a small percentage, and integrate what works back into your foundation.
         </li>
-        
-        <li class="research-item">
-            <code>Epidemiology and injury trends in the National Basketball Association: Pre- and per-COVID-19 (2017–2021). <br> <span class="blue">Torres-Ronda L, Gámez I, Robertson S, <strong>Fernández J</strong> (2022) PLoS ONE 17(2): e0263354. </span> <a href="https://www.researchgate.net/publication/358509512_Epidemiology_and_injury_trends_in_the_National_Basketball_Association_Pre-and_per-_COVID-19_2017-2021">Link</a></code>
+        <li data-category="Performance & Athlete Development" id="carl-valle">
+          You are only as good as what you can get your athletes (or others) to do. - Carl Valle
         </li>
-        
-        <li class="research-item">
-            <code>Decision Support System Applications for Scheduling in Professional Team Sport. The Team's Perspective. <br> <span class="blue">Schelling X, <strong>Fernández J</strong>, Ward P, Fernández J, Robertson S. (2021) Front Sports Act Living. Jun 4;3:678489. </span> <a href="https://www.researchgate.net/publication/351370895_Decision_Support_System_Applications_for_Scheduling_in_Professional_Team_Sport_The_Team's_Perspective">Link</a></code>
+        <li data-category="Performance & Athlete Development" id="adjustments">
+          Tech and data don't make the difference. It's the decisions and adjustments you are able to implement with your coaches and athletes.
         </li>
-        
-        <li class="research-item">
-            <code>A Deep Learning Approach to Injury Forecasting in NBA Basketball. <br> <span class="blue">Cohan, A, Schuster, J, <strong>Fernández J</strong>. (2021) Journal of Sports Analytics. 1 Jan. 277 – 289. </span> <a href="https://www.researchgate.net/publication/353143908_A_deep_learning_approach_to_injury_forecasting_in_NBA_basketball">Link</a></code>
+        <li data-category="Leadership & Team Dynamics" id="hiring">
+          In the past, I avoided hiring people I thought could be better than me, out of self-protection. This only exposed my insecurities, limited my growth, and made my position less secure in the long run.
         </li>
-        
-        <li class="research-item">
-            <code>Hiding in plain sight: Schedule density and travel influence on NBA games outcomes. <br> <span class="blue">Schuster, J, <strong>Fernández J</strong>, Cohan, A. (2021) Released as NFT on Opensea.io. December 2021. </span> <a href="https://www.researchgate.net/publication/357856729_Hiding_in_plain_sight_schedule_density_and_travel_influence_on_NBA_game_outcomes">Link</a></code>
+        <li data-category="Data & Systems" id="data">
+          Perhaps, the most important analytical skill is understanding what data CANNOT tell you. - Peter Weyand
         </li>
-    </ul>
-</section>
+        <li data-category="Performance & Athlete Development" id="health">
+          When working with athletes, health is a requirement, not a goal.
+        </li>
+        <li data-category="Career Growth" id="salary-cut">
+          At certain times, prioritize learning and growth over a higher paycheck if you can. This was one of the best things I did for my career.
+        </li>
+        <li data-category="Solutions & Problem-Solving" id="systems">
+          I’ve been an outsider to the sport I was working with multiple times, and what helped was staying critical, rely on knowledgeable insiders to adapt ideas, and leaving room to experiment.
+        </li>
+        <li data-category="Career Growth" id="opinions">
+          An important skill to develop to help advance your career is the ability to come up with and communicate well-founded opinions to address current challenges.
+        </li>
+        <li data-category="Insights & Values" id="buy-in">
+          An easy way to gain early buy-in and credibility after joining a new organization is to find ways to help others save time on their tasks.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="buy-in1">
+          3 signs of good leadership: set a clear direction, empower others, and establish a continuous feedback loop.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="direction">
+          Providing direction is mainly about defining the boundaries within which the members of your team can find possible solutions.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="balance">
+          Regarding direction, finding the balance between setting clear boundaries and allowing enough space for creativity is key to let new ideas to emerge.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="direction-speed">
+          Old but relevant: Direction before speed.
+        </li>
+        <li data-category="Career Growth" id="3cs">
+          Master the 3Cs: code, coach, and communicate.
+        </li>
+        <li data-category="Career Growth" id="specialization">
+          Specialization got me into pro sports; but career progression came from general knowledge.
+        </li>
+        <li data-category="Data & Systems" id="monitoring">
+          If you want to speed up learning, monitoring strategies should concentrate on less but more relevant aspects.
+        </li>
+        <li data-category="Data & Systems" id="assessments">
+          Assessments should be relevant, actionable, and integrated into training. Those that can't be embedded better have a significant impact.
+        </li>
+        <li data-category="Solutions & Problem-Solving" id="solutions">
+          The more complex the environment, the simpler the solution. Especially in environments with heavy schedules and high volume of athletes.
+        </li>
+        <li data-category="Performance & Athlete Development" id="in-season">
+          Lifting heavy and often during the season is a priority. Even the busiest schedules have opportunities.
+        </li>
+        <li data-category="Career Growth" id="experience">
+          Meaningful experience comes from trial and error, not just years on the job. When hiring, look for exposures to trial-and-error cycles.
+        </li>
+        <li data-category="Performance & Athlete Development" id="intuition">
+          Get used to making decisions with limited information and high uncertainty. Sport Science requires a lot of intuition.
+        </li>
+        <li data-category="Data & Systems" id="injuries">
+          The main limitation to predict injuries is our ability to collect meaningful data.
+        </li>
+        <li data-category="Performance & Athlete Development" id="worth">
+          Your current athletes don't care about the rings on your shelf.
+        </li>
+        <li data-category="Data & Systems" id="roi">
+          Skill acquisition often comes second to other routine sports science tasks. A key role for sports scientists is to develop systems that streamline decision-making, freeing up time to research and develop critical areas with high ROI.
+        </li>
+        <li data-category="Career Growth" id="networking">
+          My first jobs came through interviews. Networking and connections came into play later after proving value in previous roles. Learning to interview is an essential skill.
+        </li>
+        <li data-category="Career Growth" id="interviewing">
+          I applied to many jobs, even ones I wasn't interested in, just to get better at interviewing.
+        </li>
+        <li data-category="Career Growth" id="vacancies">
+          When hiring, advertise job vacancies, even if you have candidates in mind. You never know what talent is out there.
+        </li>
+        <li data-category="Fundamentals & Philosophy" id="philosophy">
+          When someone asks about your philosophy, they want to know your values, beliefs and priorities as they will drive decisions and ensure consistency.
+        </li>
+        <li data-category="Fundamentals & Philosophy" id="vague">
+          The ability to clearly explain your philosophy matters more than being "right or wrong." Break the field into smaller areas, document your beliefs, and review them regularly for clarity and focus.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="world-series">
+          The goal is to establish good operational processes; talent, coaching and luck handle the rest.
+        </li>
+        <li data-category="Career Growth" id="experience-time">
+          Arbitrary number but four years in one organization seems like the minimum time for someone to go through meaningful implementation, iteration, and learning.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="setting-standards">
+          A strong proof that your team is setting the standard is when your coaches become sought after by other organizations.
+        </li>
+        <li data-category="Insights & Values" id="kindness">
+          The sports world is small. I once interviewed someone who had interviewed me six years earlier. Be kind; you never know when you'll cross paths again.
+        </li>
+        <li data-category="Solutions & Problem-Solving" id="startups">
+          Many problems we solved in sport have commercial value. Think about ways to productize your work beyond your job.
+        </li>
+        <li data-category="Insights & Values" id="opportunity">
+          Ask five people in your organization what 'Player X' has to improve. If there's little agreement, you've found a big opportunity.
+        </li>
+        <li data-category="Insights & Values" id="overpaid">
+          When people are overpaid relative to their value, every idea, opinion, and person becomes a threat to them.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="conversations">
+          Improving how to approach difficult conversations is one of the most important things when progressing to more leadership roles.
+        </li>
+        <li data-category="Solutions & Problem-Solving" id="innovation">
+          If an organization needs a Head of Innovation; it's probably not truly innovative.
+        </li>
+        <li data-category="Leadership & Team Dynamics" id="culture">
+          'Winning Culture' is an overhyped term. You can't build culture; it's a consequence of people aligning with a purpose and finding personal value in the process.
+        </li>
+        <li data-category="Data & Systems" id="data-timing">
+          Better data at meaningful times outweighs continuous monitoring.
+        </li>
+        <li data-category="Performance & Athlete Development" id="practice-design">
+          Practice design is often overlooked by sport scientists, yet it’s one of the most impactful areas for coaches and athletes — far beyond just managing GPS metrics.
+        </li>
+        <li data-category="Performance & Athlete Development" id="performance">
+          Break performance into smaller, measurable components whenever possible. Athletes are more likely to buy in when they see clear, tangible links to their performance.
+        </li>
+        <li data-category="Fundamentals & Philosophy" id="training-theory">
+          Courses and certifications come and go but training theory and principles are eternal.
+        </li>
+        <li data-category="Data & Systems" id="legacy">
+          As a sport scientist, one of the most lasting things I can leave behind for an organization is solid data as not many other things last longer than a few generations of employees.
+        </li>
+        <li data-category="Fundamentals & Philosophy" id="skepticism">
+          In many fields — especially sport science — it's better to approach things with healthy skepticism rather than blind optimism.
+        </li>
+        <li data-category="Insights & Values" id="mentors">
+          Exposing yourself to environments that require you to learn and adapt will do more for your growth than any paid mentorship.
+        </li>
+        <li data-category="Solutions & Problem-Solving" id="pick_two">
+          Affordable, reliable, and practical — you can have any two, but almost never all three.
+        </li>
+      </ul>
 
+      <!-- No results placeholder -->
+      <div id="noResults" class="no-results">No matching categories found. Try refining your search.</div>
+    </section>
 
-<br>
+    <!-- Divider -->
+    <div class="orange-line"></div>
 
-    
-<!-- Orange Line -->
-     <div class="orange-line"></div>
+    <!-- Research Collaborations -->
+    <section id="research-collaborations" class="research-section">
+      <h2>Research Collaborations</h2>
+      <ul>
+        <li>
+          <code>
+            A systematic review of sport-related packages within the R CRAN repository.<br>
+            <span class="blue">
+              Casals M., <strong>Fernández J.</strong>, Martínez V., Lopez M., Langohr K., & Cortés J. (2022). International Journal of Sports Science & Coaching, 0(0).
+            </span>
+            <a href="https://www.researchgate.net/publication/365360566_A_systematic_review_of_sport-related_packages_within_the_R_CRAN_repository">Link</a>
+          </code>
+        </li>
+        <li>
+          <code>
+            Epidemiology and injury trends in the National Basketball Association: Pre- and per-COVID-19 (2017–2021).<br>
+            <span class="blue">
+              Torres-Ronda L, Gámez I, Robertson S, <strong>Fernández J</strong> (2022) PLoS ONE 17(2): e0263354.
+            </span>
+            <a href="https://www.researchgate.net/publication/358509512_Epidemiology_and_injury_trends_in_the_National_Basketball_Association_Pre-and_per-_COVID-19_2017-2021">Link</a>
+          </code>
+        </li>
+        <li>
+          <code>
+            Decision Support System Applications for Scheduling in Professional Team Sport. The Team's Perspective.<br>
+            <span class="blue">
+              Schelling X, <strong>Fernández J</strong>, Ward P, Fernández J, Robertson S. (2021) Front Sports Act Living. Jun 4;3:678489.
+            </span>
+            <a href="https://www.researchgate.net/publication/351370895_Decision_Support_System_Applications_for_Scheduling_in_Professional_Team_Sport_The_Team's_Perspective">Link</a>
+          </code>
+        </li>
+        <li>
+          <code>
+            A Deep Learning Approach to Injury Forecasting in NBA Basketball.<br>
+            <span class="blue">
+              Cohan, A, Schuster, J, <strong>Fernández J</strong>. (2021) Journal of Sports Analytics. 1 Jan. 277 – 289.
+            </span>
+            <a href="https://www.researchgate.net/publication/353143908_A_deep_learning_approach_to_injury_forecasting_in_NBA_basketball">Link</a>
+          </code>
+        </li>
+        <li>
+          <code>
+            Hiding in plain sight: Schedule density and travel influence on NBA games outcomes.<br>
+            <span class="blue">
+              Schuster, J, <strong>Fernández J</strong>, Cohan, A. (2021) Released as NFT on Opensea.io. December 2021.
+            </span>
+            <a href="https://www.researchgate.net/publication/357856729_Hiding_in_plain_sight_schedule_density_and_travel_influence_on_NBA_game_outcomes">Link</a>
+          </code>
+        </li>
+      </ul>
+    </section>
 
- <br>
+    <!-- Divider -->
+    <div class="orange-line"></div>
 
-<!-- My R Packages -->
-<section id="my-r-packages">
-    <h3 class="section-title">My R Packages</h3>
-    <div class="card-container">
+    <!-- R Packages -->
+    <section id="my-r-packages" class="packages-section">
+      <h2>My R Packages</h2>
+      <div class="card-container">
         <!-- matuR Card -->
         <div class="card" onclick="openDialog('matur-dialog')">
-            <img src="https://raw.githubusercontent.com/josedv82/matuR/refs/heads/master/man/images/maturlogo.png" alt="matuR">
-            <div class="card-title">matuR</div>
+          <img
+            src="https://raw.githubusercontent.com/josedv82/matuR/refs/heads/master/man/images/maturlogo.png"
+            alt="matuR"
+          />
+          <div class="card-title">matuR</div>
         </div>
 
         <!-- airball Card -->
         <div class="card" onclick="openDialog('airball-dialog')">
-            <img src="https://raw.githubusercontent.com/josedv82/airball/refs/heads/master/man/images/airballlogo.PNG" alt="airball">
-            <div class="card-title">airball</div>
+          <img
+            src="https://raw.githubusercontent.com/josedv82/airball/refs/heads/master/man/images/airballlogo.PNG"
+            alt="airball"
+          />
+          <div class="card-title">airball</div>
         </div>
 
         <!-- bdgramR Card -->
         <div class="card" onclick="openDialog('bdgramR-dialog')">
-            <img src="https://raw.githubusercontent.com/josedv82/bdgramR/refs/heads/master/man/images/bodygramRlogo.png" alt="bdgramR">
-            <div class="card-title">bdgramR</div>
+          <img
+            src="https://raw.githubusercontent.com/josedv82/bdgramR/refs/heads/master/man/images/bodygramRlogo.png"
+            alt="bdgramR"
+          />
+          <div class="card-title">bdgramR</div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<div class="overlay" id="overlay" onclick="closeDialog()"></div>
+    <!-- Overlay & Dialogs for R Packages -->
+    <div class="overlay" id="overlay" onclick="closeDialog()"></div>
 
-<div class="dialog" id="matur-dialog">
-    <h4>matuR</h4>
-    <p>Calculate and plot athlete maturation and biobanding metrics.</p>
-    <a href="https://github.com/josedv82/matuR" target="_blank">Learn More</a>
-</div>
-
-<div class="dialog" id="airball-dialog">
-    <h4>airball</h4>
-    <p>Extract schedule density, travel-related metrics, and injury transactions for NBA teams since 1947.</p>
-    <a href="https://github.com/josedv82/airball" target="_blank">Learn More</a>
-</div>
-
-<div class="dialog" id="bdgramR-dialog">
-    <h4>bdgramR</h4>
-    <p>Human body diagram visualizations and ggplot2 extensions in R.</p>
-    <a href="https://github.com/josedv82/bdgramR/blob/master/README.md" target="_blank">Learn More</a>
-</div>
-
-
-<br>
-
-    
-<!-- Orange Line -->
-     <div class="orange-line"></div>
-
- <br>
-
-<!-- Podcast -->
-<section id="podcasts">
-    <h3 class="section-header">Podcasts</h3>
-    <ul>
-        <li><a href="https://www.sportsmith.co/listen/the-future-of-sports-science-and-the-sports-scientist-in-professional-sport/">SportSmith:</a> The future of sports science and the sports scientist in professional sport.</li>
-    </ul>
-</section>
-
-<br>
-<br>
-<br>
-<br>
-<br>   
-
-
-
-<footer>
-    <div class="footer-content">
-        <p>&copy; 2024 Jose Fernandez.</p>
-        <a href="https://github.com/josedv82/josedv82.github.io/tree/main" target="_blank" rel="noopener" class="github-link">
-            <i class="fab fa-github"></i> View Source on GitHub
-        </a>
-    </div>
-</footer>
-
+    <div class="dialog" id="matur-dialog">
+      <h4>matuR</h4>
+      <p>Calculate and plot athlete maturation and biobanding metrics.</p>
+      <a href="https://github.com/josedv82/matuR" target="_blank" rel="noopener">Learn More</a>
     </div>
 
-<!-- Modal Structure -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <div id="modal-text-container">
-      <p id="modal-text"></p>
-      <img id="modal-illustration" src="" alt="Illustration">
+    <div class="dialog" id="airball-dialog">
+      <h4>airball</h4>
+      <p>Extract schedule density, travel-related metrics, and injury transactions for NBA teams since 1947.</p>
+      <a href="https://github.com/josedv82/airball" target="_blank" rel="noopener">Learn More</a>
     </div>
+
+    <div class="dialog" id="bdgramR-dialog">
+      <h4>bdgramR</h4>
+      <p>Human body diagram visualizations and ggplot2 extensions in R.</p>
+      <a href="https://github.com/josedv82/bdgramR/blob/master/README.md" target="_blank" rel="noopener">Learn More</a>
+    </div>
+
+    <!-- Divider -->
+    <div class="orange-line"></div>
+
+    <!-- Podcast Section -->
+    <section id="podcasts" class="podcasts-section">
+      <h2>Podcasts</h2>
+      <ul>
+        <li>
+          <a
+            href="https://www.sportsmith.co/listen/the-future-of-sports-science-and-the-sports-scientist-in-professional-sport/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            SportSmith:
+          </a>
+          The future of sports science and the sports scientist in professional sport.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Jose Fernandez.</p>
+      <a
+        href="https://github.com/josedv82/josedv82.github.io/tree/main"
+        target="_blank"
+        rel="noopener"
+      >
+        <i class="fab fa-github"></i> View Source on GitHub
+      </a>
+    </footer>
+
+  </div> <!-- End Container -->
+
+  <!-- Modal for Illustrations -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div id="modal-text-container">
+        <p id="modal-text"></p>
+        <img id="modal-illustration" src="" alt="Illustration" />
+      </div>
+    </div>
+    <div id="toast" class="toast"></div>
   </div>
-  <div id="toast" class="toast"></div>
-</div>
 
+  <!-- External JS -->
+  <script src="js/scripts.js"></script>
 
+  <!-- Responsive Nav Toggle -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
 
-
-<!-- Link to external JS -->
-<script src="js/scripts.js"></script>
-
-
-<!-- for responsive screen -->
-<script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        const navLinks = document.getElementById('nav-links');
-        navLinks.classList.toggle('dropdown-active');  // Toggle the dropdown-active class
+    menuToggle.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
     });
 
-    // Dismiss dropdown on link click
-    const navItems = document.querySelectorAll('.nav-link');
+    // Close dropdown on nav link click
+    const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const navLinks = document.getElementById('nav-links');
-            navLinks.classList.remove('dropdown-active');  // Remove the dropdown-active class
-        });
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
     });
-</script>
+  </script>
 
+  <!-- Dialog functions -->
+  <script>
+    function openDialog(dialogId) {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById(dialogId).style.display = 'block';
+    }
 
-<script>
-function openDialog(dialogId) {
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById(dialogId).style.display = 'block';
-}
-
-function closeDialog() {
-    document.getElementById('overlay').style.display = 'none';
-    document.querySelectorAll('.dialog').forEach(dialog => {
+    function closeDialog() {
+      document.getElementById('overlay').style.display = 'none';
+      document.querySelectorAll('.dialog').forEach(dialog => {
         dialog.style.display = 'none';
-    });
-}
-</script>
-
-    
-    
+      });
+    }
+  </script>
 </body>
 </html>
+
