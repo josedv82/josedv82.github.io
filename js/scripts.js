@@ -237,20 +237,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// open and close package cards
-function openDialog(dialogId) {
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById(dialogId).style.display = 'block';
-}
-
-function closeDialog() {
-    document.getElementById('overlay').style.display = 'none';
-    document.querySelectorAll('.dialog').forEach(dialog => {
-        dialog.style.display = 'none';
-    });
-}
-
-
 
 
     
