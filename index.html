@@ -185,12 +185,47 @@
 <!-- My R Packages -->
 <section id="my-r-packages">
     <h3 class="section-title">My R Packages</h3>
-    <ul>
-        <li><a href="https://github.com/josedv82/matuR">matuR:</a> Calculate and plot athlete maturation and biobanding metrics.</li>
-        <li><a href="https://github.com/josedv82/airball">airball:</a> Extract schedule density, travel related metrics and injury transactions for NBA teams since 1947.</li>
-        <li><a href="https://github.com/josedv82/bdgramR/blob/master/README.md">bdgramR:</a> Human body diagram visualizations and ggplot2 extensions in R.</li>
-    </ul>
+    <div class="card-container">
+        <!-- matuR Card -->
+        <div class="card" onclick="openDialog('matur-dialog')">
+            <img src="https://raw.githubusercontent.com/josedv82/matuR/refs/heads/master/man/images/matur_logo.PNG" alt="matuR">
+            <div class="card-title">matuR</div>
+        </div>
+
+        <!-- airball Card -->
+        <div class="card" onclick="openDialog('airball-dialog')">
+            <img src="https://raw.githubusercontent.com/josedv82/airball/refs/heads/master/man/images/airballlogo.PNG" alt="airball">
+            <div class="card-title">airball</div>
+        </div>
+
+        <!-- bdgramR Card -->
+        <div class="card" onclick="openDialog('bdgramR-dialog')">
+            <img src="https://raw.githubusercontent.com/josedv82/bdgramR/refs/heads/master/man/images/bodygramRlogo.png" alt="bdgramR">
+            <div class="card-title">bdgramR</div>
+        </div>
+    </div>
 </section>
+
+<div class="overlay" id="overlay" onclick="closeDialog()"></div>
+
+<div class="dialog" id="matur-dialog">
+    <h4>matuR</h4>
+    <p>Calculate and plot athlete maturation and biobanding metrics.</p>
+    <a href="https://github.com/josedv82/matuR" target="_blank">Learn More</a>
+</div>
+
+<div class="dialog" id="airball-dialog">
+    <h4>airball</h4>
+    <p>Extract schedule density, travel-related metrics, and injury transactions for NBA teams since 1947.</p>
+    <a href="https://github.com/josedv82/airball" target="_blank">Learn More</a>
+</div>
+
+<div class="dialog" id="bdgramR-dialog">
+    <h4>bdgramR</h4>
+    <p>Human body diagram visualizations and ggplot2 extensions in R.</p>
+    <a href="https://github.com/josedv82/bdgramR/blob/master/README.md" target="_blank">Learn More</a>
+</div>
+
 
 <br>
 
