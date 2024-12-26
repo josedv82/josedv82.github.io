@@ -623,4 +623,106 @@ ul#reflections li:hover {
 .dropdown-active {
     display: flex;  /* Show the dropdown when active */
 }
-/*
+
+
+/* for packages cards */
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: rgba(22, 29, 30, 0.8); /* Matches theme */
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+}
+
+.card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #fff;
+}
+
+.dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff; /* White background for readability */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.dialog h4 {
+    margin-top: 0;
+    color: #111927;
+}
+
+.dialog p {
+    margin: 10px 0;
+    color: #444;
+    font-size: 14px;
+}
+
+.dialog a {
+    color: #ff521b; /* Matches orange theme */
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.dialog a:hover {
+    text-decoration: underline;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+    z-index: 999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+
+    .card-container {
+        gap: 15px; /* Reduce gap for smaller screens */
+    }
+}
