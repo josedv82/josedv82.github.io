@@ -666,13 +666,18 @@ ul#reflections li:hover {
     color: #fff;
 }
 
+.card:nth-child(2) .card-title {
+    padding-top: 10px; /* for airball card */
+}
+
+
 .dialog {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff; /* White background for readability */
+    background: #fff; 
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
