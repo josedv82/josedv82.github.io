@@ -743,15 +743,17 @@ ul#reflections li:hover {
 }
 
 
+
 #research-collaborations .card-link {
+    font-size: 14px;
     position: absolute;
     bottom: 15px;
     right: 15px;
     background-color: #ff521b;
     color: #fff;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -759,15 +761,16 @@ ul#reflections li:hover {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#research-collaborations .card-link i {
-    font-size: 16px;
+#research-collaborations .card-link:hover {
+    background-color: #e64512;
+    transform: scale(1.1);
 }
 
 
 #research-collaborations .card-subtitle {
     font-size: 12px;
     color: #bebec0;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     line-height: 1.5;
     padding: 0 10px; /* Padding for left and right */
 }
@@ -777,5 +780,20 @@ ul#reflections li:hover {
     height: 1px;
     background: rgba(255, 255, 255, 0.2);
     margin: 10px 0;
+}
+
+#research-collaborations .card-journal {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+
+#research-collaborations .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
 }
 
