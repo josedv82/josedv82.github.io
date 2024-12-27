@@ -368,7 +368,7 @@ ul#reflections li:hover {
     background-color: #f5f5f5;
     color: #9b9b9b;
     opacity: 0.5;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 /* Add search icon */
@@ -392,6 +392,8 @@ ul#reflections li:hover {
 
 #thoughtsSearch::placeholder {
     transition: all 0.3s ease;
+    color: #9b9b9b; /* Gray color for placeholder */
+    opacity: 0.6; /* Slight transparency */
 }
 
 
@@ -521,7 +523,7 @@ ul#reflections li:hover {
 }
 
 .category-label .highlight {
-    color: #dd8a0f;
+    color: #ff521b;
     font-weight: bold;
 }
 
