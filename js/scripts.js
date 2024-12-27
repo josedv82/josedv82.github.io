@@ -1,7 +1,3 @@
-/* ------------------------------------------------------------
-   scripts.js
-   ------------------------------------------------------------ */
-
 document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById("modal");
     var modalText = document.getElementById("modal-text");
@@ -18,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to check and append icon if illustration exists
     function checkAndAppendIcon(item) {
-        var illustrationUrl = illustrations/${item.id}.png;
+        var illustrationUrl = `illustrations/${item.id}.png`;
         imageExists(illustrationUrl, function(exists) {
             if (exists) {
                 var icon = document.createElement('i');
@@ -68,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tweetButton.addEventListener('click', function(e) {
             e.stopPropagation();
             const textWithoutLabel = item.innerText.replace(item.querySelector('.category-label').innerText, '').trim();
-            const twitterUrl = https://twitter.com/intent/tweet?text=${encodeURIComponent(textWithoutLabel)};
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textWithoutLabel)}`;
             window.open(twitterUrl, '_blank');
         });
 
@@ -79,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         blueskyButton.addEventListener('click', function(e) {
             e.stopPropagation();
             const textWithoutLabel = item.innerText.replace(item.querySelector('.category-label').innerText, '').trim();
-            const blueskyUrl = https://bsky.app/intent/compose?text=${encodeURIComponent(textWithoutLabel)};
+            const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(textWithoutLabel)}`;
             window.open(blueskyUrl, '_blank');
         });
 
@@ -134,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const textWithoutLabel = item.innerText.replace(item.querySelector('.category-label').innerText, '').trim();
         modalText.innerText = textWithoutLabel;
 
-        var illustrationUrl = illustrations/${item.id}.png;
+        var illustrationUrl = `illustrations/${item.id}.png`;
         if (item.getAttribute('data-illustration') === 'true') {
             imageExists(illustrationUrl, function(exists) {
                 if (exists) {
@@ -156,29 +152,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
+    };
 
-    // Show toast message - consolidated function
+    // Show toast message
     function showToast(message) {
-        console.log("Showing toast with message:", message); // Debug log
-        const toast = document.getElementById('toast');
-        if (!toast) {
-            console.error('Toast element not found');
-            return;
-        }
-
         toast.textContent = message;
-        toast.style.display = 'block'; // Ensure the toast is displayed
-        toast.style.opacity = '1'; // Set opacity to 1 for visibility
-
-        // Add a class to trigger CSS transitions
-        toast.classList.add('show');
+        toast.style.display = 'block';
+        toast.style.opacity = '1';
 
         setTimeout(() => {
             toast.style.opacity = '0'; // Fade out
             setTimeout(() => {
                 toast.style.display = 'none'; // Hide after fade out
-                toast.classList.remove('show');
             }, 300);
         }, 2000);
     }
@@ -200,48 +185,34 @@ document.addEventListener('DOMContentLoaded', function () {
                     const categoryText = categoryLabel.textContent.toLowerCase();
 
                     if (categoryText.includes(searchTerm)) {
-                        thought.style.display = 'block'; // Show the thought if the category matches
+                        thought.style.display = 'block';
                         hasVisibleThoughts = true;
-
-                        // Highlight the matching text
-                        const regex = new RegExp((${searchTerm}), 'gi');
-                        categoryLabel.innerHTML = categoryText.replace(regex, '<span class="highlight">$1</span>');
                     } else {
-                        thought.style.display = 'none'; // Hide the thought if the category doesn't match
-                        categoryLabel.innerHTML = categoryText; // Reset the label text
+                        thought.style.display = 'none';
                     }
                 }
             });
 
-            // Show/hide no results message
             noResults.style.display = hasVisibleThoughts ? 'none' : 'block';
-
-            // Show or hide the clear icon
             clearSearch.style.display = searchTerm ? 'block' : 'none';
         });
 
-        // Clear the search input when the clear icon is clicked
         clearSearch.addEventListener('click', function() {
-            thoughtsSearch.value = ''; // Clear the input
-            clearSearch.style.display = 'none'; // Hide the clear icon
-            thoughtsSearch.dispatchEvent(new Event('input')); // Trigger input event to refresh the list
+            thoughtsSearch.value = '';
+            clearSearch.style.display = 'none';
+            thoughtsSearch.dispatchEvent(new Event('input'));
         });
     }
 
-    // Simplified copy to clipboard function
+    // Copy to clipboard function
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text)
             .then(() => {
                 showToast('Text copied to clipboard!');
             })
             .catch(err => {
-                console.error('Failed to copy text: ', err);
                 showToast('Failed to copy text');
             });
     }
-
-
-
-
-    
 });
+
