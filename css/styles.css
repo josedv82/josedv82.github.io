@@ -627,7 +627,7 @@ ul#reflections li:hover {
 
 /* for packages cards */
 
-.card-container {
+.package-card-container {
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -635,7 +635,7 @@ ul#reflections li:hover {
     margin-top: 20px;
 }
 
-.card {
+.package-card {
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
@@ -647,26 +647,26 @@ ul#reflections li:hover {
     overflow: hidden;
 }
 
-.card:hover {
+.package-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
 }
 
-.card img {
+.package-card img {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 100%;
     height: auto;
 }
 
-.card-title {
+.package-card-title {
     font-size: 16px;
     font-weight: bold;
     margin: 15px 0;
     color: #fff;
 }
 
-.card:nth-child(2) .card-title {
+.package-card:nth-child(2) .package-card-title {
     padding-top: 10px; /* for airball card */
 }
 
@@ -723,11 +723,11 @@ ul#reflections li:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .card {
+    .package-card {
         width: 90%; /* Adjust width for smaller screens */
     }
 
-    .card-container {
+    .package-card-container {
         gap: 15px; /* Reduce gap for smaller screens */
     }
 }
