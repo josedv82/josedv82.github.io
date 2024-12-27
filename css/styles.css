@@ -799,6 +799,7 @@ ul#reflections li:hover {
     margin-bottom: 10px;
     line-height: 1.5;
     padding: 0 10px;
+    text-align: left;
 }
 
 #research-collaborations .divider-line {
@@ -813,6 +814,7 @@ ul#reflections li:hover {
     margin-bottom: 10px;
     line-height: 1.5;
     padding: 0 10px;
+    text-align: left;
 }
 
 
