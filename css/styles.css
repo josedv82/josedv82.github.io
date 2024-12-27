@@ -738,28 +738,54 @@ ul#reflections li:hover {
 
 
 /* Left-align text inside research cards */
+
+#research-collaborations .card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+
+
 #research-collaborations .card {
-  text-align: left; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    padding-bottom: 50px; /* Add space for the link button */
+    text-align: left;
+    background-color: rgba(22, 29, 30, 0.8);
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 
 
 #research-collaborations .card-link {
-    font-size: 14px;
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 10px;
+    right: 10px;
     background-color: #ff521b;
     color: #fff;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+
+#research-collaborations .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 
 #research-collaborations .card-link:hover {
     background-color: #e64512;
