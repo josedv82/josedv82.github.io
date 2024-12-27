@@ -169,11 +169,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Update the search functionality
-    const thoughtsSearch = document.getElementById('thoughtsSearch');
+     const thoughtsSearch = document.getElementById('thoughtsSearch');
     const clearSearch = document.getElementById('clearSearch');
 
     if (thoughtsSearch) {
-        thoughtsSearch.addEventListener('input', function(e) {
+        thoughtsSearch.addEventListener('input', function (e) {
             const searchTerm = e.target.value.toLowerCase();
             const thoughts = document.querySelectorAll('#reflections li');
             const noResults = document.getElementById('noResults');
@@ -183,24 +183,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 const categoryLabel = thought.querySelector('.category-label');
                 if (categoryLabel) {
                     const categoryText = categoryLabel.textContent.toLowerCase();
+                    const originalText = categoryLabel.textContent;
 
                     if (categoryText.includes(searchTerm)) {
-                        thought.style.display = 'block';
+                        thought.style.display = 'block'; // Show the thought if the category matches
                         hasVisibleThoughts = true;
+
+                        // Highlight the matching text in orange
+                        const regex = new RegExp(`(${searchTerm})`, 'gi');
+                        categoryLabel.innerHTML = originalText.replace(
+                            regex,
+                            '<span class="highlight">$1</span>'
+                        );
                     } else {
-                        thought.style.display = 'none';
+                        thought.style.display = 'none'; // Hide the thought if the category doesn't match
+                        categoryLabel.innerHTML = originalText; // Reset the label text
                     }
                 }
             });
 
+            // Show/hide no results message
             noResults.style.display = hasVisibleThoughts ? 'none' : 'block';
+
+            // Show or hide the clear icon
             clearSearch.style.display = searchTerm ? 'block' : 'none';
+
+            // Update the search field color
+            if (searchTerm) {
+                thoughtsSearch.style.color = '#ff521b'; // Orange for active search text
+            } else {
+                thoughtsSearch.style.color = '#9b9b9b'; // Reset to gray when empty
+            }
         });
 
-        clearSearch.addEventListener('click', function() {
-            thoughtsSearch.value = '';
-            clearSearch.style.display = 'none';
-            thoughtsSearch.dispatchEvent(new Event('input'));
+        // Clear the search input when the clear icon is clicked
+        clearSearch.addEventListener('click', function () {
+            thoughtsSearch.value = ''; // Clear the input
+            clearSearch.style.display = 'none'; // Hide the clear icon
+            thoughtsSearch.dispatchEvent(new Event('input')); // Trigger input event to refresh the list
         });
     }
 
