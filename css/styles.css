@@ -733,3 +733,10 @@ ul#reflections li:hover {
         gap: 15px; /* Reduce gap for smaller screens */
     }
 }
+
+
+/* Left-align text inside research cards */
+#research-collaborations .card {
+  text-align: left; 
+}
+
