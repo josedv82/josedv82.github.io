@@ -802,10 +802,9 @@ ul#reflections li:hover {
 }
 
 #research-collaborations .divider-line {
-    width: 100%;
+    width: 90%;
     height: 1px;
     background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
 }
 
 #research-collaborations .card-journal {
