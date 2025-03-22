@@ -1,0 +1,130 @@
+/* Reset and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color: #ffffff;
+    --text-color: #2a2a2a;
+    --accent-color: #555555;
+    --light-gray: #f5f5f5;
+    --transition-speed: 0.5s;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 2rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+header h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+/* Main content */
+main {
+    margin: 0 auto;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+/* Quote section */
+.quote-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.1;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.quote-section.visible {
+    opacity: 1;
+}
+
+.quote-container {
+    max-width: 600px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+    border-left: 3px solid var(--accent-color);
+    border-right: 3px solid var(--accent-color);
+    transform: translateY(20px);
+    transition: transform var(--transition-speed) ease-out;
+}
+
+.quote-section.visible .quote-container {
+    transform: translateY(0);
+}
+
+.quote {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid var(--accent-color);
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quote {
+        font-size: 1.2rem;
+    }
+    
+    .quote-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote {
+        font-size: 1rem;
+    }
+    
+    .quote-container {
+        padding: 1rem;
+    }
+    
+    header h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* For very large screens */
+@media (min-width: 1400px) {
+    .quote {
+        font-size: 1.8rem;
+    }
+}
