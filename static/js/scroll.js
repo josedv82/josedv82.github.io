@@ -1,133 +1,123 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get all quote sections
-    const sections = document.querySelectorAll('.quote-section');
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    let currentSection = 0;
-    let isScrolling = false;
-    let touchStartY = 0;
-    let touchEndY = 0;
-
-    // Function to activate a section
-    const activateSection = (index) => {
-        // Deactivate all sections
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
-
-        // Activate current section
-        if (sections[index]) {
-            sections[index].classList.add('active');
+    // Get all quote paragraphs
+    const quotes = document.querySelectorAll('.quote-paragraph');
+    const progressBar = document.getElementById('progress-bar');
+    
+    // Activate the first quote on page load
+    if (quotes.length > 0) {
+        quotes[0].classList.add('active');
+    }
+    
+    // Calculate which quotes are visible based on scroll position
+    const updateActiveQuotes = () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.body.scrollHeight - windowHeight;
+        const scrollPosition = window.scrollY;
+        
+        // Update progress bar
+        const progress = (scrollPosition / documentHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        // Check each quote's position
+        quotes.forEach((quote, index) => {
+            const rect = quote.getBoundingClientRect();
+            const quoteTop = rect.top;
+            const quoteHeight = rect.height;
             
-            // Scroll to this section
-            sections[index].scrollIntoView({
+            // Calculate the position relative to the viewport
+            // A quote is considered "active" when its top is in the middle third of the screen
+            const viewportMiddle = windowHeight / 2;
+            const threshold = windowHeight / 3;
+            
+            if (quoteTop < viewportMiddle + threshold && 
+                quoteTop > viewportMiddle - threshold) {
+                quote.classList.add('active');
+            } else {
+                quote.classList.remove('active');
+            }
+        });
+    };
+    
+    // Handle scrolling
+    window.addEventListener('scroll', () => {
+        updateActiveQuotes();
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', () => {
+        updateActiveQuotes();
+    });
+    
+    // Handle keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        // Find currently active quote
+        const activeQuote = document.querySelector('.quote-paragraph.active');
+        if (!activeQuote) return;
+        
+        const currentIndex = Array.from(quotes).indexOf(activeQuote);
+        
+        if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && 
+            currentIndex < quotes.length - 1) {
+            // Next quote
+            e.preventDefault();
+            const nextQuote = quotes[currentIndex + 1];
+            const offset = nextQuote.offsetTop - window.innerHeight / 3;
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentIndex > 0) {
+            // Previous quote
+            e.preventDefault();
+            const prevQuote = quotes[currentIndex - 1];
+            const offset = prevQuote.offsetTop - window.innerHeight / 3;
+            window.scrollTo({
+                top: offset,
                 behavior: 'smooth'
             });
         }
-
-        // Update scroll indicator visibility
-        if (index === sections.length - 1) {
-            scrollIndicator.style.opacity = '0';
-        } else {
-            scrollIndicator.style.opacity = '0.7';
-        }
-    };
-
-    // Set up Intersection Observer to detect which section is in view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !isScrolling) {
-                // Find the index of the section
-                const index = Array.from(sections).indexOf(entry.target);
-                currentSection = index;
-                activateSection(currentSection);
-            }
-        });
-    }, {
-        root: null,
-        rootMargin: '-10% 0px',
-        threshold: 0.5
     });
-
-    // Observe all sections
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-
-    // Wheel event handler for scrolling between sections
-    document.addEventListener('wheel', (e) => {
-        if (isScrolling) return;
-        
-        isScrolling = true;
-        setTimeout(() => { isScrolling = false; }, 800); // Prevent rapid scrolling
-        
-        if (e.deltaY > 0 && currentSection < sections.length - 1) {
-            // Scroll down
-            currentSection++;
-            activateSection(currentSection);
-        } else if (e.deltaY < 0 && currentSection > 0) {
-            // Scroll up
-            currentSection--;
-            activateSection(currentSection);
-        }
-    });
-
-    // Touch events for mobile
+    
+    // Initialize on page load
+    updateActiveQuotes();
+    
+    // Add touch swipe handling for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
     document.addEventListener('touchstart', (e) => {
         touchStartY = e.changedTouches[0].screenY;
     });
-
+    
     document.addEventListener('touchend', (e) => {
-        if (isScrolling) return;
-        
         touchEndY = e.changedTouches[0].screenY;
         const deltaY = touchStartY - touchEndY;
         
-        if (Math.abs(deltaY) < 50) return; // Minimum swipe distance
+        // Minimum swipe distance (50px)
+        if (Math.abs(deltaY) < 50) return;
         
-        isScrolling = true;
-        setTimeout(() => { isScrolling = false; }, 800);
+        // Find currently active quote
+        const activeQuote = document.querySelector('.quote-paragraph.active');
+        if (!activeQuote) return;
         
-        if (deltaY > 0 && currentSection < sections.length - 1) {
+        const currentIndex = Array.from(quotes).indexOf(activeQuote);
+        
+        if (deltaY > 0 && currentIndex < quotes.length - 1) {
             // Swipe up (scroll down)
-            currentSection++;
-            activateSection(currentSection);
-        } else if (deltaY < 0 && currentSection > 0) {
+            const nextQuote = quotes[currentIndex + 1];
+            const offset = nextQuote.offsetTop - window.innerHeight / 3;
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        } else if (deltaY < 0 && currentIndex > 0) {
             // Swipe down (scroll up)
-            currentSection--;
-            activateSection(currentSection);
-        }
-    });
-
-    // Key events for keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (isScrolling) return;
-        
-        if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && 
-            currentSection < sections.length - 1) {
-            e.preventDefault();
-            isScrolling = true;
-            setTimeout(() => { isScrolling = false; }, 800);
-            currentSection++;
-            activateSection(currentSection);
-        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentSection > 0) {
-            e.preventDefault();
-            isScrolling = true;
-            setTimeout(() => { isScrolling = false; }, 800);
-            currentSection--;
-            activateSection(currentSection);
-        }
-    });
-
-    // Initialize the first section
-    if (sections.length > 0) {
-        activateSection(0);
-    }
-
-    // Handle click on scroll indicator
-    scrollIndicator.addEventListener('click', () => {
-        if (currentSection < sections.length - 1) {
-            currentSection++;
-            activateSection(currentSection);
+            const prevQuote = quotes[currentIndex - 1];
+            const offset = prevQuote.offsetTop - window.innerHeight / 3;
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
         }
     });
 });

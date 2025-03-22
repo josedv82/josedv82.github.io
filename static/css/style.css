@@ -7,177 +7,117 @@
 
 :root {
     --main-bg-color: #ffffff;
-    --text-color: #1a1a1a;
-    --accent-color: #0a0a0a;
-    --transition-speed: 0.6s;
+    --text-color: #000000;
+    --faded-text-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.4s;
 }
 
 html {
     scroll-behavior: smooth;
-    height: 100%;
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Times New Roman', serif;
     background-color: var(--main-bg-color);
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
-    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-/* Header styles - minimal and subtle */
-header {
+/* Title/header styles */
+.site-title {
     position: fixed;
     top: 2rem;
-    left: 2rem;
-    z-index: 1000;
-    mix-blend-mode: difference;
-}
-
-header h1 {
-    font-weight: 300;
-    letter-spacing: 2px;
-    font-size: 1rem;
-    text-transform: uppercase;
-    color: white;
-}
-
-/* Main content */
-main {
-    height: 100%;
-    perspective: 1px;
-    transform-style: preserve-3d;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-/* Quote section - full screen with centered content */
-.quote-section {
-    height: 100vh;
+    left: 0;
     width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: var(--main-bg-color);
-}
-
-.quote-container {
-    max-width: 800px;
-    width: 80%;
-    padding: 2rem;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
-    position: relative;
-}
-
-.quote-section.active .quote-container {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.quote {
-    font-size: 2.2rem;
-    font-weight: 300;
-    line-height: 1.4;
-    color: var(--text-color);
     text-align: center;
-    letter-spacing: -0.5px;
+    font-size: 1.2rem;
+    font-style: italic;
+    z-index: 1000;
 }
 
-/* Footer styles - minimal */
+/* Main content container */
+main {
+    padding: 25vh 0;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* Quotes container */
+.quotes-container {
+    position: relative;
+    padding: 0 2rem;
+}
+
+/* Individual quote paragraph */
+.quote-paragraph {
+    margin: 2rem 0;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    opacity: 0.1;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.quote-paragraph.active {
+    opacity: 1;
+}
+
+/* Progress bar at bottom */
+.progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #000;
+    z-index: 1000;
+    transition: width 0.1s linear;
+}
+
+/* Footer styles */
 footer {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
     font-size: 0.7rem;
     color: #777;
-    z-index: 1000;
-    mix-blend-mode: difference;
-}
-
-footer p {
-    color: white;
-}
-
-/* Scroll indicator */
-.scroll-indicator {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 50px;
     z-index: 100;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.scroll-indicator:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 1px;
-    height: 50px;
-    background-color: var(--text-color);
-    animation: scrollDown 2s infinite;
-}
-
-@keyframes scrollDown {
-    0% {
-        transform: scale(1, 0);
-        transform-origin: top center;
-    }
-    50% {
-        transform: scale(1, 1);
-        transform-origin: top center;
-    }
-    50.1% {
-        transform-origin: bottom center;
-    }
-    100% {
-        transform: scale(1, 0);
-        transform-origin: bottom center;
-    }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .quote {
-        font-size: 1.8rem;
+    main {
+        padding-top: 20vh;
     }
     
-    .quote-container {
-        width: 85%;
-        padding: 1.5rem;
+    .quotes-container {
+        padding: 0 1.5rem;
+    }
+    
+    .quote-paragraph {
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .quote {
-        font-size: 1.4rem;
+    main {
+        padding-top: 15vh;
     }
     
-    .quote-container {
-        width: 90%;
-        padding: 1rem;
+    .quotes-container {
+        padding: 0 1rem;
     }
     
-    header h1 {
-        font-size: 0.8rem;
+    .quote-paragraph {
+        font-size: 1rem;
+        margin: 1.5rem 0;
     }
     
-    header {
-        top: 1rem;
-        left: 1rem;
-    }
-    
-    footer {
-        bottom: 1rem;
-        right: 1rem;
+    .site-title {
+        font-size: 1rem;
     }
 }

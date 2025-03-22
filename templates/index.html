@@ -3,31 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wisdom Flow</title>
+    <title>the white mirror.</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>The Wisdom Flow</h1>
-    </header>
+    <div class="site-title">the white mirror.</div>
     
-    <main id="scroll-container">
-        {% for quote in quotes %}
-            <section class="quote-section" id="quote-{{ loop.index }}">
-                <div class="quote-container">
-                    <blockquote class="quote">{{ quote }}</blockquote>
-                </div>
-            </section>
-        {% endfor %}
+    <main>
+        <div class="quotes-container" id="quotes-container">
+            {% for quote in quotes %}
+                <p class="quote-paragraph" id="quote-{{ loop.index }}">{{ quote }}</p>
+            {% endfor %}
+        </div>
     </main>
     
-    <div class="scroll-indicator"></div>
+    <div class="progress-bar" id="progress-bar"></div>
     
     <footer>
-        <p>&copy; 2025</p>
+        <p>thewhitemirror.co</p>
     </footer>
     
     <script src="{{ url_for('static', filename='js/scroll.js') }}"></script>
