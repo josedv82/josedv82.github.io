@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Prevent overscroll/bounce effect
+    document.body.style.overscrollBehavior = 'none';
+    document.documentElement.style.overscrollBehavior = 'none';
+    
+    // Touch variables
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    // Additional prevention for Safari and mobile browsers
+    document.body.addEventListener('touchmove', function(e) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+        const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+        
+        // If at the top or bottom of the page
+        if ((scrollTop <= 0 && e.touches[0].screenY > touchStartY) || 
+            (scrollTop + clientHeight >= scrollHeight && e.touches[0].screenY < touchStartY)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
     // DOM Elements
     const quotes = document.querySelectorAll('.quote-paragraph');
     const siteTitle = document.querySelector('.site-title');
@@ -15,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         activeScale: 1.02,
         // How fast to move background elements relative to scroll speed (lower = more dramatic parallax)
         parallaxFactor: 0.4,
-        // Default opacity for inactive quotes (reduced to make them more greyed out)
-        inactiveOpacity: 0.01,
+        // Default opacity for inactive quotes (increased for better visibility)
+        inactiveOpacity: 0.25,
         // Medium opacity for quotes that are approaching but not fully active
-        approachingOpacity: 0.15
+        approachingOpacity: 0.5
     };
     
     // Track scroll positions for velocity calculations
@@ -66,8 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 // All non-active quotes are greyed out but slightly visible
                 quote.classList.remove('active', 'visible');
-                quote.style.opacity = '0.07'; // Increased from 0.01 to be visible but still hard to read
-                quote.style.color = '#ddd';   // Very light gray
+                quote.style.opacity = '0.25'; // Significantly increased to make inactive text visible
+                quote.style.color = '#555';   // Darker gray for better visibility
                 quote.style.transform = 'translateZ(0) scale(1)';
             }
         });
@@ -205,9 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Touch navigation
-    let touchStartY = 0;
-    let touchEndY = 0;
+    // Touch navigation - using the variables declared at the top
     
     document.addEventListener('touchstart', (e) => {
         touchStartY = e.changedTouches[0].screenY;
