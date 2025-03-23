@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const quotes = document.querySelectorAll('.quote-paragraph');
-    const progressBar = document.getElementById('progress-bar');
     const siteTitle = document.querySelector('.site-title');
     const parallaxBg = document.querySelector('.parallax-bg');
     const bgElements = document.querySelectorAll('.bg-element');
@@ -105,10 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollDirection = scrollY > lastScrollY ? 1 : (scrollY < lastScrollY ? -1 : 0);
         scrollVelocity = Math.abs(scrollY - lastScrollY);
         lastScrollY = scrollY;
-        
-        // Update progress bar
-        const progress = (scrollY / documentHeight) * 100;
-        progressBar.style.width = `${progress}%`;
         
         // Handle site title visibility with a slight parallax effect
         if (scrollY > 100) {
