@@ -7,11 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define how many quotes to highlight at a time (just like White Mirror)
     const VISIBLE_QUOTES_COUNT = 2;
     
+    // Keep track of which quotes have been read (highlighted)
+    const alreadyRead = new Set();
+    
+    // Last scroll position to detect direction
+    let lastScrollTop = 0;
+    
     // Calculate which quotes are visible based on scroll position
     const updateActiveQuotes = () => {
         const windowHeight = window.innerHeight;
         const documentHeight = document.body.scrollHeight - windowHeight;
         const scrollPosition = window.scrollY;
+        const scrollingDown = scrollPosition > lastScrollTop;
         
         // Update progress bar
         const progress = (scrollPosition / documentHeight) * 100;
@@ -24,24 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
             siteTitle.classList.remove('hidden');
         }
         
-        // Reset all quotes to low opacity first
-        quotes.forEach(quote => {
-            quote.classList.remove('active');
-            quote.style.opacity = '0.03';
-            quote.style.color = '#666';
+        // Reset all quotes to low opacity first, but preserve highlighted quotes when scrolling up
+        quotes.forEach((quote, index) => {
+            // When scrolling up, don't fade out quotes that have already been read
+            if (scrollingDown || !alreadyRead.has(index)) {
+                quote.classList.remove('active');
+                quote.style.opacity = '0.03';
+                quote.style.color = '#666';
+            }
         });
         
-        // Calculate which quotes should be active based on scroll position
-        let activeIndex = 0;
-        let bestVisibility = -Infinity;
-        
-        // Special handling for top of page - show first quote(s)
+        // Special handling for top of page - show and track first quote(s)
         if (scrollPosition < 100) {
             for (let i = 0; i < Math.min(VISIBLE_QUOTES_COUNT, quotes.length); i++) {
                 quotes[i].classList.add('active');
                 quotes[i].style.opacity = '1';
                 quotes[i].style.color = '#000000';
+                alreadyRead.add(i); // Mark as read
             }
+            lastScrollTop = scrollPosition;
             return;
         }
 
@@ -69,8 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Sort quotes by their position AND distance from ideal position (which is top 20% of viewport)
-        // For quotes above the ideal line, prioritize those closest to it, top to bottom
-        // For quotes below, prioritize closest to entering the ideal zone
         visibleQuotes.sort((a, b) => {
             // If one is above the ideal line and one is below, prioritize the one above
             const aAboveIdeal = a.topPosition < windowHeight * 0.4;
@@ -92,6 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 quotes[item.index].classList.add('active');
                 quotes[item.index].style.opacity = '1';
                 quotes[item.index].style.color = '#000000';
+                
+                // When scrolling down, mark this quote as read
+                if (scrollingDown) {
+                    alreadyRead.add(item.index);
+                }
             });
         } else {
             // Fallback - find the quote closest to entering the viewport from the bottom
@@ -114,8 +125,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 quotes[closestQuote].classList.add('active');
                 quotes[closestQuote].style.opacity = '1';
                 quotes[closestQuote].style.color = '#000000';
+                
+                // When scrolling down, mark this quote as read
+                if (scrollingDown) {
+                    alreadyRead.add(closestQuote);
+                }
             }
         }
+        
+        // When scrolling up, re-highlight quotes that were previously read
+        if (!scrollingDown) {
+            alreadyRead.forEach(index => {
+                quotes[index].classList.add('active');
+                quotes[index].style.opacity = '1';
+                quotes[index].style.color = '#000000';
+            });
+        }
+        
+        // Update last scroll position
+        lastScrollTop = scrollPosition;
     };
     
     // Optimized scroll handling with requestAnimationFrame
