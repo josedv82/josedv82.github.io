@@ -8,12 +8,16 @@
 :root {
     --main-bg-color: #ffffff;
     --text-color: #000000;
-    --faded-text-color: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.4s;
+    --faded-text-color: rgba(0, 0, 0, 0.05);
+    --transition-speed: 0.3s;
 }
 
 html {
     scroll-behavior: smooth;
+    perspective: 1px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body {
@@ -21,9 +25,10 @@ body {
     background-color: var(--main-bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    overflow-x: hidden;
     padding: 0;
     margin: 0;
+    height: 100%;
+    transform-style: preserve-3d;
 }
 
 /* Title/header styles */
@@ -36,18 +41,23 @@ body {
     font-size: 1.2rem;
     font-style: italic;
     z-index: 1000;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    transform: translateZ(0);
 }
 
 .site-title.hidden {
     opacity: 0;
+    transform: translateY(-20px);
 }
 
 /* Main content container */
 main {
-    padding: 25vh 0;
+    position: relative;
+    padding: 35vh 0 25vh;
     max-width: 650px;
     margin: 0 auto;
+    z-index: 1;
+    transform: translateZ(0);
 }
 
 /* Quotes container */
@@ -58,19 +68,61 @@ main {
 
 /* Individual quote paragraph */
 .quote-paragraph {
-    margin: 2rem 0;
+    position: relative;
+    margin: 5rem 0;
     font-size: 1.25rem;
-    line-height: 1.5;
-    opacity: 0.05; /* Very faded when not highlighted, just like White Mirror */
-    transition: opacity 0.2s ease, color 0.2s ease;
-    color: #888; /* Light gray for non-highlighted quotes */
+    line-height: 1.6;
+    opacity: 0.05;
+    color: #888;
     font-weight: 400;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translateZ(0);
 }
 
 .quote-paragraph.active {
-    opacity: 1; /* Fully visible when highlighted */
-    color: #000; /* Pure black text for highlighted quotes */
-    font-weight: 500; /* Slightly bolder for better readability */
+    opacity: 1;
+    color: #000;
+    font-weight: 500;
+    transform: scale(1.02);
+}
+
+.quote-paragraph.visible {
+    opacity: 0.3;
+    color: #333;
+}
+
+/* Parallax background elements */
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.bg-element {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.01);
+    border-radius: 50%;
+    transform: translateZ(-1px) scale(2);
+}
+
+.bg-element-1 {
+    top: 15%;
+    left: 10%;
+    width: 40vw;
+    height: 40vw;
+    opacity: 0.05;
+}
+
+.bg-element-2 {
+    bottom: 20%;
+    right: 15%;
+    width: 35vw;
+    height: 35vw;
+    opacity: 0.03;
 }
 
 /* Progress bar at bottom */
@@ -82,8 +134,8 @@ main {
     height: 3px;
     background-color: #000;
     z-index: 1000;
-    /* Remove transition for instant updates */
-    transition: none;
+    transform: translateZ(0);
+    transition: width 0.1s linear;
 }
 
 /* Footer styles */
@@ -96,12 +148,13 @@ footer {
     font-size: 0.7rem;
     color: #777;
     z-index: 100;
+    transform: translateZ(0);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     main {
-        padding-top: 20vh;
+        padding-top: 30vh;
     }
     
     .quotes-container {
@@ -110,12 +163,13 @@ footer {
     
     .quote-paragraph {
         font-size: 1.1rem;
+        margin: 4rem 0;
     }
 }
 
 @media (max-width: 480px) {
     main {
-        padding-top: 15vh;
+        padding-top: 25vh;
     }
     
     .quotes-container {
@@ -124,7 +178,7 @@ footer {
     
     .quote-paragraph {
         font-size: 1rem;
-        margin: 1.5rem 0;
+        margin: 3rem 0;
     }
     
     .site-title {

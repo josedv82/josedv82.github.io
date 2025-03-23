@@ -1,191 +1,216 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get all elements
+    // DOM Elements
     const quotes = document.querySelectorAll('.quote-paragraph');
     const progressBar = document.getElementById('progress-bar');
     const siteTitle = document.querySelector('.site-title');
+    const parallaxBg = document.querySelector('.parallax-bg');
+    const bgElements = document.querySelectorAll('.bg-element');
     
-    // Define how many quotes to highlight at a time (just like White Mirror)
-    const VISIBLE_QUOTES_COUNT = 2;
+    // Configuration
+    const config = {
+        // Distance from viewport top where quotes become fully visible (percent of viewport height)
+        activationThreshold: 0.35,
+        // Distance from bottom of viewport where quotes start to become visible (percent of viewport height)
+        earlyActivationThreshold: 0.85,
+        // How much to scale active quotes
+        activeScale: 1.02,
+        // How fast to move background elements relative to scroll speed (lower = more dramatic parallax)
+        parallaxFactor: 0.4,
+        // Default opacity for inactive quotes
+        inactiveOpacity: 0.05,
+        // Medium opacity for quotes that are approaching but not fully active
+        approachingOpacity: 0.2
+    };
     
-    // Keep track of which quotes have been read (highlighted)
-    const alreadyRead = new Set();
+    // Track scroll positions for velocity calculations
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+    let scrollDirection = 0; // 1 = down, -1 = up, 0 = static
     
-    // Last scroll position to detect direction
-    let lastScrollTop = 0;
+    // State for all quotes
+    const quoteStates = Array.from(quotes).map(() => ({
+        active: false,
+        approaching: false,
+        visible: false,
+        progress: 0, // 0 to 1, how close to being fully active
+        distanceFromIdeal: Infinity
+    }));
     
-    // Calculate which quotes are visible based on scroll position
-    const updateActiveQuotes = () => {
+    /**
+     * Calculate the activation progress (0-1) based on position in viewport
+     */
+    function calculateActivationProgress(rect, windowHeight) {
+        // How far from ideal position (as a percentage of window height)
+        const idealPosition = windowHeight * 0.25; // 25% from top
+        const distanceFromIdeal = Math.abs(rect.top - idealPosition);
+        const normalizedDistance = distanceFromIdeal / (windowHeight * 0.5);
+        
+        // Clamp between 0 and 1, with 1 being at the ideal position
+        return Math.max(0, Math.min(1, 1 - normalizedDistance));
+    }
+    
+    /**
+     * Update the visual state of quotes based on their calculated states
+     */
+    function updateQuoteVisuals() {
+        quotes.forEach((quote, index) => {
+            const state = quoteStates[index];
+            
+            // Base opacity and color on state
+            if (state.active) {
+                quote.classList.add('active');
+                quote.classList.remove('visible');
+                quote.style.opacity = '1';
+                quote.style.color = '#000000';
+                quote.style.transform = `translateZ(0) scale(${config.activeScale})`;
+            } 
+            else if (state.approaching) {
+                quote.classList.remove('active');
+                quote.classList.add('visible');
+                quote.style.opacity = `${config.approachingOpacity + (state.progress * 0.4)}`;
+                quote.style.color = '#333';
+                // Scale based on progress toward being active
+                const scale = 1 + ((config.activeScale - 1) * state.progress);
+                quote.style.transform = `translateZ(0) scale(${scale})`;
+            } 
+            else {
+                quote.classList.remove('active', 'visible');
+                quote.style.opacity = `${config.inactiveOpacity}`;
+                quote.style.color = '#888';
+                quote.style.transform = 'translateZ(0) scale(1)';
+            }
+        });
+    }
+    
+    /**
+     * Update parallax elements based on scroll position
+     */
+    function updateParallaxElements(scrollY) {
+        bgElements.forEach((el, i) => {
+            const speed = config.parallaxFactor * (i + 1) * 0.5;
+            const yOffset = scrollY * speed;
+            el.style.transform = `translateZ(-1px) scale(2) translateY(${yOffset}px)`;
+        });
+    }
+    
+    /**
+     * Main function to update all visual elements based on scroll position
+     */
+    function updateVisuals() {
         const windowHeight = window.innerHeight;
         const documentHeight = document.body.scrollHeight - windowHeight;
-        const scrollPosition = window.scrollY;
-        const scrollingDown = scrollPosition > lastScrollTop;
+        const scrollY = window.scrollY;
+        
+        // Detect scroll direction and calculate velocity
+        scrollDirection = scrollY > lastScrollY ? 1 : (scrollY < lastScrollY ? -1 : 0);
+        scrollVelocity = Math.abs(scrollY - lastScrollY);
+        lastScrollY = scrollY;
         
         // Update progress bar
-        const progress = (scrollPosition / documentHeight) * 100;
+        const progress = (scrollY / documentHeight) * 100;
         progressBar.style.width = `${progress}%`;
         
-        // Handle title visibility
-        if (scrollPosition > 50) {
+        // Handle site title visibility with a slight parallax effect
+        if (scrollY > 100) {
             siteTitle.classList.add('hidden');
         } else {
             siteTitle.classList.remove('hidden');
+            siteTitle.style.transform = `translateZ(0) translateY(${scrollY * 0.2}px)`;
         }
         
-        // Reset all quotes to low opacity first, but preserve highlighted quotes when scrolling up
-        quotes.forEach((quote, index) => {
-            // When scrolling up, don't fade out quotes that have already been read
-            if (scrollingDown || !alreadyRead.has(index)) {
-                quote.classList.remove('active');
-                quote.style.opacity = '0.03';
-                quote.style.color = '#666';
-            }
-        });
-        
-        // Special handling for top of page - show and track first quote(s)
-        if (scrollPosition < 100) {
-            for (let i = 0; i < Math.min(VISIBLE_QUOTES_COUNT, quotes.length); i++) {
-                quotes[i].classList.add('active');
-                quotes[i].style.opacity = '1';
-                quotes[i].style.color = '#000000';
-                alreadyRead.add(i); // Mark as read
-            }
-            lastScrollTop = scrollPosition;
-            return;
-        }
-
-        // Find quotes that are approaching the viewport or already in it
-        let visibleQuotes = [];
+        // Update each quote's state
         quotes.forEach((quote, index) => {
             const rect = quote.getBoundingClientRect();
+            const state = quoteStates[index];
             
-            // Highlight quotes that are:
-            // 1. Already in the top portion of the viewport OR
-            // 2. Approaching the viewport from below (start highlighting them sooner)
-            const isInTopPortion = rect.top < windowHeight * 0.4 && rect.bottom > 0;
-            const isApproaching = rect.top >= windowHeight * 0.4 && rect.top <= windowHeight * 0.95;
+            // Calculate how far this quote is from the ideal position (for activation)
+            const activationProgress = calculateActivationProgress(rect, windowHeight);
+            state.progress = activationProgress;
+            state.distanceFromIdeal = Math.abs(rect.top - (windowHeight * 0.25));
             
-            if (isInTopPortion || isApproaching) {
-                // Calculate distance from ideal position (top 20% of screen)
-                const distance = Math.abs(rect.top - (windowHeight * 0.2));
-                
-                visibleQuotes.push({
-                    index: index,
-                    topPosition: rect.top, // Distance from top of viewport
-                    distance: distance // Distance from ideal position
-                });
-            }
+            // Determine if the quote is active (in the target activation zone)
+            const isInActivationZone = rect.top < windowHeight * config.activationThreshold && rect.bottom > 0;
+            
+            // Determine if the quote is approaching activation (for early fading in)
+            const isApproaching = !isInActivationZone && 
+                rect.top >= windowHeight * config.activationThreshold && 
+                rect.top <= windowHeight * config.earlyActivationThreshold;
+            
+            // Determine if the quote is at all visible
+            const isVisible = rect.bottom > 0 && rect.top < windowHeight;
+            
+            // Update state
+            state.active = isInActivationZone;
+            state.approaching = isApproaching;
+            state.visible = isVisible;
         });
         
-        // Sort quotes by their position AND distance from ideal position (which is top 20% of viewport)
-        visibleQuotes.sort((a, b) => {
-            // If one is above the ideal line and one is below, prioritize the one above
-            const aAboveIdeal = a.topPosition < windowHeight * 0.4;
-            const bAboveIdeal = b.topPosition < windowHeight * 0.4;
-            
-            if (aAboveIdeal && !bAboveIdeal) return -1;
-            if (!aAboveIdeal && bAboveIdeal) return 1;
-            
-            // Both are in the same zone, so sort by distance from ideal position
-            return a.distance - b.distance;
+        // Find the most visible quote in the activation zone
+        const activeQuotes = quoteStates
+            .map((state, index) => ({ ...state, index }))
+            .filter(state => state.active || state.approaching)
+            .sort((a, b) => a.distanceFromIdeal - b.distanceFromIdeal);
+        
+        // Always prioritize quotes in the active zone over approaching quotes
+        activeQuotes.sort((a, b) => {
+            if (a.active && !b.active) return -1;
+            if (!a.active && b.active) return 1;
+            return 0;
         });
         
-        // Take top N quotes for highlighting (or fewer if not enough are visible)
-        const quotesToHighlight = visibleQuotes.slice(0, VISIBLE_QUOTES_COUNT);
-        
-        // If we found visible quotes, highlight them
-        if (quotesToHighlight.length > 0) {
-            quotesToHighlight.forEach(item => {
-                quotes[item.index].classList.add('active');
-                quotes[item.index].style.opacity = '1';
-                quotes[item.index].style.color = '#000000';
-                
-                // When scrolling down, mark this quote as read
-                if (scrollingDown) {
-                    alreadyRead.add(item.index);
-                }
-            });
-        } else {
-            // Fallback - find the quote closest to entering the viewport from the bottom
-            let closestQuote = null;
-            let minDistance = Infinity;
-            
-            quotes.forEach((quote, index) => {
-                const rect = quote.getBoundingClientRect();
-                // If quote is below viewport, calculate how far
-                if (rect.top > windowHeight * 0.4) {
-                    const distance = rect.top - windowHeight * 0.4;
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestQuote = index;
-                    }
-                }
-            });
-            
-            if (closestQuote !== null) {
-                quotes[closestQuote].classList.add('active');
-                quotes[closestQuote].style.opacity = '1';
-                quotes[closestQuote].style.color = '#000000';
-                
-                // When scrolling down, mark this quote as read
-                if (scrollingDown) {
-                    alreadyRead.add(closestQuote);
-                }
-            }
+        // Make sure we have at least one highlighted quote when possible
+        if (activeQuotes.length > 0 && !activeQuotes.some(q => q.active)) {
+            quoteStates[activeQuotes[0].index].active = true;
         }
         
-        // When scrolling up, re-highlight quotes that were previously read
-        if (!scrollingDown) {
-            alreadyRead.forEach(index => {
-                quotes[index].classList.add('active');
-                quotes[index].style.opacity = '1';
-                quotes[index].style.color = '#000000';
-            });
-        }
+        // Update visual appearance based on calculated states
+        updateQuoteVisuals();
         
-        // Update last scroll position
-        lastScrollTop = scrollPosition;
-    };
+        // Update parallax elements
+        updateParallaxElements(scrollY);
+    }
     
-    // Optimized scroll handling with requestAnimationFrame
+    // Optimize scroll event handling
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
-                updateActiveQuotes();
+                updateVisuals();
                 ticking = false;
             });
             ticking = true;
         }
     });
     
-    // Update on resize
+    // Handle window resize
     window.addEventListener('resize', () => {
-        updateActiveQuotes();
+        updateVisuals();
     });
     
-    // Handle keyboard navigation
+    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        // Find currently active quote
-        const activeQuote = document.querySelector('.quote-paragraph.active');
-        if (!activeQuote) return;
+        // Find current active quote
+        const activeIndex = quoteStates.findIndex(state => state.active);
         
-        const currentIndex = Array.from(quotes).indexOf(activeQuote);
+        if (activeIndex === -1) return;
         
         if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && 
-            currentIndex < quotes.length - 1) {
-            // Next quote
+            activeIndex < quotes.length - 1) {
+            // Move to next quote
             e.preventDefault();
-            const nextQuote = quotes[currentIndex + 1];
-            const offset = nextQuote.offsetTop - 10; // Position at top of viewport
+            const nextQuote = quotes[activeIndex + 1];
+            const offset = nextQuote.offsetTop - (window.innerHeight * 0.25);
+            
             window.scrollTo({
                 top: offset,
                 behavior: 'smooth'
             });
-        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentIndex > 0) {
-            // Previous quote
+        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && activeIndex > 0) {
+            // Move to previous quote
             e.preventDefault();
-            const prevQuote = quotes[currentIndex - 1];
-            const offset = prevQuote.offsetTop - 10; // Position at top of viewport
+            const prevQuote = quotes[activeIndex - 1];
+            const offset = prevQuote.offsetTop - (window.innerHeight * 0.25);
+            
             window.scrollTo({
                 top: offset,
                 behavior: 'smooth'
@@ -193,10 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Initialize on page load
-    updateActiveQuotes();
-    
-    // Add touch swipe handling for mobile
+    // Touch navigation
     let touchStartY = 0;
     let touchEndY = 0;
     
@@ -208,31 +230,34 @@ document.addEventListener('DOMContentLoaded', () => {
         touchEndY = e.changedTouches[0].screenY;
         const deltaY = touchStartY - touchEndY;
         
-        // Minimum swipe distance (50px)
-        if (Math.abs(deltaY) < 50) return;
+        // Minimum swipe distance (40px)
+        if (Math.abs(deltaY) < 40) return;
         
-        // Find currently active quote
-        const activeQuote = document.querySelector('.quote-paragraph.active');
-        if (!activeQuote) return;
+        // Find current active quote
+        const activeIndex = quoteStates.findIndex(state => state.active);
+        if (activeIndex === -1) return;
         
-        const currentIndex = Array.from(quotes).indexOf(activeQuote);
-        
-        if (deltaY > 0 && currentIndex < quotes.length - 1) {
+        if (deltaY > 0 && activeIndex < quotes.length - 1) {
             // Swipe up (scroll down)
-            const nextQuote = quotes[currentIndex + 1];
-            const offset = nextQuote.offsetTop - 10;
+            const nextQuote = quotes[activeIndex + 1];
+            const offset = nextQuote.offsetTop - (window.innerHeight * 0.25);
+            
             window.scrollTo({
                 top: offset,
                 behavior: 'smooth'
             });
-        } else if (deltaY < 0 && currentIndex > 0) {
+        } else if (deltaY < 0 && activeIndex > 0) {
             // Swipe down (scroll up)
-            const prevQuote = quotes[currentIndex - 1];
-            const offset = prevQuote.offsetTop - 10;
+            const prevQuote = quotes[activeIndex - 1];
+            const offset = prevQuote.offsetTop - (window.innerHeight * 0.25);
+            
             window.scrollTo({
                 top: offset,
                 behavior: 'smooth'
             });
         }
     });
+    
+    // Initialize on page load
+    updateVisuals();
 });
