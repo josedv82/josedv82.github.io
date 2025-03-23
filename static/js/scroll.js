@@ -45,24 +45,43 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Find quotes in the viewport
+        // Find quotes that are approaching the viewport or already in it
         let visibleQuotes = [];
         quotes.forEach((quote, index) => {
             const rect = quote.getBoundingClientRect();
             
-            // Check if quote is within the top portion of the viewport (like White Mirror)
-            // A quote is considered visible if it's partly in the top 40% of the viewport
-            if (rect.top < windowHeight * 0.4 && rect.bottom > 0) {
+            // Highlight quotes that are:
+            // 1. Already in the top portion of the viewport OR
+            // 2. Approaching the viewport from below (start highlighting them sooner)
+            const isInTopPortion = rect.top < windowHeight * 0.4 && rect.bottom > 0;
+            const isApproaching = rect.top >= windowHeight * 0.4 && rect.top <= windowHeight * 0.95;
+            
+            if (isInTopPortion || isApproaching) {
+                // Calculate distance from ideal position (top 20% of screen)
+                const distance = Math.abs(rect.top - (windowHeight * 0.2));
+                
                 visibleQuotes.push({
                     index: index,
                     topPosition: rect.top, // Distance from top of viewport
-                    visible: (rect.bottom - Math.max(0, rect.top)) / rect.height // % visible
+                    distance: distance // Distance from ideal position
                 });
             }
         });
         
-        // Sort by position from top to bottom
-        visibleQuotes.sort((a, b) => a.topPosition - b.topPosition);
+        // Sort quotes by their position AND distance from ideal position (which is top 20% of viewport)
+        // For quotes above the ideal line, prioritize those closest to it, top to bottom
+        // For quotes below, prioritize closest to entering the ideal zone
+        visibleQuotes.sort((a, b) => {
+            // If one is above the ideal line and one is below, prioritize the one above
+            const aAboveIdeal = a.topPosition < windowHeight * 0.4;
+            const bAboveIdeal = b.topPosition < windowHeight * 0.4;
+            
+            if (aAboveIdeal && !bAboveIdeal) return -1;
+            if (!aAboveIdeal && bAboveIdeal) return 1;
+            
+            // Both are in the same zone, so sort by distance from ideal position
+            return a.distance - b.distance;
+        });
         
         // Take top N quotes for highlighting (or fewer if not enough are visible)
         const quotesToHighlight = visibleQuotes.slice(0, VISIBLE_QUOTES_COUNT);
