@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         activeScale: 1.02,
         // How fast to move background elements relative to scroll speed (lower = more dramatic parallax)
         parallaxFactor: 0.4,
-        // Default opacity for inactive quotes (increased for better visibility)
-        inactiveOpacity: 0.25,
+        // Default opacity for inactive quotes (set to be subtle but still visible)
+        inactiveOpacity: 0.1,
         // Medium opacity for quotes that are approaching but not fully active
         approachingOpacity: 0.5
     };
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 // All non-active quotes are greyed out but slightly visible
                 quote.classList.remove('active', 'visible');
-                quote.style.opacity = '0.25'; // Significantly increased to make inactive text visible
+                quote.style.opacity = '0.1'; // Decreased to make inactive text more subtle but still slightly visible
                 quote.style.color = '#555';   // Darker gray for better visibility
                 quote.style.transform = 'translateZ(0) scale(1)';
             }
