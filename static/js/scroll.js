@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         activeScale: 1.02,
         // How fast to move background elements relative to scroll speed (lower = more dramatic parallax)
         parallaxFactor: 0.4,
-        // Default opacity for inactive quotes
-        inactiveOpacity: 0.05,
+        // Default opacity for inactive quotes (reduced to make them more greyed out)
+        inactiveOpacity: 0.01,
         // Medium opacity for quotes that are approaching but not fully active
-        approachingOpacity: 0.2
+        approachingOpacity: 0.15
     };
     
     // Track scroll positions for velocity calculations
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 quote.classList.remove('active', 'visible');
                 quote.style.opacity = `${config.inactiveOpacity}`;
-                quote.style.color = '#888';
+                quote.style.color = '#ccc'; /* Lighter color to make text harder to read */
                 quote.style.transform = 'translateZ(0) scale(1)';
             }
         });
