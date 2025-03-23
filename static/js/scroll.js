@@ -7,18 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let touchStartY = 0;
     let touchEndY = 0;
     
-    // Additional prevention for Safari and mobile browsers
-    document.body.addEventListener('touchmove', function(e) {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
-        const clientHeight = document.documentElement.clientHeight || window.innerHeight;
-        
-        // If at the top or bottom of the page
-        if ((scrollTop <= 0 && e.touches[0].screenY > touchStartY) || 
-            (scrollTop + clientHeight >= scrollHeight && e.touches[0].screenY < touchStartY)) {
-            e.preventDefault();
-        }
-    }, { passive: false });
+    // We'll use a more gentle approach to prevent bounce without locking scrolling
     // DOM Elements
     const quotes = document.querySelectorAll('.quote-paragraph');
     const siteTitle = document.querySelector('.site-title');

@@ -13,13 +13,12 @@
 }
 
 html {
-    /* Removed smooth scrolling to prevent bounce effect */
-    scroll-behavior: auto;
+    scroll-behavior: smooth; /* Re-enable smooth scrolling for better experience */
     perspective: 1px;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    overscroll-behavior: none; /* Prevents bounce/overscroll effect */
+    overscroll-behavior-y: contain; /* More gentle overscroll containment */
 }
 
 body {
@@ -31,7 +30,7 @@ body {
     margin: 0;
     height: 100%;
     transform-style: preserve-3d;
-    overscroll-behavior: none; /* Also prevent bounce/overscroll on body */
+    overscroll-behavior-y: contain; /* More gentle overscroll containment */
 }
 
 /* Title/header styles */
