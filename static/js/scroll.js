@@ -29,21 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
             siteTitle.classList.remove('hidden');
         }
         
-        // Create an array to store quotes by their position from top of viewport
+        // Create an array to store quotes that should be highlighted
         const visibleQuotes = [];
+        const screenOffsetThreshold = windowHeight * 0.3; // Start highlighting when quote is 30% of screen height from top
         
         // First, reset all quotes to very low opacity and remove active class
         quotes.forEach(quote => {
             quote.classList.remove('active');
             quote.style.opacity = '0.05'; // Very very greyed out (barely visible)
+            quote.style.color = '#666'; // Light gray for non-highlighted text
         });
         
-        // Find quotes that are visible in the viewport
+        // Find quotes that should be highlighted (including those about to enter the viewport)
         quotes.forEach((quote, index) => {
             const rect = quote.getBoundingClientRect();
             
-            // If the quote is visible in the viewport (wholly or partially)
-            if (rect.top < windowHeight && rect.bottom > 0) {
+            // If the quote is visible in the viewport OR about to enter from the bottom
+            // Include quotes that are partially visible at the top of the screen
+            if (rect.top < (windowHeight - screenOffsetThreshold) && rect.bottom > -50) {
                 visibleQuotes.push({
                     quote: quote,
                     index: index,
@@ -55,23 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sort by top position (top to bottom)
         visibleQuotes.sort((a, b) => a.top - b.top);
         
-        // Highlight at least 3 quotes, starting from the top
+        // Ensure we highlight at least 3 quotes, starting from the top
         const numToHighlight = Math.max(3, visibleQuotes.length);
         
-        // Highlight visible quotes from the top down
+        // Highlight visible quotes - all at 100% opacity (fully highlighted)
         for (let i = 0; i < Math.min(numToHighlight, visibleQuotes.length); i++) {
-            if (i === 0) {
-                // Primary (top) quote - fully visible and black
-                visibleQuotes[i].quote.classList.add('active');
-                visibleQuotes[i].quote.style.opacity = '1';
-                visibleQuotes[i].quote.style.color = '#000000'; // Make sure it's very black
-            } else if (i < 3) {
-                // Next two quotes - more visible but still faded
-                visibleQuotes[i].quote.style.opacity = i === 1 ? '0.4' : '0.2';
-            } else {
-                // Any additional visible quotes
-                visibleQuotes[i].quote.style.opacity = '0.1';
-            }
+            visibleQuotes[i].quote.classList.add('active');
+            visibleQuotes[i].quote.style.opacity = '1';
+            visibleQuotes[i].quote.style.color = '#000000'; // Very black
         }
         
         // Update last scroll position
