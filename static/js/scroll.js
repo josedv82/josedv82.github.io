@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 quote.style.transform = `translateZ(0) scale(${config.activeScale})`;
             } 
             else {
-                // All non-active quotes are super greyed out
+                // All non-active quotes are greyed out but slightly visible
                 quote.classList.remove('active', 'visible');
-                quote.style.opacity = '0.01'; // Extremely faded
+                quote.style.opacity = '0.07'; // Increased from 0.01 to be visible but still hard to read
                 quote.style.color = '#ddd';   // Very light gray
                 quote.style.transform = 'translateZ(0) scale(1)';
             }
