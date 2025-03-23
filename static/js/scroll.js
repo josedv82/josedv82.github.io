@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastScrollY = window.scrollY;
     let scrollVelocity = 0;
     let scrollDirection = 0; // 1 = down, -1 = up, 0 = static
+    let isUserScrolling = false; // Tracks if user is actively scrolling
+    let scrollTimeout = null;
     
     // State for all quotes
     const quoteStates = Array.from(quotes).map(() => ({
@@ -90,6 +92,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const speed = config.parallaxFactor * (i + 1) * 0.5;
             const yOffset = scrollY * speed;
             el.style.transform = `translateZ(-1px) scale(2) translateY(${yOffset}px)`;
+        });
+    }
+    
+    /**
+     * Handle scrolling to a target position with appropriate behavior
+     */
+    function scrollToPosition(targetPosition) {
+        // Use smooth scrolling for deliberate navigation or slower scrolling
+        // Use auto (instant) scrolling for fast scrolls to avoid bounce back
+        const behavior = scrollVelocity > 40 || isUserScrolling ? 'auto' : 'smooth';
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: behavior
         });
     }
     
@@ -169,6 +185,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Optimize scroll event handling
     let ticking = false;
     window.addEventListener('scroll', () => {
+        // Update flag to indicate user is actively scrolling
+        isUserScrolling = true;
+        
+        // Clear existing timeout to reset the timer
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        
+        // Set a timeout to detect when scrolling stops
+        scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+        }, 100); // Consider scrolling stopped after 100ms of inactivity
+        
+        // Calculate scroll velocity for this event
+        const currentScrollY = window.scrollY;
+        scrollVelocity = Math.abs(currentScrollY - lastScrollY);
+        
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 updateVisuals();
@@ -197,20 +230,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const nextQuote = quotes[activeIndex + 1];
             const offset = nextQuote.offsetTop - (window.innerHeight * 0.25);
             
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
+            scrollToPosition(offset);
         } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && activeIndex > 0) {
             // Move to previous quote
             e.preventDefault();
             const prevQuote = quotes[activeIndex - 1];
             const offset = prevQuote.offsetTop - (window.innerHeight * 0.25);
             
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
+            scrollToPosition(offset);
         }
     });
     
@@ -236,19 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const nextQuote = quotes[activeIndex + 1];
             const offset = nextQuote.offsetTop - (window.innerHeight * 0.25);
             
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
+            scrollToPosition(offset);
         } else if (deltaY < 0 && activeIndex > 0) {
             // Swipe down (scroll up)
             const prevQuote = quotes[activeIndex - 1];
             const offset = prevQuote.offsetTop - (window.innerHeight * 0.25);
             
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
+            scrollToPosition(offset);
         }
     });
     
