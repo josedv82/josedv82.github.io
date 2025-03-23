@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create an array to store quotes by their position from top of viewport
         const visibleQuotes = [];
         
-        // First, reset all quotes to low opacity and remove active class
+        // First, reset all quotes to very low opacity and remove active class
         quotes.forEach(quote => {
             quote.classList.remove('active');
-            quote.style.opacity = '0.1';
+            quote.style.opacity = '0.05'; // Very very greyed out (barely visible)
         });
         
         // Find quotes that are visible in the viewport
@@ -61,15 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Highlight visible quotes from the top down
         for (let i = 0; i < Math.min(numToHighlight, visibleQuotes.length); i++) {
             if (i === 0) {
-                // Primary (top) quote - fully visible
+                // Primary (top) quote - fully visible and black
                 visibleQuotes[i].quote.classList.add('active');
                 visibleQuotes[i].quote.style.opacity = '1';
+                visibleQuotes[i].quote.style.color = '#000000'; // Make sure it's very black
             } else if (i < 3) {
-                // Next two quotes - decreased visibility
-                visibleQuotes[i].quote.style.opacity = 0.6 - ((i-1) * 0.2);
+                // Next two quotes - more visible but still faded
+                visibleQuotes[i].quote.style.opacity = i === 1 ? '0.4' : '0.2';
             } else {
                 // Any additional visible quotes
-                visibleQuotes[i].quote.style.opacity = '0.2';
+                visibleQuotes[i].quote.style.opacity = '0.1';
             }
         }
         

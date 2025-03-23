@@ -61,12 +61,15 @@ main {
     margin: 2rem 0;
     font-size: 1.25rem;
     line-height: 1.5;
-    opacity: 0.1;
-    transition: opacity var(--transition-speed) ease;
+    opacity: 0.05; /* Very very greyed out by default */
+    transition: opacity var(--transition-speed) ease, color var(--transition-speed) ease;
+    color: #666; /* Lighter text color for non-highlighted quotes */
 }
 
 .quote-paragraph.active {
     opacity: 1;
+    color: #000; /* Very black text for highlighted quotes */
+    font-weight: 500; /* Slightly bolder to enhance contrast */
 }
 
 /* Progress bar at bottom */
