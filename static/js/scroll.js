@@ -46,25 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
             quote.style.color = '#666';
             
             // Consider a quote visible if:
-            // 1. Its top is in the top third of the viewport OR
-            // 2. It's partially above the viewport (already scrolled past) OR
+            // 1. It's near the top of the viewport (more sensitive detection) OR
+            // 2. It's partially visible anywhere in the viewport OR
             // 3. It's the first quote in the document and we're at the top
             
-            const isInTopThird = rect.top >= 0 && rect.top <= windowHeight / 2;
-            const isJustScrolledPast = rect.top < 0 && rect.bottom > 0;
+            // More sensitive top detection - highlight as soon as the quote enters viewport
+            const isNearTop = rect.top >= -100 && rect.top <= windowHeight * 0.4;
+            
+            // Any part of the quote is visible in the viewport
+            const isPartiallyVisible = (rect.top < windowHeight && rect.bottom > 0);
+            
             const isFirstQuoteAtTop = index === 0 && scrollPosition < 50;
             
-            if (isInTopThird || isJustScrolledPast || isFirstQuoteAtTop) {
+            // Weight by proximity to the ideal position (near top of viewport)
+            const proximityToIdeal = Math.abs(rect.top - windowHeight * 0.2);
+            
+            if (isNearTop || isPartiallyVisible || isFirstQuoteAtTop) {
                 visibleQuotes.push({
                     quote: quote,
                     index: index,
-                    top: rect.top
+                    top: rect.top,
+                    proximity: proximityToIdeal
                 });
             }
         });
         
-        // Sort by position from top to bottom
-        visibleQuotes.sort((a, b) => a.top - b.top);
+        // Sort by proximity to ideal position first (closest to top)
+        visibleQuotes.sort((a, b) => a.proximity - b.proximity);
         
         // For quotes in the viewport or just scrolled past, highlight them
         // We always want to highlight at least 3 quotes if possible
@@ -125,14 +133,28 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = scrollPosition;
     };
     
-    // Handle scrolling
+    // Handle scrolling with requestAnimationFrame for better performance
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        updateActiveQuotes();
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateActiveQuotes();
+                ticking = false;
+            });
+            ticking = true;
+        }
     });
     
     // Update on resize
+    let resizeTicking = false;
     window.addEventListener('resize', () => {
-        updateActiveQuotes();
+        if (!resizeTicking) {
+            window.requestAnimationFrame(() => {
+                updateActiveQuotes();
+                resizeTicking = false;
+            });
+            resizeTicking = true;
+        }
     });
     
     // Handle keyboard navigation

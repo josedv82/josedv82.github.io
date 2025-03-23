@@ -62,7 +62,7 @@ main {
     font-size: 1.25rem;
     line-height: 1.5;
     opacity: 0.03; /* Extremely faded when not highlighted */
-    transition: opacity 0.2s ease, color 0.2s ease;
+    transition: opacity 0.1s linear, color 0.1s linear; /* Make transitions faster */
     color: #666; /* Lighter text color for non-highlighted quotes */
 }
 
@@ -81,7 +81,8 @@ main {
     height: 3px;
     background-color: #000;
     z-index: 1000;
-    transition: width 0.1s linear;
+    /* Remove transition for instant updates */
+    transition: none;
 }
 
 /* Footer styles */
