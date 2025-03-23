@@ -36,6 +36,11 @@ body {
     font-size: 1.2rem;
     font-style: italic;
     z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+
+.site-title.hidden {
+    opacity: 0;
 }
 
 /* Main content container */

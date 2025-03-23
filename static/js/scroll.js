@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get all quote paragraphs
+    // Get all elements
     const quotes = document.querySelectorAll('.quote-paragraph');
     const progressBar = document.getElementById('progress-bar');
+    const siteTitle = document.querySelector('.site-title');
+    
+    // Last scroll position for detecting scroll direction
+    let lastScrollTop = 0;
     
     // Activate the first quote on page load
     if (quotes.length > 0) {
@@ -18,24 +22,53 @@ document.addEventListener('DOMContentLoaded', () => {
         const progress = (scrollPosition / documentHeight) * 100;
         progressBar.style.width = `${progress}%`;
         
-        // Check each quote's position
+        // Handle title visibility
+        if (scrollPosition > 50) {
+            siteTitle.classList.add('hidden');
+        } else {
+            siteTitle.classList.remove('hidden');
+        }
+        
+        // Create an array to store quotes by their position relative to center
+        const quotePositions = [];
+        
+        // Calculate the center position of each quote
         quotes.forEach((quote, index) => {
             const rect = quote.getBoundingClientRect();
-            const quoteTop = rect.top;
-            const quoteHeight = rect.height;
+            const quoteCenter = rect.top + (rect.height / 2);
+            const distanceFromViewportMiddle = Math.abs(quoteCenter - (windowHeight / 2));
             
-            // Calculate the position relative to the viewport
-            // A quote is considered "active" when its top is in the middle third of the screen
-            const viewportMiddle = windowHeight / 2;
-            const threshold = windowHeight / 3;
+            quotePositions.push({
+                quote: quote,
+                distance: distanceFromViewportMiddle
+            });
             
-            if (quoteTop < viewportMiddle + threshold && 
-                quoteTop > viewportMiddle - threshold) {
-                quote.classList.add('active');
-            } else {
-                quote.classList.remove('active');
-            }
+            // First, remove active from all quotes
+            quote.classList.remove('active');
         });
+        
+        // Sort quotes by distance from viewport middle (closest first)
+        quotePositions.sort((a, b) => a.distance - b.distance);
+        
+        // Activate the 3 closest quotes, with varying opacity levels
+        for (let i = 0; i < Math.min(3, quotePositions.length); i++) {
+            if (i === 0) {
+                // Primary (closest) quote - fully visible
+                quotePositions[i].quote.classList.add('active');
+                quotePositions[i].quote.style.opacity = '1';
+            } else {
+                // Secondary quotes - less visible
+                quotePositions[i].quote.style.opacity = 0.3 - (i * 0.1);
+            }
+        }
+        
+        // Reset all other quotes to very low opacity
+        for (let i = 3; i < quotePositions.length; i++) {
+            quotePositions[i].quote.style.opacity = '0.1';
+        }
+        
+        // Update last scroll position
+        lastScrollTop = scrollPosition;
     };
     
     // Handle scrolling
