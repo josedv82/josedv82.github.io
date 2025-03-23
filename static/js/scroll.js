@@ -29,42 +29,48 @@ document.addEventListener('DOMContentLoaded', () => {
             siteTitle.classList.remove('hidden');
         }
         
-        // Create an array to store quotes by their position relative to center
-        const quotePositions = [];
+        // Create an array to store quotes by their position from top of viewport
+        const visibleQuotes = [];
         
-        // Calculate the center position of each quote
-        quotes.forEach((quote, index) => {
-            const rect = quote.getBoundingClientRect();
-            const quoteCenter = rect.top + (rect.height / 2);
-            const distanceFromViewportMiddle = Math.abs(quoteCenter - (windowHeight / 2));
-            
-            quotePositions.push({
-                quote: quote,
-                distance: distanceFromViewportMiddle
-            });
-            
-            // First, remove active from all quotes
+        // First, reset all quotes to low opacity and remove active class
+        quotes.forEach(quote => {
             quote.classList.remove('active');
+            quote.style.opacity = '0.1';
         });
         
-        // Sort quotes by distance from viewport middle (closest first)
-        quotePositions.sort((a, b) => a.distance - b.distance);
-        
-        // Activate the 3 closest quotes, with varying opacity levels
-        for (let i = 0; i < Math.min(3, quotePositions.length); i++) {
-            if (i === 0) {
-                // Primary (closest) quote - fully visible
-                quotePositions[i].quote.classList.add('active');
-                quotePositions[i].quote.style.opacity = '1';
-            } else {
-                // Secondary quotes - less visible
-                quotePositions[i].quote.style.opacity = 0.3 - (i * 0.1);
+        // Find quotes that are visible in the viewport
+        quotes.forEach((quote, index) => {
+            const rect = quote.getBoundingClientRect();
+            
+            // If the quote is visible in the viewport (wholly or partially)
+            if (rect.top < windowHeight && rect.bottom > 0) {
+                visibleQuotes.push({
+                    quote: quote,
+                    index: index,
+                    top: rect.top // Store the top position
+                });
             }
-        }
+        });
         
-        // Reset all other quotes to very low opacity
-        for (let i = 3; i < quotePositions.length; i++) {
-            quotePositions[i].quote.style.opacity = '0.1';
+        // Sort by top position (top to bottom)
+        visibleQuotes.sort((a, b) => a.top - b.top);
+        
+        // Highlight at least 3 quotes, starting from the top
+        const numToHighlight = Math.max(3, visibleQuotes.length);
+        
+        // Highlight visible quotes from the top down
+        for (let i = 0; i < Math.min(numToHighlight, visibleQuotes.length); i++) {
+            if (i === 0) {
+                // Primary (top) quote - fully visible
+                visibleQuotes[i].quote.classList.add('active');
+                visibleQuotes[i].quote.style.opacity = '1';
+            } else if (i < 3) {
+                // Next two quotes - decreased visibility
+                visibleQuotes[i].quote.style.opacity = 0.6 - ((i-1) * 0.2);
+            } else {
+                // Any additional visible quotes
+                visibleQuotes[i].quote.style.opacity = '0.2';
+            }
         }
         
         // Update last scroll position
