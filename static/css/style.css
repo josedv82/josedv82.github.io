@@ -61,16 +61,16 @@ main {
     margin: 2rem 0;
     font-size: 1.25rem;
     line-height: 1.5;
-    opacity: 0.03; /* Extremely faded when not highlighted */
-    transition: opacity 0.15s ease-in, color 0.15s ease-in; /* Only transition to visible, not back */
-    color: #666; /* Lighter text color for non-highlighted quotes */
+    opacity: 0.05; /* Very faded when not highlighted, just like White Mirror */
+    transition: opacity 0.2s ease, color 0.2s ease;
+    color: #888; /* Light gray for non-highlighted quotes */
+    font-weight: 400;
 }
 
 .quote-paragraph.active {
     opacity: 1; /* Fully visible when highlighted */
     color: #000; /* Pure black text for highlighted quotes */
-    font-weight: 600; /* Bolder for maximum contrast */
-    transition: opacity 0.05s ease-out, color 0.05s ease-out; /* Faster transition to visible */
+    font-weight: 500; /* Slightly bolder for better readability */
 }
 
 /* Progress bar at bottom */
