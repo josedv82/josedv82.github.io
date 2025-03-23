@@ -55,7 +55,7 @@ body {
 /* Main content container */
 main {
     position: relative;
-    padding: 35vh 0 50vh; /* Increased bottom padding to allow highlighting of bottom quotes */
+    padding: 35vh 0 100vh; /* Significantly increased bottom padding to ensure very last quote gets highlighted */
     max-width: 650px;
     margin: 0 auto;
     z-index: 1;
@@ -128,7 +128,7 @@ main {
 @media (max-width: 768px) {
     main {
         padding-top: 30vh;
-        padding-bottom: 50vh; /* Maintain bottom padding on tablets */
+        padding-bottom: 100vh; /* Match desktop bottom padding for tablet */
     }
     
     .quotes-container {
@@ -144,7 +144,7 @@ main {
 @media (max-width: 480px) {
     main {
         padding-top: 25vh;
-        padding-bottom: 50vh; /* Maintain bottom padding on mobile */
+        padding-bottom: 100vh; /* Match desktop bottom padding for mobile */
     }
     
     .quotes-container {

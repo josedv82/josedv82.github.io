@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Default opacity for inactive quotes (set to be subtle but still visible)
         inactiveOpacity: 0.1,
         // Medium opacity for quotes that are approaching but not fully active
-        approachingOpacity: 0.5
+        approachingOpacity: 0.5,
+        // Special handling for the last quote to ensure it gets activated
+        lastQuoteThreshold: 0.6
     };
     
     // Track scroll positions for velocity calculations
@@ -140,12 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
             state.progress = activationProgress;
             state.distanceFromIdeal = Math.abs(rect.top - (windowHeight * 0.25));
             
+            // Special handling for the last quote
+            const isLastQuote = index === quotes.length - 1;
+            
             // Determine if the quote is active (in the target activation zone)
-            const isInActivationZone = rect.top < windowHeight * config.activationThreshold && rect.bottom > 0;
+            // For the last quote, use a more generous activation zone
+            const activationThreshold = isLastQuote ? config.lastQuoteThreshold : config.activationThreshold;
+            const isInActivationZone = rect.top < windowHeight * activationThreshold && rect.bottom > 0;
             
             // Determine if the quote is approaching activation (for early fading in)
             const isApproaching = !isInActivationZone && 
-                rect.top >= windowHeight * config.activationThreshold && 
+                rect.top >= windowHeight * activationThreshold && 
                 rect.top <= windowHeight * config.earlyActivationThreshold;
             
             // Determine if the quote is at all visible
@@ -155,6 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
             state.active = isInActivationZone;
             state.approaching = isApproaching;
             state.visible = isVisible;
+            
+            // Force the last quote to be active when it's visible near the bottom of the screen
+            if (isLastQuote && isVisible && scrollY + windowHeight >= document.body.scrollHeight - 100) {
+                state.active = true;
+            }
         });
         
         // Find the most visible quote in the activation zone
