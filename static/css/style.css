@@ -62,7 +62,7 @@ main {
     font-size: 1.25rem;
     line-height: 1.5;
     opacity: 0.03; /* Extremely faded when not highlighted */
-    transition: opacity 0.1s linear, color 0.1s linear; /* Make transitions faster */
+    transition: opacity 0.15s ease-in, color 0.15s ease-in; /* Only transition to visible, not back */
     color: #666; /* Lighter text color for non-highlighted quotes */
 }
 
@@ -70,6 +70,7 @@ main {
     opacity: 1; /* Fully visible when highlighted */
     color: #000; /* Pure black text for highlighted quotes */
     font-weight: 600; /* Bolder for maximum contrast */
+    transition: opacity 0.05s ease-out, color 0.05s ease-out; /* Faster transition to visible */
 }
 
 /* Progress bar at bottom */

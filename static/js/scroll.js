@@ -7,12 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Last scroll position for detecting scroll direction
     let lastScrollTop = 0;
     
+    // Track which quotes have been highlighted already
+    // Once a quote is highlighted, it remains highlighted when scrolling up
+    const highlightedQuotes = new Set();
+    
     // Activate the first three quotes on page load
     if (quotes.length > 0) {
         for (let i = 0; i < Math.min(3, quotes.length); i++) {
             quotes[i].classList.add('active');
             quotes[i].style.opacity = '1';
             quotes[i].style.color = '#000000';
+            highlightedQuotes.add(i);
         }
     }
     
@@ -21,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const windowHeight = window.innerHeight;
         const documentHeight = document.body.scrollHeight - windowHeight;
         const scrollPosition = window.scrollY;
+        const scrollingUp = scrollPosition < lastScrollTop;
         
         // Update progress bar
         const progress = (scrollPosition / documentHeight) * 100;
@@ -33,99 +39,106 @@ document.addEventListener('DOMContentLoaded', () => {
             siteTitle.classList.remove('hidden');
         }
         
-        // Find quotes that should be highlighted based on viewport position
-        let visibleQuotes = [];
+        // Reset all quotes to initial state first
+        quotes.forEach((quote, index) => {
+            // When scrolling up, don't unhighlight quotes that were already highlighted
+            if (!scrollingUp || !highlightedQuotes.has(index)) {
+                quote.classList.remove('active');
+                quote.style.opacity = '0.03';
+                quote.style.color = '#666';
+            }
+        });
         
-        // Check each quote's position relative to the viewport
+        // Special case for top of page
+        if (scrollPosition < 50) {
+            for (let i = 0; i < Math.min(3, quotes.length); i++) {
+                quotes[i].classList.add('active');
+                quotes[i].style.opacity = '1';
+                quotes[i].style.color = '#000000';
+                highlightedQuotes.add(i);
+            }
+            
+            // Update last scroll position and return
+            lastScrollTop = scrollPosition;
+            return;
+        }
+        
+        // Find the quotes that should be highlighted now based on viewport position
+        let currentHighlights = [];
+        
+        // Find which quotes are in the viewport
         quotes.forEach((quote, index) => {
             const rect = quote.getBoundingClientRect();
             
-            // Reset styling for all quotes first
-            quote.classList.remove('active');
-            quote.style.opacity = '0.03';
-            quote.style.color = '#666';
-            
-            // Consider a quote visible if:
-            // 1. It's near the top of the viewport (more sensitive detection) OR
-            // 2. It's partially visible anywhere in the viewport OR
-            // 3. It's the first quote in the document and we're at the top
-            
-            // More sensitive top detection - highlight as soon as the quote enters viewport
+            // Check if quote is near the top of the viewport or partially visible
             const isNearTop = rect.top >= -100 && rect.top <= windowHeight * 0.4;
-            
-            // Any part of the quote is visible in the viewport
             const isPartiallyVisible = (rect.top < windowHeight && rect.bottom > 0);
             
-            const isFirstQuoteAtTop = index === 0 && scrollPosition < 50;
-            
-            // Weight by proximity to the ideal position (near top of viewport)
-            const proximityToIdeal = Math.abs(rect.top - windowHeight * 0.2);
-            
-            if (isNearTop || isPartiallyVisible || isFirstQuoteAtTop) {
-                visibleQuotes.push({
-                    quote: quote,
+            if (isNearTop || isPartiallyVisible) {
+                const proximityToIdeal = Math.abs(rect.top - windowHeight * 0.2);
+                currentHighlights.push({
                     index: index,
-                    top: rect.top,
                     proximity: proximityToIdeal
                 });
             }
         });
         
-        // Sort by proximity to ideal position first (closest to top)
-        visibleQuotes.sort((a, b) => a.proximity - b.proximity);
+        // Sort by proximity to ideal position
+        currentHighlights.sort((a, b) => a.proximity - b.proximity);
         
-        // For quotes in the viewport or just scrolled past, highlight them
-        // We always want to highlight at least 3 quotes if possible
-        
-        // Start with the default behavior for the top of the page
-        if (scrollPosition < 50) {
-            for (let i = 0; i < Math.min(3, quotes.length); i++) {
-                quotes[i].classList.add('active');
-                quotes[i].style.opacity = '1';
-                quotes[i].style.color = '#000000'; 
-            }
-            return;
-        }
-        
-        // If we have visible quotes, determine which ones to highlight
-        if (visibleQuotes.length > 0) {
-            // Find the primary quote (the one most prominently in view)
-            const primaryIndex = visibleQuotes[0].index;
+        // If we're scrolling down, highlight current and next quotes
+        if (!scrollingUp && currentHighlights.length > 0) {
+            // Get the primary quote to highlight
+            const primaryIndex = currentHighlights[0].index;
             
             // Always highlight the primary quote
             quotes[primaryIndex].classList.add('active');
             quotes[primaryIndex].style.opacity = '1';
             quotes[primaryIndex].style.color = '#000000';
+            highlightedQuotes.add(primaryIndex);
             
-            // Highlight one quote above and one below if they exist
+            // Highlight quotes around the primary one
             if (primaryIndex > 0) {
                 quotes[primaryIndex - 1].classList.add('active');
                 quotes[primaryIndex - 1].style.opacity = '1';
                 quotes[primaryIndex - 1].style.color = '#000000';
+                highlightedQuotes.add(primaryIndex - 1);
             }
             
             if (primaryIndex < quotes.length - 1) {
                 quotes[primaryIndex + 1].classList.add('active');
                 quotes[primaryIndex + 1].style.opacity = '1';
                 quotes[primaryIndex + 1].style.color = '#000000';
+                highlightedQuotes.add(primaryIndex + 1);
             }
+        } 
+        // When scrolling up, make sure all previously highlighted quotes stay highlighted
+        else if (scrollingUp) {
+            // Make sure all previously highlighted quotes remain highlighted
+            highlightedQuotes.forEach(index => {
+                quotes[index].classList.add('active');
+                quotes[index].style.opacity = '1';
+                quotes[index].style.color = '#000000';
+            });
             
-            // If we need more to reach 3 highlights, add them
-            if (primaryIndex > 1 && (primaryIndex === quotes.length - 1 || primaryIndex === 0)) {
-                quotes[primaryIndex - 2].classList.add('active');
-                quotes[primaryIndex - 2].style.opacity = '1';
-                quotes[primaryIndex - 2].style.color = '#000000';
-            } else if (primaryIndex < quotes.length - 2 && (primaryIndex === 0 || primaryIndex === 1)) {
-                quotes[primaryIndex + 2].classList.add('active');
-                quotes[primaryIndex + 2].style.opacity = '1';
-                quotes[primaryIndex + 2].style.color = '#000000';
-            }
-        } else {
-            // Fallback: Highlight the first 3 quotes if nothing is visible
-            for (let i = 0; i < Math.min(3, quotes.length); i++) {
-                quotes[i].classList.add('active');
-                quotes[i].style.opacity = '1';
-                quotes[i].style.color = '#000000';
+            // Additionally, highlight quotes around the current visible ones if they exist
+            if (currentHighlights.length > 0) {
+                const primaryIndex = currentHighlights[0].index;
+                
+                // Only add new highlights that weren't already highlighted
+                if (primaryIndex > 0 && !highlightedQuotes.has(primaryIndex - 1)) {
+                    quotes[primaryIndex - 1].classList.add('active');
+                    quotes[primaryIndex - 1].style.opacity = '1';
+                    quotes[primaryIndex - 1].style.color = '#000000';
+                    highlightedQuotes.add(primaryIndex - 1);
+                }
+                
+                if (primaryIndex < quotes.length - 1 && !highlightedQuotes.has(primaryIndex + 1)) {
+                    quotes[primaryIndex + 1].classList.add('active');
+                    quotes[primaryIndex + 1].style.opacity = '1';
+                    quotes[primaryIndex + 1].style.color = '#000000';
+                    highlightedQuotes.add(primaryIndex + 1);
+                }
             }
         }
         
