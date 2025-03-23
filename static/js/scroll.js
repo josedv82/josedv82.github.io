@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         quotes.forEach((quote, index) => {
             const state = quoteStates[index];
             
-            // Base opacity and color on state
+            // Base opacity and color on state - only two states now: active or inactive
             if (state.active) {
                 quote.classList.add('active');
                 quote.classList.remove('visible');
@@ -63,19 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 quote.style.color = '#000000';
                 quote.style.transform = `translateZ(0) scale(${config.activeScale})`;
             } 
-            else if (state.approaching) {
-                quote.classList.remove('active');
-                quote.classList.add('visible');
-                quote.style.opacity = `${config.approachingOpacity + (state.progress * 0.4)}`;
-                quote.style.color = '#333';
-                // Scale based on progress toward being active
-                const scale = 1 + ((config.activeScale - 1) * state.progress);
-                quote.style.transform = `translateZ(0) scale(${scale})`;
-            } 
             else {
+                // All non-active quotes are super greyed out
                 quote.classList.remove('active', 'visible');
-                quote.style.opacity = `${config.inactiveOpacity}`;
-                quote.style.color = '#ccc'; /* Lighter color to make text harder to read */
+                quote.style.opacity = '0.01'; // Extremely faded
+                quote.style.color = '#ddd';   // Very light gray
                 quote.style.transform = 'translateZ(0) scale(1)';
             }
         });
