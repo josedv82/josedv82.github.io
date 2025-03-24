@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Collaborations - Jose Fernandez</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .about-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .collab-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: normal;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .divider-line {
+            height: 1px;
+            background-color: #eee;
+            margin: 0.5rem 0;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .card-journal {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 1rem;
+        }
+
+        .card-link {
+            align-self: flex-end;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: opacity 0.3s;
+        }
+
+        .card-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            font-style: italic;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-style: italic;
+            padding: 0.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-title">Jose Fernandez</div>
+
+    <!-- Parallax background elements -->
+    <div class="parallax-bg">
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+    </div>
+
+    <main>
+        <div class="collab-container">
+            <h3 class="section-title">Research Collaborations</h3>
+            <div class="card-container">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-title">
+                        A systematic review of sport-related packages within the R CRAN repository
+                    </div>
+                    <div class="divider-line"></div>
+                    <p class="card-subtitle">
+                        Casals M., <strong>Fernández J.</strong>, Martínez V., Lopez M., Langohr K., & Cortés J.
+                    </p>
+                    <p class="card-journal">
+                        <em>International Journal of Sports Science & Coaching, 0(0). November 11, 2022.</em>
+                    </p>
+                    <a href="https://www.researchgate.net/publication/365360566_A_systematic_review_of_sport-related_packages_within_the_R_CRAN_repository" target="_blank" class="card-link">
+                        →
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-title">
+                        Epidemiology and injury trends in the National Basketball Association: Pre- and per-COVID-19 (2017–2021)
+                    </div>
+                    <div class="divider-line"></div>
+                    <p class="card-subtitle">
+                        Torres-Ronda L, Gámez I, Robertson S, <strong>Fernández J</strong>.
+                    </p>
+                    <p class="card-journal">
+                        <em>PLoS ONE 17(2): February 10, 2022. e0263354.</em>
+                    </p>
+                    <a href="https://www.researchgate.net/publication/358509512_Epidemiology_and_injury_trends_in_the_National_Basketball_Association_Pre-and_per-_COVID-19_2017-2021" target="_blank" class="card-link">
+                        →
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-title">
+                        Decision Support System Applications for Scheduling in Professional Team Sport. The Team's Perspective
+                    </div>
+                    <div class="divider-line"></div>
+                    <p class="card-subtitle">
+                        Schelling X, <strong>Fernández J</strong>, Ward P, Fernández J, Robertson S.
+                    </p>
+                    <p class="card-journal">
+                        <em>Front Sports Act Living, Jun 4 2021; 3:678489.</em>
+                    </p>
+                    <a href="https://www.researchgate.net/publication/351370895_Decision_Support_System_Applications_for_Scheduling_in_Professional_Team_Sport_The_Team's_Perspective" target="_blank" class="card-link">
+                        →
+                    </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="card-title">
+                        A Deep Learning Approach to Injury Forecasting in NBA Basketball
+                    </div>
+                    <div class="divider-line"></div>
+                    <p class="card-subtitle">
+                        Cohan, A, Schuster, J, <strong>Fernández J</strong>.
+                    </p>
+                    <p class="card-journal">
+                        <em>Journal of Sports Analytics, December 2021, 277 – 289.</em>
+                    </p>
+                    <a href="https://www.researchgate.net/publication/353143908_A_deep_learning_approach_to_injury_forecasting_in_NBA_basketball" target="_blank" class="card-link">
+                        →
+                    </a>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <div class="card-title">
+                        Hiding in plain sight: Schedule density and travel influence on NBA games outcomes
+                    </div>
+                    <div class="divider-line"></div>
+                    <p class="card-subtitle">
+                        Schuster, J, <strong>Fernández J</strong>, Cohan, A.
+                    </p>
+                    <p class="card-journal">
+                        <em>Released as NFT on Opensea.io, June 2021.</em>
+                    </p>
+                    <a href="https://www.researchgate.net/publication/357856729_Hiding_in_plain_sight_schedule_density_and_travel_influence_on_NBA_game_outcomes" target="_blank" class="card-link">
+                        →
+                    </a>
+                </div>
+            </div>
+
+            <a href="{{ url_for('index') }}" class="back-link">← Back to reflections</a>
+        </div>
+    </main>
+</body>
+</html>

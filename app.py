@@ -63,3 +63,7 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
+    
+@app.route('/collaborations')
+def collaborations():
+    return render_template('collaborations.html')
