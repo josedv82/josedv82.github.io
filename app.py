@@ -67,3 +67,7 @@ def about():
 @app.route('/collaborations')
 def collaborations():
     return render_template('collaborations.html')
+    
+@app.route('/r-packages')
+def r_packages():
+    return render_template('r_packages.html')
