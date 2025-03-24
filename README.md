@@ -1,6 +1,6 @@
 # Jose Fernandez Website
 
-A dynamic quote-revealing website that creates an immersive reading experience through advanced scroll-based interactions and responsive design.
+A dynamic quote-revealing static website that creates an immersive reading experience through advanced scroll-based interactions and responsive design.
 
 ## Features
 
@@ -15,23 +15,18 @@ A dynamic quote-revealing website that creates an immersive reading experience t
 
 ## Technologies Used
 
-- Flask
 - HTML/CSS
 - JavaScript
-- Gunicorn
 
-## Setup and Installation
+## Setup and Usage
 
 1. Clone the repository
-2. Install dependencies:
-   ```
-   pip install flask flask-sqlalchemy gunicorn psycopg2-binary email-validator
-   ```
-3. Run the application:
-   ```
-   python main.py
-   ```
+2. Open index.html in a web browser
    
 ## Deployment
 
-The application is configured to run with Gunicorn for production deployment.
+This is a fully static website that can be deployed on any web server or hosting service that can serve static files.
+
+## About
+
+The website showcases Jose Fernandez's reflections, research collaborations, R packages, and podcast appearances with a clean and minimalist design focused on content presentation.
