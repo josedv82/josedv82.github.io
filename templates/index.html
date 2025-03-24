@@ -4,11 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>the white mirror.</title>
+    <title>Jose Fernandez</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Navigation styles */
+        .nav-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-style: italic;
+            padding: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
-    <div class="site-title">the white mirror.</div>
+    <div class="site-title">Jose Fernandez</div>
+    
+    <div class="nav-container">
+        <a href="{{ url_for('about') }}" class="nav-link">About me</a>
+    </div>
     
     <!-- Parallax background elements -->
     <div class="parallax-bg">
