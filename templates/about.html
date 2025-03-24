@@ -4,39 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>About - Jose Fernandez</title>
+    <title>About Me - Jose Fernandez</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        /* About page specific styles */
         .about-container {
             max-width: 700px;
             margin: 0 auto;
-            padding: 2rem;
-            text-align: center;
+            padding: 0 2rem;
         }
         
-        .profile-image {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        .about-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 4px;
         }
         
-        .bio-text {
+        .about-text {
             font-size: 1.1rem;
             line-height: 1.7;
-            margin-bottom: 2rem;
-            text-align: left;
+            margin-bottom: 3rem;
         }
         
         .back-link {
             display: inline-block;
+            margin-top: 2rem;
+            font-style: italic;
             color: #000;
             text-decoration: none;
-            font-style: italic;
-            margin-top: 2rem;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
             transition: opacity 0.3s;
         }
         
@@ -44,30 +43,47 @@
             opacity: 0.7;
         }
         
-        .section-title {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            font-weight: normal;
-            text-align: left;
+        /* Navigation styles */
+        .nav-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-style: italic;
+            padding: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-link:hover {
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
     <div class="site-title">Jose Fernandez</div>
     
+    <div class="nav-container">
+        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+    </div>
+    
+    <!-- Parallax background elements -->
+    <div class="parallax-bg">
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+    </div>
+    
     <main>
         <div class="about-container">
-            <img src="{{ url_for('static', filename='images/jose_fernandez.jpg') }}" alt="Jose Fernandez" class="profile-image">
+            <img src="{{ url_for('static', filename='images/jose_fernandez.jpg') }}" alt="Jose Fernandez" class="about-image">
             
-            <h2 class="section-title">About Me</h2>
-            
-            <div class="bio-text">
-                <p>Jose Fernandez is a sports scientist and performance specialist with extensive experience working with elite athletes and professional sports teams. With a background in athletic performance, data analysis, and coaching, Jose combines practical knowledge with scientific principles to optimize athletic development.</p>
-                
-                <p>Throughout his career, Jose has worked with organizations in various sports, helping athletes reach their peak performance through innovative training methodologies, careful monitoring, and individualized programming. His approach emphasizes mastering fundamentals while strategically implementing cutting-edge techniques and technologies.</p>
-                
-                <p>Jose is passionate about sharing his knowledge and insights with the broader sports community, believing that continuous learning and adaptation are key to success in the ever-evolving field of sports science.</p>
-            </div>
+            <p class="about-text">
+                Born in Spain, I have a formal education in High Performance and Sport Science. I began my career at youth basketball academies, often working with fewer resources, then expanded my experience across Europe and China. After spending more than six years with the Houston Astros in MLB, I now lead performance and R&D at BCSG, a multi-club sport firm managing soccer teams across international leagues. Having worked in basketball, baseball, and football (soccer), I've developed a strong interest and skills in data analysis and programming along the way. I'm passionate about building and consider myself an amateur entrepreneur.
+            </p>
             
             <a href="{{ url_for('index') }}" class="back-link">← Back to reflections</a>
         </div>
