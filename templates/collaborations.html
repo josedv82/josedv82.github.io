@@ -86,23 +86,6 @@
 
         .back-link {
             display: inline-block;
-
-    <script>
-        document.querySelector('.dropdown').addEventListener('click', function() {
-            this.querySelector('.chevron').classList.toggle('active');
-            this.querySelector('.dropdown-content').classList.toggle('show');
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.dropdown')) {
-                document.querySelector('.chevron').classList.remove('active');
-                document.querySelector('.dropdown-content').classList.remove('show');
-            }
-        });
-    </script>
-</body>
-</html>
-
             margin-top: 2rem;
             font-style: italic;
             color: #000;
@@ -139,63 +122,46 @@
         .dropdown {
             position: relative;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .chevron {
-            border: solid black;
-            border-width: 0 2px 2px 0;
-            display: inline-block;
-            padding: 3px;
-            transform: rotate(45deg);
-            transition: transform 0.3s;
-        }
-
-        .chevron.active {
-            transform: rotate(-135deg);
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            top: calc(100% + 5px);
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
             background-color: white;
             min-width: 160px;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
+            padding: 12px 0;
             border-radius: 4px;
-            overflow: hidden;
+            margin-top: 10px;
         }
 
-        .dropdown-content.show {
-            display: block;
+        .dropdown:hover .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .dropdown-content .nav-link {
             color: black;
-            padding: 12px;
+            padding: 12px 16px;
             text-decoration: none;
             display: block;
             text-align: center;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .dropdown-content .nav-link:last-child {
-            border-bottom: none;
+            width: 100%;
         }
 
         .dropdown-content .nav-link:hover {
-            background-color: #f8f8f8;
+            background-color: #f1f1f1;
         }
     </style>
 </head>
 <body>
     <div class="site-title dropdown">
-        Jose Fernandez <i class="chevron"></i>
+        Jose Fernandez
         <div class="dropdown-content">
             <a href="{{ url_for('index') }}" class="nav-link">Reflections</a>
             <a href="{{ url_for('about') }}" class="nav-link">About me</a>
