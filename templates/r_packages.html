@@ -43,6 +43,15 @@
             transition: transform 0.3s, box-shadow 0.3s;
             max-width: 200px;
             margin: 0 auto;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            line-height: 1.4;
         }
 
         .card:hover {
@@ -209,44 +218,27 @@
                 <h3 class="section-title">My R Packages</h3>
                 <div class="card-container">
                     <!-- matuR Card -->
-                    <div class="card" onclick="openDialog('matur-dialog')">
+                    <a href="https://github.com/josedv82/matuR" class="card">
                         <img src="https://raw.githubusercontent.com/josedv82/matuR/refs/heads/master/man/images/maturlogo.png" alt="matuR">
                         <div class="card-title">matuR</div>
-                    </div>
+                        <p class="card-description">Calculate and plot athlete maturation and biobanding metrics.</p>
+                    </a>
 
                     <!-- airball Card -->
-                    <div class="card" onclick="openDialog('airball-dialog')">
+                    <a href="https://github.com/josedv82/airball" class="card">
                         <img src="https://raw.githubusercontent.com/josedv82/airball/refs/heads/master/man/images/airballlogo.PNG" alt="airball">
                         <div class="card-title">airball</div>
-                    </div>
+                        <p class="card-description">Extract schedule density, travel-related metrics, and injury transactions for NBA teams since 1947.</p>
+                    </a>
 
                     <!-- bdgramR Card -->
-                    <div class="card" onclick="openDialog('bdgramR-dialog')">
+                    <a href="https://github.com/josedv82/bdgramR" class="card">
                         <img src="https://raw.githubusercontent.com/josedv82/bdgramR/refs/heads/master/man/images/bodygramRlogo.png" alt="bdgramR">
                         <div class="card-title">bdgramR</div>
-                    </div>
+                        <p class="card-description">Human body diagram visualizations and ggplot2 extensions in R.</p>
+                    </a>
                 </div>
             </section>
-
-            <div class="overlay" id="overlay" onclick="closeDialog()"></div>
-
-            <div class="dialog" id="matur-dialog">
-                <h4>matuR</h4>
-                <p>Calculate and plot athlete maturation and biobanding metrics.</p>
-                <a href="https://github.com/josedv82/matuR" target="_blank">Learn More</a>
-            </div>
-
-            <div class="dialog" id="airball-dialog">
-                <h4>airball</h4>
-                <p>Extract schedule density, travel-related metrics, and injury transactions for NBA teams since 1947.</p>
-                <a href="https://github.com/josedv82/airball" target="_blank">Learn More</a>
-            </div>
-
-            <div class="dialog" id="bdgramR-dialog">
-                <h4>bdgramR</h4>
-                <p>Human body diagram visualizations and ggplot2 extensions in R.</p>
-                <a href="https://github.com/josedv82/bdgramR/blob/master/README.md" target="_blank">Learn More</a>
-            </div>
 
             <a href="{{ url_for('index') }}" class="back-link">← Back to reflections</a>
         </div>
