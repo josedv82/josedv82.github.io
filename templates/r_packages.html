@@ -28,19 +28,21 @@
 
         .card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
             margin-top: 2rem;
         }
 
         .card {
             background-color: #fff;
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 4px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 200px;
+            margin: 0 auto;
         }
 
         .card:hover {
@@ -98,7 +100,7 @@
         .back-link:hover {
             opacity: 0.7;
         }
-        
+
         /* Dialog styles */
         .overlay {
             position: fixed;
@@ -110,7 +112,7 @@
             z-index: 1000;
             display: none;
         }
-        
+
         .dialog {
             position: fixed;
             top: 50%;
@@ -125,12 +127,12 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             display: none;
         }
-        
+
         .dialog h4 {
             margin-top: 0;
             font-size: 1.5rem;
         }
-        
+
         .dialog a {
             display: inline-block;
             margin-top: 1rem;
@@ -139,24 +141,25 @@
             border-bottom: 1px solid #000;
             padding-bottom: 2px;
         }
-        
+
         .dialog a:hover {
             opacity: 0.7;
         }
-        
+
         /* Package card styles */
         .card img {
             max-width: 100%;
             height: auto;
             margin-bottom: 1rem;
             border-radius: 4px;
+            filter: grayscale(100%);
         }
-        
+
         #my-r-packages .card {
             cursor: pointer;
             text-align: center;
         }
-        
+
         #my-r-packages .card-title {
             font-weight: bold;
         }
@@ -184,12 +187,12 @@
 </head>
 <body>
     <div class="site-title">Jose Fernandez</div>
-    
+
     <!-- Navigation links -->
     <div class="nav-container">
         <a href="{{ url_for('index') }}" class="nav-link">Reflections</a>
-        <a href="{{ url_for('about') }}" class="nav-link">About</a>
-        <a href="{{ url_for('collaborations') }}" class="nav-link">Collaborations</a>
+        <a href="{{ url_for('about') }}" class="nav-link"></a>
+        <a href="{{ url_for('collaborations') }}" class="nav-link"></a>
         <a href="{{ url_for('r_packages') }}" class="nav-link">R Packages</a>
     </div>
 
@@ -256,7 +259,7 @@
             document.getElementById(dialogId).style.display = 'block';
             document.body.style.overflow = 'hidden'; // Prevent scrolling when dialog is open
         }
-        
+
         function closeDialog() {
             document.getElementById('overlay').style.display = 'none';
             // Hide all dialogs
@@ -266,7 +269,7 @@
             });
             document.body.style.overflow = ''; // Restore scrolling
         }
-        
+
         // Close dialog when ESC key is pressed
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
