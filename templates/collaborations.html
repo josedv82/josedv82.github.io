@@ -118,10 +118,55 @@
         .nav-link:hover {
             opacity: 0.7;
         }
+
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 12px 0;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dropdown-content .nav-link {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .dropdown-content .nav-link:hover {
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
-    <div class="site-title">Jose Fernandez</div>
+    <div class="site-title dropdown">
+        Jose Fernandez
+        <div class="dropdown-content">
+            <a href="{{ url_for('index') }}" class="nav-link">Reflections</a>
+            <a href="{{ url_for('about') }}" class="nav-link">About me</a>
+        </div>
+    </div>
     
     
 
