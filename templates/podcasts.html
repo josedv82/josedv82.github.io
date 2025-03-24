@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Podcasts - Jose Fernandez</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .about-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 4px;
+            filter: grayscale(100%);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            text-align: justify;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: normal;
+        }
+        
+        #podcasts ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        #podcasts li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        #podcasts li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #555;
+        }
+        
+        #podcasts a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        #podcasts a:hover {
+            opacity: 0.7;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            font-style: italic;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-style: italic;
+            padding: 0.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-title">Jose Fernandez</div>
+    
+    <!-- Parallax background elements -->
+    <div class="parallax-bg">
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+    </div>
+
+    <main>
+        <div class="about-container">
+            <!-- Podcast -->
+            <section id="podcasts">
+                <h3 class="section-header">Podcasts</h3>
+                <ul>
+                    <li><a href="https://www.sportsmith.co/listen/the-future-of-sports-science-and-the-sports-scientist-in-professional-sport/">SportSmith:</a> The future of sports science and the sports scientist in professional sport.</li>
+                </ul>
+            </section>
+
+            <a href="{{ url_for('index') }}" class="back-link">← Back to reflections</a>
+        </div>
+    </main>
+</body>
+</html>

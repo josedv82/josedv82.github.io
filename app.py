@@ -71,3 +71,7 @@ def collaborations():
 @app.route('/r-packages')
 def r_packages():
     return render_template('r_packages.html')
+    
+@app.route('/podcasts')
+def podcasts():
+    return render_template('podcasts.html')
