@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 quote.classList.remove('visible');
                 quote.style.opacity = '1';
                 quote.style.color = '#000000';
-                quote.style.transform = translateZ(0) scale(${config.activeScale});
+                quote.style.transform = `translateZ(0) scale(${config.activeScale})`;
             } 
             else {
                 // All non-active quotes are greyed out but slightly visible
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bgElements.forEach((el, i) => {
             const speed = config.parallaxFactor * (i + 1) * 0.5;
             const yOffset = scrollY * speed;
-            el.style.transform = translateZ(-1px) scale(2) translateY(${yOffset}px);
+            el.style.transform = `translateZ(-1px) scale(2) translateY(${yOffset}px)`;
         });
     }
     
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             siteTitle.classList.add('hidden');
         } else {
             siteTitle.classList.remove('hidden');
-            siteTitle.style.transform = translateZ(0) translateY(${scrollY * 0.2}px);
+            siteTitle.style.transform = `translateZ(0) translateY(${scrollY * 0.2}px)`;
         }
         
         // Update each quote's state
