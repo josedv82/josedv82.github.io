@@ -2,17 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Prevent overscroll/bounce effect
     document.body.style.overscrollBehavior = 'none';
     document.documentElement.style.overscrollBehavior = 'none';
-
+    
     // Touch variables
     let touchStartY = 0;
     let touchEndY = 0;
-
+    
     // DOM Elements
     const quotes = document.querySelectorAll('.quote-paragraph');
     const siteTitle = document.querySelector('.site-title');
     const parallaxBg = document.querySelector('.parallax-bg');
     const bgElements = document.querySelectorAll('.bg-element');
-
+    
     // Configuration
     const config = {
         activationThreshold: 0.35,
@@ -23,15 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
         approachingOpacity: 0.5,
         lastQuoteThreshold: 0.6
     };
-
-    // Track scroll positions for velocity calculations
+    
     let lastScrollY = window.scrollY;
     let scrollVelocity = 0;
-    let scrollDirection = 0; // 1 = down, -1 = up, 0 = static
+    let scrollDirection = 0;
     let isUserScrolling = false;
     let scrollTimeout = null;
-
-    // State for all quotes
+    
     const quoteStates = Array.from(quotes).map(() => ({
         active: false,
         approaching: false,
@@ -40,18 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         distanceFromIdeal: Infinity
     }));
 
-    /**
-     * Vibration function
-     */
-    function triggerVibration() {
-        if ("vibrate" in navigator) {
-            navigator.vibrate(50); // Vibrate for 50ms
-        }
-    }
-
-    /**
-     * Calculate the activation progress (0-1) based on position in viewport
-     */
     function calculateActivationProgress(rect, windowHeight) {
         const idealPosition = windowHeight * 0.25;
         const distanceFromIdeal = Math.abs(rect.top - idealPosition);
@@ -59,13 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.max(0, Math.min(1, 1 - normalizedDistance));
     }
 
-    /**
-     * Update the visual state of quotes based on their calculated states
-     */
     function updateQuoteVisuals() {
         quotes.forEach((quote, index) => {
             const state = quoteStates[index];
-
+            
             if (state.active) {
                 quote.classList.add('active');
                 quote.classList.remove('visible');
@@ -81,9 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Update parallax elements based on scroll position
-     */
     function updateParallaxElements(scrollY) {
         bgElements.forEach((el, i) => {
             const speed = config.parallaxFactor * (i + 1) * 0.5;
@@ -92,32 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Handle scrolling to a target position
-     */
     function scrollToPosition(targetPosition) {
         const behavior = scrollVelocity > 40 || isUserScrolling ? 'auto' : 'smooth';
-        window.scrollTo({ top: targetPosition, behavior: behavior });
+        window.scrollTo({
+            top: targetPosition,
+            behavior: behavior
+        });
     }
 
-    /**
-     * Main function to update visuals based on scroll position
-     */
     function updateVisuals() {
         const windowHeight = window.innerHeight;
+        const documentHeight = document.body.scrollHeight - windowHeight;
         const scrollY = window.scrollY;
-
+        
         scrollDirection = scrollY > lastScrollY ? 1 : (scrollY < lastScrollY ? -1 : 0);
         scrollVelocity = Math.abs(scrollY - lastScrollY);
         lastScrollY = scrollY;
-
+        
         if (scrollY > 100) {
             siteTitle.classList.add('hidden');
         } else {
             siteTitle.classList.remove('hidden');
             siteTitle.style.transform = `translateZ(0) translateY(${scrollY * 0.2}px)`;
         }
-
+        
         quotes.forEach((quote, index) => {
             const rect = quote.getBoundingClientRect();
             const state = quoteStates[index];
@@ -128,14 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const isLastQuote = index === quotes.length - 1;
             const activationThreshold = isLastQuote ? config.lastQuoteThreshold : config.activationThreshold;
             const isInActivationZone = rect.top < windowHeight * activationThreshold && rect.bottom > 0;
-            const isApproaching = !isInActivationZone &&
-                rect.top >= windowHeight * activationThreshold &&
-                rect.top <= windowHeight * config.earlyActivationThreshold;
+            const isApproaching = !isInActivationZone && rect.top >= windowHeight * activationThreshold && rect.top <= windowHeight * config.earlyActivationThreshold;
             const isVisible = rect.bottom > 0 && rect.top < windowHeight;
-
-            if (state.active !== isInActivationZone) {
-                triggerVibration();
-            }
 
             state.active = isInActivationZone;
             state.approaching = isApproaching;
@@ -146,15 +118,47 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        const activeQuotes = quoteStates
+            .map((state, index) => ({ ...state, index }))
+            .filter(state => state.active || state.approaching)
+            .sort((a, b) => a.distanceFromIdeal - b.distanceFromIdeal);
+
+        activeQuotes.sort((a, b) => {
+            if (a.active && !b.active) return -1;
+            if (!a.active && b.active) return 1;
+            return 0;
+        });
+
+        if (activeQuotes.length > 0 && !activeQuotes.some(q => q.active)) {
+            quoteStates[activeQuotes[0].index].active = true;
+        }
+
         updateQuoteVisuals();
         updateParallaxElements(scrollY);
+    }
+
+    function triggerVibration() {
+        if ("vibrate" in navigator) {
+            navigator.vibrate(50);
+        } else if (window?.webkit && window?.webkit.messageHandlers) {
+            try {
+                window.navigator?.webkit?.messageHandlers?.selectionChanged?.postMessage({});
+            } catch (e) {
+                console.error("Haptic feedback not available.");
+            }
+        }
     }
 
     let ticking = false;
     window.addEventListener('scroll', () => {
         isUserScrolling = true;
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => { isUserScrolling = false; }, 100);
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+        }, 100);
+
         const currentScrollY = window.scrollY;
         scrollVelocity = Math.abs(currentScrollY - lastScrollY);
 
@@ -173,19 +177,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeIndex = quoteStates.findIndex(state => state.active);
         if (activeIndex === -1) return;
 
-        if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') &&
-            activeIndex < quotes.length - 1) {
+        if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && activeIndex < quotes.length - 1) {
             e.preventDefault();
-            const nextQuote = quotes[activeIndex + 1];
-            const offset = nextQuote.offsetTop - (window.innerHeight * 0.25);
             triggerVibration();
-            scrollToPosition(offset);
+            const nextQuote = quotes[activeIndex + 1];
+            scrollToPosition(nextQuote.offsetTop - (window.innerHeight * 0.25));
         } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && activeIndex > 0) {
             e.preventDefault();
-            const prevQuote = quotes[activeIndex - 1];
-            const offset = prevQuote.offsetTop - (window.innerHeight * 0.25);
             triggerVibration();
-            scrollToPosition(offset);
+            const prevQuote = quotes[activeIndex - 1];
+            scrollToPosition(prevQuote.offsetTop - (window.innerHeight * 0.25));
         }
     });
 
@@ -201,8 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeIndex = quoteStates.findIndex(state => state.active);
         if (activeIndex === -1) return;
 
-        if ((deltaY > 0 && activeIndex < quotes.length - 1) || (deltaY < 0 && activeIndex > 0)) {
-            triggerVibration();
+        triggerVibration();
+
+        if (deltaY > 0 && activeIndex < quotes.length - 1) {
+            scrollToPosition(quotes[activeIndex + 1].offsetTop - (window.innerHeight * 0.25));
+        } else if (deltaY < 0 && activeIndex > 0) {
+            scrollToPosition(quotes[activeIndex - 1].offsetTop - (window.innerHeight * 0.25));
         }
     });
 
