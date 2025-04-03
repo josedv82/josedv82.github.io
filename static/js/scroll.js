@@ -287,6 +287,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize on page load
     updateVisuals();
+    
+    // Ensure first quote is highlighted on initial load
+    quoteStates[0].active = true;
+    quoteStates[0].approaching = false;
+    quoteStates[0].visible = true;
+    quoteStates[0].progress = 1;
+    quoteStates[0].distanceFromIdeal = 0;
+    updateQuoteVisuals();
 
     // View toggle functionality
     const viewToggle = document.getElementById('viewToggle');
@@ -387,6 +395,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 quotesContainer.style.display = 'block';
                 setTimeout(() => {
                     quotesContainer.style.opacity = '1';
+                    // Reset scroll position and ensure first quote is highlighted
+                    window.scrollTo(0, 0);
+                    quoteStates.forEach((state, index) => {
+                        state.active = index === 0;
+                        state.approaching = false;
+                        state.visible = true;
+                        state.progress = index === 0 ? 1 : 0;
+                        state.distanceFromIdeal = index === 0 ? 0 : Infinity;
+                    });
+                    updateQuoteVisuals();
                 }, 50);
             }, 300);
         }
