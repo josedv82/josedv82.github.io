@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Philosophy & Mindset': {
             description: 'Core beliefs and approaches to professional and personal challenges',
-            quotes: [1, 4, 29, 30, 36]
+            quotes: [1, 4, 29, 30, 36, 49]
         }
     };
 
