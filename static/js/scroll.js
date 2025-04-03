@@ -422,8 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isThreadedView = !isThreadedView;
         
         if (isThreadedView) {
-            viewToggle.textContent = '—';
-            viewToggle.title = 'Switch to Scroll View';
+            viewToggle.innerHTML = '<i class="fa-solid fa-arrow-right-arrow-left"></i><span class="tooltip">theme view</span>';
             quotesContainer.style.opacity = '0';
             setTimeout(() => {
                 quotesContainer.style.display = 'none';
@@ -436,8 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentThreadIndex = 0;
             createThreadedView();
         } else {
-            viewToggle.textContent = '|';
-            viewToggle.title = 'Switch to Thread View';
+            viewToggle.innerHTML = '<i class="fa-solid fa-arrows-up-down"></i><span class="tooltip">scroll view</span>';
             threadedView.style.opacity = '0';
             threadedView.classList.remove('active');
             setTimeout(() => {

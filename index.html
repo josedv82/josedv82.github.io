@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Jose Fernandez</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Navigation styles */
         .nav-container {
@@ -58,11 +59,29 @@
             display: block;
             padding: 0.5rem;
             transition: opacity 0.2s ease;
-            font-family: monospace;
         }
 
         .view-toggle:hover {
             opacity: 0.7;
+        }
+
+        .view-toggle .tooltip {
+            position: absolute;
+            bottom: auto;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
+            color: #808080;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-family: monospace;
+            margin-left: 8px;
+        }
+
+        .view-toggle:hover .tooltip {
+            opacity: 1;
         }
 
         /* Threaded view styles */
@@ -220,14 +239,14 @@
             text-decoration: none;
             font-family: monospace;
             padding: 0.5rem;
-            margin: 2rem auto;
+            margin: 2rem 0;
             cursor: pointer;
             transition: all 0.2s ease;
             border: none;
             background: none;
             font-size: 1rem;
-            text-align: center;
-            width: 100%;
+            text-align: left;
+            width: fit-content;
         }
 
         .back-to-top:hover {
@@ -247,7 +266,10 @@
         </div>
     </div>
     
-    <button class="view-toggle" id="viewToggle" title="Switch to Thread View">|</button>
+    <button class="view-toggle" id="viewToggle">
+        <i class="fa-solid fa-arrows-up-down"></i>
+        <span class="tooltip">scroll view</span>
+    </button>
     
     <!-- Parallax background elements -->
     <div class="parallax-bg">
