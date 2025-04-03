@@ -35,16 +35,30 @@
             left: 0;
             width: 100%;
             z-index: 1000;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .site-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
         }
         
         .nav-links {
-            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
         }
         
         .about-link-container .nav-link {
-            display: inline-block;
-            margin: 0 0.5rem;
             color: #808080;
+            padding: 0.5rem;
         }
 
         /* View toggle button styles */
@@ -59,6 +73,7 @@
             display: block;
             padding: 0.5rem;
             transition: opacity 0.2s ease;
+            z-index: 1001;
         }
 
         .view-toggle:hover {
@@ -67,21 +82,30 @@
 
         .view-toggle .tooltip {
             position: absolute;
-            bottom: auto;
-            left: 100%;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 0.7rem;
             color: #808080;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: all 0.3s ease;
             font-family: monospace;
-            margin-left: 8px;
+            pointer-events: none;
         }
 
         .view-toggle:hover .tooltip {
             opacity: 1;
+        }
+
+        .view-toggle:hover + .about-link-container {
+            transform: translateY(25px);
+        }
+
+        /* Remove individual transforms since we're moving the container */
+        .view-toggle:hover + .about-link-container .site-title,
+        .view-toggle:hover + .about-link-container .nav-links {
+            transform: none;
         }
 
         /* Threaded view styles */
@@ -256,6 +280,11 @@
     </style>
 </head>
 <body>
+    <button class="view-toggle" id="viewToggle">
+        <i class="fa-solid fa-arrows-up-down"></i>
+        <span class="tooltip">scroll view</span>
+    </button>
+
     <div class="about-link-container">
         <div class="site-title">Jose Fernandez</div>
         <div class="nav-links">
@@ -265,11 +294,6 @@
             <a href="podcasts.html" class="nav-link">Podcasts</a>
         </div>
     </div>
-    
-    <button class="view-toggle" id="viewToggle">
-        <i class="fa-solid fa-arrows-up-down"></i>
-        <span class="tooltip">scroll view</span>
-    </button>
     
     <!-- Parallax background elements -->
     <div class="parallax-bg">
