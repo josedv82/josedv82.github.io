@@ -76,6 +76,7 @@
         .topic-thread {
             margin-bottom: 4rem;
             position: relative;
+            padding-top: 1rem;
         }
 
         .topic-title {
@@ -83,66 +84,123 @@
             margin-bottom: 2rem;
             color: #333;
             font-weight: normal;
-            position: relative;
-            padding-left: 1.5rem;
             letter-spacing: 0.5px;
         }
 
-        .topic-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 6px;
-            height: 6px;
-            background: #808080;
-            border-radius: 50%;
-            transform: translateY(-50%);
-        }
-
-        .thread-line {
-            position: absolute;
-            left: 2.5px;
-            top: 2rem;
-            bottom: 0;
-            width: 1px;
-            background: #e0e0e0;
-        }
-
         .quote-thread {
-            position: relative;
-            padding-left: 2rem;
             margin-bottom: 1.5rem;
-        }
-
-        .quote-thread::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.8rem;
-            width: 6px;
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 50%;
         }
 
         .quote-content {
             color: #333;
             line-height: 1.5;
-            position: relative;
-            transition: opacity 0.2s ease;
-            padding-left: 0.5rem;
         }
 
         .quote-content:hover {
-            opacity: 0.7;
+            opacity: 1;
         }
 
         .topic-description {
             font-size: 0.9rem;
             color: #666;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
             font-style: italic;
+        }
+
+        /* Thread navigation styles */
+        .thread-navigation {
+            display: none;
+        }
+
+        .thread-counter {
+            position: relative;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .nav-arrow {
+            color: #808080;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            opacity: 0.7;
+            -webkit-user-select: none;
+            user-select: none;
+            padding: 0 0.5rem;
+        }
+
+        .nav-arrow:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .nav-arrow.disabled:hover {
+            transform: none;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .thread-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .thread-dot:hover {
+            transform: scale(1.2);
+        }
+
+        .thread-dot.active {
+            background: #808080;
+            transform: scale(1.2);
+        }
+
+        .threaded-view.active ~ .thread-counter {
+            opacity: 1;
+        }
+
+        /* Topic thread styles */
+        .topic-thread {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .topic-title::before {
+            display: none;
+        }
+
+        .thread-line {
+            display: none;
+        }
+
+        .quote-thread::before {
+            display: none;
+        }
+
+        /* Remove padding that was accounting for the line */
+        .topic-title, .quote-thread {
+            padding-left: 0;
         }
 
         /* Add subtle animation for the dots */
@@ -153,6 +211,28 @@
 
         .quote-thread::before {
             animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Back to top button styles */
+        .back-to-top {
+            display: block;
+            color: #808080;
+            text-decoration: none;
+            font-family: monospace;
+            padding: 0.5rem;
+            margin: 2rem auto;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .back-to-top:hover {
+            opacity: 0.7;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -225,6 +305,7 @@
             <p class="quote-paragraph" id="quote-46">In many fields — especially sport science — it's better to approach things with healthy skepticism rather than blind optimism.</p>
             <p class="quote-paragraph" id="quote-47">Exposing yourself to environments that require you to learn and adapt will do more for your growth than any paid mentorship.</p>
             <p class="quote-paragraph" id="quote-48">Affordable, reliable, and practical — you can have any two, but almost never all three.</p>
+            <button type="button" class="back-to-top" id="backToTop">↑ back to top</button>
         </div>
         
         <div class="threaded-view" id="threaded-view">

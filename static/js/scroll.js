@@ -300,7 +300,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewToggle = document.getElementById('viewToggle');
     const quotesContainer = document.getElementById('quotes-container');
     const threadedView = document.getElementById('threaded-view');
+    const prevThreadButton = document.getElementById('prevThread');
+    const nextThreadButton = document.getElementById('nextThread');
+    const threadCounter = document.getElementById('threadCounter');
     let isThreadedView = false;
+    let currentThreadIndex = 0;
 
     // Define quote topics with improved grouping
     const quoteTopics = {
@@ -329,46 +333,89 @@ document.addEventListener('DOMContentLoaded', () => {
     function createThreadedView() {
         threadedView.innerHTML = '';
         
-        Object.entries(quoteTopics).forEach(([topic, data]) => {
-            const topicThread = document.createElement('div');
-            topicThread.className = 'topic-thread';
-            
-            const threadLine = document.createElement('div');
-            threadLine.className = 'thread-line';
-            
-            const topicTitle = document.createElement('div');
-            topicTitle.className = 'topic-title';
-            
-            const titleText = document.createElement('div');
-            titleText.textContent = topic;
-            
-            const description = document.createElement('div');
-            description.className = 'topic-description';
-            description.textContent = data.description;
-            
-            topicTitle.appendChild(titleText);
-            topicTitle.appendChild(description);
-            
-            topicThread.appendChild(threadLine);
-            topicThread.appendChild(topicTitle);
-            
-            data.quotes.forEach(index => {
-                const quote = document.querySelector(`#quote-${index}`);
-                if (quote) {
-                    const quoteThread = document.createElement('div');
-                    quoteThread.className = 'quote-thread';
-                    
-                    const quoteContent = document.createElement('div');
-                    quoteContent.className = 'quote-content';
-                    quoteContent.textContent = quote.textContent;
-                    
-                    quoteThread.appendChild(quoteContent);
-                    topicThread.appendChild(quoteThread);
-                }
-            });
-            
-            threadedView.appendChild(topicThread);
+        const topicEntries = Object.entries(quoteTopics);
+        const [topic, data] = topicEntries[currentThreadIndex];
+        
+        // Create container for thread
+        const threadContainer = document.createElement('div');
+        
+        // Create navigation for this thread
+        const threadNav = document.createElement('div');
+        threadNav.className = 'thread-counter';
+        
+        const prevArrow = document.createElement('span');
+        prevArrow.className = `nav-arrow ${currentThreadIndex === 0 ? 'disabled' : ''}`;
+        prevArrow.id = 'prevThread';
+        prevArrow.textContent = '←';
+        prevArrow.addEventListener('click', () => {
+            if (!prevArrow.classList.contains('disabled')) {
+                navigateThread(-1);
+            }
         });
+        
+        const nextArrow = document.createElement('span');
+        nextArrow.className = `nav-arrow ${currentThreadIndex === topicEntries.length - 1 ? 'disabled' : ''}`;
+        nextArrow.id = 'nextThread';
+        nextArrow.textContent = '→';
+        nextArrow.addEventListener('click', () => {
+            if (!nextArrow.classList.contains('disabled')) {
+                navigateThread(1);
+            }
+        });
+        
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'dots-container';
+        
+        topicEntries.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = `thread-dot ${index === currentThreadIndex ? 'active' : ''}`;
+            dot.addEventListener('click', () => {
+                currentThreadIndex = index;
+                createThreadedView();
+            });
+            dotsContainer.appendChild(dot);
+        });
+        
+        threadNav.appendChild(prevArrow);
+        threadNav.appendChild(dotsContainer);
+        threadNav.appendChild(nextArrow);
+        
+        const topicThread = document.createElement('div');
+        topicThread.className = 'topic-thread';
+        
+        const topicTitle = document.createElement('div');
+        topicTitle.className = 'topic-title';
+        
+        const titleText = document.createElement('div');
+        titleText.textContent = topic;
+        
+        const description = document.createElement('div');
+        description.className = 'topic-description';
+        description.textContent = data.description;
+        
+        topicTitle.appendChild(titleText);
+        topicTitle.appendChild(description);
+        topicThread.appendChild(topicTitle);
+        
+        data.quotes.forEach(index => {
+            const quote = document.querySelector(`#quote-${index}`);
+            if (quote) {
+                const quoteThread = document.createElement('div');
+                quoteThread.className = 'quote-thread';
+                
+                const quoteContent = document.createElement('div');
+                quoteContent.className = 'quote-content';
+                quoteContent.textContent = quote.textContent;
+                
+                quoteThread.appendChild(quoteContent);
+                topicThread.appendChild(quoteThread);
+            }
+        });
+        
+        // Add navigation first, then the thread content
+        threadContainer.appendChild(threadNav);
+        threadContainer.appendChild(topicThread);
+        threadedView.appendChild(threadContainer);
     }
 
     function toggleView() {
@@ -381,15 +428,18 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 quotesContainer.style.display = 'none';
                 threadedView.style.display = 'block';
+                threadedView.classList.add('active');
                 setTimeout(() => {
                     threadedView.style.opacity = '1';
                 }, 50);
             }, 300);
+            currentThreadIndex = 0;
             createThreadedView();
         } else {
             viewToggle.textContent = '|';
             viewToggle.title = 'Switch to Thread View';
             threadedView.style.opacity = '0';
+            threadedView.classList.remove('active');
             setTimeout(() => {
                 threadedView.style.display = 'none';
                 quotesContainer.style.display = 'block';
@@ -400,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     quoteStates.forEach((state, index) => {
                         state.active = index === 0;
                         state.approaching = false;
-                        state.visible = true;
+                        state.visible = index === 0;
                         state.progress = index === 0 ? 1 : 0;
                         state.distanceFromIdeal = index === 0 ? 0 : Infinity;
                     });
@@ -416,4 +466,37 @@ document.addEventListener('DOMContentLoaded', () => {
     threadedView.style.opacity = '0';
 
     viewToggle.addEventListener('click', toggleView);
+
+    function navigateThread(direction) {
+        const topicEntries = Object.entries(quoteTopics);
+        const newIndex = currentThreadIndex + direction;
+        
+        if (newIndex >= 0 && newIndex < topicEntries.length) {
+            currentThreadIndex = newIndex;
+            createThreadedView();
+        }
+    }
+
+    // Add click handlers for navigation arrows
+    prevThreadButton.addEventListener('click', () => {
+        if (!prevThreadButton.classList.contains('disabled')) {
+            navigateThread(-1);
+        }
+    });
+    
+    nextThreadButton.addEventListener('click', () => {
+        if (!nextThreadButton.classList.contains('disabled')) {
+            navigateThread(1);
+        }
+    });
+});
+
+// Back to top functionality
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'backToTop') {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
 });
