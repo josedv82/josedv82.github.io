@@ -287,4 +287,115 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize on page load
     updateVisuals();
+
+    // View toggle functionality
+    const viewToggle = document.getElementById('viewToggle');
+    const quotesContainer = document.getElementById('quotes-container');
+    const threadedView = document.getElementById('threaded-view');
+    let isThreadedView = false;
+
+    // Define quote topics with improved grouping
+    const quoteTopics = {
+        'Leadership & Team Building': {
+            description: 'Principles of effective leadership, team dynamics, and organizational culture',
+            quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40]
+        },
+        'Career Development & Growth': {
+            description: 'Strategies for professional advancement and personal development',
+            quotes: [7, 8, 9, 10, 15, 16, 26, 27, 35, 47]
+        },
+        'Data Science & Analysis': {
+            description: 'Insights on data-driven decision making and analytical approaches',
+            quotes: [5, 17, 18, 19, 22, 23, 41, 45, 46, 48]
+        },
+        'Training & Performance Science': {
+            description: 'Principles of athletic training, performance monitoring, and sports science',
+            quotes: [2, 3, 6, 20, 21, 24, 25, 42, 43, 44]
+        },
+        'Philosophy & Mindset': {
+            description: 'Core beliefs and approaches to professional and personal challenges',
+            quotes: [1, 4, 29, 30, 36]
+        }
+    };
+
+    function createThreadedView() {
+        threadedView.innerHTML = '';
+        
+        Object.entries(quoteTopics).forEach(([topic, data]) => {
+            const topicThread = document.createElement('div');
+            topicThread.className = 'topic-thread';
+            
+            const threadLine = document.createElement('div');
+            threadLine.className = 'thread-line';
+            
+            const topicTitle = document.createElement('div');
+            topicTitle.className = 'topic-title';
+            
+            const titleText = document.createElement('div');
+            titleText.textContent = topic;
+            
+            const description = document.createElement('div');
+            description.className = 'topic-description';
+            description.textContent = data.description;
+            
+            topicTitle.appendChild(titleText);
+            topicTitle.appendChild(description);
+            
+            topicThread.appendChild(threadLine);
+            topicThread.appendChild(topicTitle);
+            
+            data.quotes.forEach(index => {
+                const quote = document.querySelector(`#quote-${index}`);
+                if (quote) {
+                    const quoteThread = document.createElement('div');
+                    quoteThread.className = 'quote-thread';
+                    
+                    const quoteContent = document.createElement('div');
+                    quoteContent.className = 'quote-content';
+                    quoteContent.textContent = quote.textContent;
+                    
+                    quoteThread.appendChild(quoteContent);
+                    topicThread.appendChild(quoteThread);
+                }
+            });
+            
+            threadedView.appendChild(topicThread);
+        });
+    }
+
+    function toggleView() {
+        isThreadedView = !isThreadedView;
+        
+        if (isThreadedView) {
+            viewToggle.textContent = '—';
+            viewToggle.title = 'Switch to Scroll View';
+            quotesContainer.style.opacity = '0';
+            setTimeout(() => {
+                quotesContainer.style.display = 'none';
+                threadedView.style.display = 'block';
+                setTimeout(() => {
+                    threadedView.style.opacity = '1';
+                }, 50);
+            }, 300);
+            createThreadedView();
+        } else {
+            viewToggle.textContent = '|';
+            viewToggle.title = 'Switch to Thread View';
+            threadedView.style.opacity = '0';
+            setTimeout(() => {
+                threadedView.style.display = 'none';
+                quotesContainer.style.display = 'block';
+                setTimeout(() => {
+                    quotesContainer.style.opacity = '1';
+                }, 50);
+            }, 300);
+        }
+    }
+
+    // Add transition styles
+    quotesContainer.style.transition = 'opacity 0.3s ease';
+    threadedView.style.transition = 'opacity 0.3s ease';
+    threadedView.style.opacity = '0';
+
+    viewToggle.addEventListener('click', toggleView);
 });

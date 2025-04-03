@@ -45,6 +45,115 @@
             margin: 0 0.5rem;
             color: #808080;
         }
+
+        /* View toggle button styles */
+        .view-toggle {
+            position: relative;
+            background: none;
+            border: none;
+            color: #808080;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 1.5rem auto;
+            display: block;
+            padding: 0.5rem;
+            transition: opacity 0.2s ease;
+            font-family: monospace;
+        }
+
+        .view-toggle:hover {
+            opacity: 0.7;
+        }
+
+        /* Threaded view styles */
+        .threaded-view {
+            display: none;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .topic-thread {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .topic-title {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #333;
+            font-weight: normal;
+            position: relative;
+            padding-left: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .topic-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            background: #808080;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .thread-line {
+            position: absolute;
+            left: 2.5px;
+            top: 2rem;
+            bottom: 0;
+            width: 1px;
+            background: #e0e0e0;
+        }
+
+        .quote-thread {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-thread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.8rem;
+            width: 6px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 50%;
+        }
+
+        .quote-content {
+            color: #333;
+            line-height: 1.5;
+            position: relative;
+            transition: opacity 0.2s ease;
+            padding-left: 0.5rem;
+        }
+
+        .quote-content:hover {
+            opacity: 0.7;
+        }
+
+        .topic-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Add subtle animation for the dots */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .quote-thread::before {
+            animation: fadeIn 0.3s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +166,8 @@
             <a href="podcasts.html" class="nav-link">Podcasts</a>
         </div>
     </div>
+    
+    <button class="view-toggle" id="viewToggle" title="Switch to Thread View">|</button>
     
     <!-- Parallax background elements -->
     <div class="parallax-bg">
@@ -114,6 +225,10 @@
             <p class="quote-paragraph" id="quote-46">In many fields — especially sport science — it's better to approach things with healthy skepticism rather than blind optimism.</p>
             <p class="quote-paragraph" id="quote-47">Exposing yourself to environments that require you to learn and adapt will do more for your growth than any paid mentorship.</p>
             <p class="quote-paragraph" id="quote-48">Affordable, reliable, and practical — you can have any two, but almost never all three.</p>
+        </div>
+        
+        <div class="threaded-view" id="threaded-view">
+            <!-- Topic cards will be dynamically inserted here -->
         </div>
     </main>
     
