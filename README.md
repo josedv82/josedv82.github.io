@@ -1,32 +1,22 @@
-# Jose Fernandez Website
+# Jose Fernandez
 
-A dynamic quote-revealing static website that creates an immersive reading experience through advanced scroll-based interactions and responsive design.
+A collection of reflections and insights from my journey in sports science, performance, and leadership. The website presents a curated set of thoughts and learnings gathered through years of experience across different sports and organizations.
 
-## Features
+## Content
 
-- Scroll-triggered quote highlighting
-- Performance-optimized JavaScript interactions
-- Responsive typography and adaptive design
-- Minimalist user interface with smooth transitions
-- About Me page with biography
-- Research Collaborations listing
-- R Packages showcase
-- Podcasts listing
+The website features:
 
-## Technologies Used
+- A series of reflections on leadership, team building, and organizational culture
+- Insights on data science and analytics in sports
+- Thoughts on training methodology and performance science
+- Career development observations and experiences
+- Core philosophies and approaches to professional challenges
 
-- HTML/CSS
-- JavaScript
+## Additional Sections
 
-## Setup and Usage
+- About Me: Professional background and current role
+- Collaborations: Research work and academic publications
+- R Packages: Open-source tools for sports science
+- Podcasts: Conversations and discussions about sports performance
 
-1. Clone the repository
-2. Open index.html in a web browser
-   
-## Deployment
-
-This is a fully static website that can be deployed on any web server or hosting service that can serve static files.
-
-## About
-
-The website showcases Jose Fernandez's reflections, research collaborations, R packages, and podcast appearances with a clean and minimalist design focused on content presentation.
+The site is designed to be a resource for professionals in sports science, coaching, and performance, sharing practical insights and lessons learned from real-world experiences.
