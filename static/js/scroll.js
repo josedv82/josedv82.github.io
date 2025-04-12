@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quoteTopics = {
         'Leadership & Team Building': {
             description: 'Principles of effective leadership, team dynamics, and organizational culture',
-            quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40, 28]
+            quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40, 28, 50]
         },
         'Career Development & Growth': {
             description: 'Strategies for professional advancement and personal development',
