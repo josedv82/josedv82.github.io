@@ -309,19 +309,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define quote topics with improved grouping
     const quoteTopics = {
         'Leadership & Team Building': {
-            description: 'Principles of effective leadership, team dynamics, and organizational culture',
+            description: 'Leadership principles, team dynamics, and organizational culture',
             quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40, 28, 50]
         },
         'Career Development & Growth': {
-            description: 'Strategies for professional advancement and personal development',
+            description: 'Reflections on professional advancement and personal development',
             quotes: [7, 8, 9, 10, 15, 16, 26, 27, 35, 47]
         },
         'Data Science & Analysis': {
-            description: 'Insights on data-driven decision making and analytical approaches',
+            description: 'Insights on data-informed decision making and analytical approaches',
             quotes: [5, 17, 18, 19, 22, 23, 41, 45, 46, 48]
         },
         'Training & Performance Science': {
-            description: 'Principles of athletic training, performance monitoring, and sports science',
+            description: 'Thoughts around athletic training, performance monitoring, and sports science',
             quotes: [2, 3, 6, 20, 21, 24, 25, 42, 43, 44, 49]
         },
         'Philosophy & Mindset': {
