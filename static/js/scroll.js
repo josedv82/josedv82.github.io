@@ -400,9 +400,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const description = document.createElement('div');
         description.className = 'topic-description';
         description.textContent = data.description;
-        description.style.borderBottom = '1px solid rgba(0, 0, 0, 0.1)';
-        description.style.paddingBottom = '2rem';
-        description.style.marginBottom = '2rem';
+        // Add divider styles directly to the element
+        Object.assign(description.style, {
+            borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+            paddingBottom: '2rem',
+            marginBottom: '2rem',
+            display: 'block',
+            width: '100%',
+            boxSizing: 'border-box'
+        });
         
         topicTitle.appendChild(titleText);
         topicTitle.appendChild(description);
