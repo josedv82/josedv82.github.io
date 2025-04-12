@@ -75,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 quote.style.opacity = '1';
                 quote.style.color = '#000000';
                 quote.style.transform = `translateZ(0) scale(${config.activeScale})`;
+                // Remove border and spacing for all quotes
+                quote.style.borderBottom = 'none';
+                quote.style.paddingBottom = '0';
+                quote.style.marginBottom = '0';
             } 
             else {
                 // All non-active quotes are greyed out but slightly visible
@@ -82,6 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 quote.style.opacity = '0.1'; // Decreased to make inactive text more subtle but still slightly visible
                 quote.style.color = '#555';   // Darker gray for better visibility
                 quote.style.transform = 'translateZ(0) scale(1)';
+                // Remove border and spacing for all quotes
+                quote.style.borderBottom = 'none';
+                quote.style.paddingBottom = '0';
+                quote.style.marginBottom = '0';
             }
         });
     }
@@ -392,6 +400,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const description = document.createElement('div');
         description.className = 'topic-description';
         description.textContent = data.description;
+        description.style.borderBottom = '1px solid rgba(0, 0, 0, 0.1)';
+        description.style.paddingBottom = '2rem';
+        description.style.marginBottom = '2rem';
         
         topicTitle.appendChild(titleText);
         topicTitle.appendChild(description);
