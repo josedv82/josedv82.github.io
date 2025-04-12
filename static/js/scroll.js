@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define quote topics with improved grouping
     const quoteTopics = {
         'Leadership & Team Building': {
-            description: 'Leadership principles, team dynamics, and organizational culture' <hr>,
+            description: 'Leadership principles, team dynamics, and organizational culture',
             quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40, 28, 50]
         },
         'Career Development & Growth': {
