@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quoteTopics = {
         'Leadership & Team Building': {
             description: 'Leadership principles, team dynamics, and organizational culture',
-            quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40, 28, 50]
+            quotes: [11, 12, 13, 14, 31, 32, 33, 34, 37, 38, 39, 40, 28, 50, 51, 53]
         },
         'Career Development & Growth': {
             description: 'Reflections on professional advancement and personal development',
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Philosophy & Mindset': {
             description: 'Core beliefs and approaches to professional and personal challenges',
-            quotes: [1, 4, 29, 30, 36]
+            quotes: [1, 4, 29, 30, 36, 52]
         }
     };
 
