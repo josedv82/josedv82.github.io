@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Career Development & Growth': {
             description: 'Reflections on professional advancement and personal development',
-            quotes: [7, 8, 9, 10, 15, 16, 26, 27, 35, 47]
+            quotes: [7, 8, 9, 10, 15, 16, 26, 35, 47]
         },
         'Data Science & Analysis': {
             description: 'Insights on data-informed decision making and analytical approaches',
