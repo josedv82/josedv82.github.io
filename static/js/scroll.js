@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Data Science & Analysis': {
             description: 'Insights on data-informed decision making and analytical approaches',
-            quotes: [5, 17, 18, 19, 22, 23, 41, 45, 46, 48]
+            quotes: [5, 17, 18, 19, 22, 23, 41, 45, 46, 48, 58]
         },
         'Training & Performance Science': {
             description: 'Thoughts around athletic training, performance monitoring, and sports science',
