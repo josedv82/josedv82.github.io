@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Training & Performance Science': {
             description: 'Thoughts around athletic training, performance monitoring, and sports science',
-            quotes: [2, 3, 6, 20, 21, 24, 25, 42, 43, 44, 49]
+            quotes: [2, 3, 6, 20, 21, 24, 25, 42, 43, 44, 49, 57]
         },
         'Philosophy & Mindset': {
             description: 'Core beliefs and approaches to professional and personal challenges',
