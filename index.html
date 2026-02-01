@@ -4,383 +4,1068 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Jose Fernandez</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <meta name="description" content="Jose Fernandez - Sports Science Insights, Leadership Philosophy & High Performance">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="color-scheme" content="dark light">
+    <title>Jose Fernandez | Sports Science & Leadership</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSBHYL543V"></script>
-    <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'G-CSBHYL543V');
-     </script>
-
     <style>
-        /* Navigation styles */
-        .nav-container {
+        :root {
+            /* Colors */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #c9a962;
+            --accent-hover: #d4b876;
+            --border: #2a2a2a;
+            --border-hover: #3a3a3a;
+            
+            /* Typography */
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+            --space-xl: 4rem;
+            --space-2xl: 6rem;
+            
+            /* Transitions */
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --duration-fast: 0.2s;
+            --duration-normal: 0.4s;
+            --duration-slow: 0.8s;
+            
+            /* Z-index */
+            --z-base: 1;
+            --z-nav: 100;
+            --z-overlay: 200;
+            --z-modal: 300;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
-        }
-        
-        .nav-link {
-            color: #000;
-            text-decoration: none;
-            font-style: italic;
-            padding: 0.5rem;
-            transition: opacity 0.3s;
-        }
-        
-        .nav-link:hover {
-            opacity: 0.7;
-        }
-        
-        .about-link-container {
-            text-align: center;
-            position: fixed;
-            top: 2rem;
+            top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
-            transition: transform 0.3s ease;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-overlay);
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            z-index: calc(var(--z-overlay) + 1);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-nav);
+            padding: var(--space-md) var(--space-lg);
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: color var(--duration-fast);
+        }
+
+        .logo:hover {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            position: relative;
+            padding: 0.25rem 0;
+            transition: color var(--duration-fast);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width var(--duration-normal) var(--ease-out);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s var(--ease-out) 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.03em;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--space-xl);
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
         }
-        
-        .site-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 2;
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
         }
-        
-        .nav-links {
+
+        .scroll-indicator i {
+            font-size: 1rem;
+        }
+
+        /* View Toggle */
+        .view-toggle-container {
+            position: fixed;
+            bottom: var(--space-lg);
+            right: var(--space-lg);
+            z-index: var(--z-nav);
             display: flex;
-            justify-content: center;
-            gap: 1rem;
+            gap: var(--space-xs);
+            background: var(--bg-card);
+            padding: 0.5rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+
+        .view-toggle-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .view-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.75rem 1rem;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--duration-fast);
+        }
+
+        .view-toggle-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .view-toggle-btn.active {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-lg);
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: var(--space-xl);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all var(--duration-slow) var(--ease-out);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        /* Quote Cards - Grid View */
+        .quotes-grid {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .quote-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all var(--duration-normal) var(--ease-out);
+            cursor: pointer;
+        }
+
+        .quote-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity var(--duration-normal);
+        }
+
+        .quote-card:hover::before {
+            opacity: 1;
+        }
+
+        .quote-number {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--border);
+            line-height: 1;
+            opacity: 0.5;
+            transition: all var(--duration-normal);
+        }
+
+        .quote-card:hover .quote-number {
+            color: var(--accent);
+            opacity: 0.2;
+        }
+
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-primary);
             position: relative;
             z-index: 1;
         }
-        
-        .about-link-container .nav-link {
-            color: #808080;
-            padding: 0.5rem;
-        }
 
-        /* View toggle button styles */
-        .view-toggle {
-            position: relative;
-            background: none;
-            border: none;
-            color: #808080;
-            cursor: pointer;
-            font-size: 1rem;
-            margin: 1.5rem auto;
-            display: block;
-            padding: 0.5rem;
-            transition: opacity 0.2s ease;
-            z-index: 1001;
-        }
-
-        .view-toggle:hover {
-            opacity: 0.7;
-        }
-
-        .view-toggle .tooltip {
+        .quote-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
             position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7rem;
-            color: #808080;
-            white-space: nowrap;
-            opacity: 0;
-            transition: all 0.3s ease;
-            font-family: monospace;
-            pointer-events: none;
+            top: -1.5rem;
+            left: -0.5rem;
+            font-family: var(--font-display);
+            line-height: 1;
         }
 
-        .view-toggle:hover .tooltip {
-            opacity: 1;
-        }
-
-        .view-toggle:hover + .about-link-container {
-            transform: translateY(25px);
-        }
-
-        /* Remove individual transforms since we're moving the container */
-        .view-toggle:hover + .about-link-container .site-title,
-        .view-toggle:hover + .about-link-container .nav-links {
-            transform: none;
-        }
-
-        /* Threaded view styles */
-        .threaded-view {
-            display: none;
-            padding: 2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .topic-thread {
-            margin-bottom: 4rem;
-            position: relative;
-            padding-top: 1rem;
-        }
-
-        .topic-title {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #333;
-            font-weight: normal;
-            letter-spacing: 0.5px;
-        }
-
-        .quote-thread {
-            margin-bottom: 1.5rem;
-        }
-
-        .quote-content {
-            color: #333;
-            line-height: 1.5;
-        }
-
-        .quote-content:hover {
-            opacity: 1;
-        }
-
-        .topic-description {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 0.25rem;
+        .quote-author {
+            margin-top: var(--space-md);
+            font-size: 0.875rem;
+            color: var(--accent);
             font-style: italic;
         }
 
-        /* Thread navigation styles */
-        .thread-navigation {
+        /* Topic Threads View */
+        .topics-view {
             display: none;
         }
 
-        .thread-counter {
-            position: relative;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-            background: none;
-            box-shadow: none;
-            padding: 0;
-            margin-bottom: 2rem;
+        .topics-view.active {
+            display: block;
         }
 
-        .nav-arrow {
-            color: #808080;
-            cursor: pointer;
-            font-family: monospace;
+        .quotes-grid.hidden {
+            display: none;
+        }
+
+        .topic-section {
+            margin-bottom: var(--space-2xl);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .topic-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all var(--duration-slow) var(--ease-out);
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topic-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 500;
+        }
+
+        .topic-count {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .topic-quotes {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .topic-quote-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--space-md) var(--space-lg);
+            transition: all var(--duration-fast);
+        }
+
+        .topic-quote-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+        }
+
+        .topic-quote-text {
             font-size: 1rem;
-            transition: all 0.2s ease;
-            opacity: 0.7;
-            -webkit-user-select: none;
-            user-select: none;
-            padding: 0 0.5rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
         }
 
-        .nav-arrow:hover {
-            opacity: 1;
-            transform: scale(1.1);
+        /* Thread Navigation */
+        .thread-nav {
+            position: fixed;
+            left: var(--space-lg);
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: var(--space-xs);
+            z-index: var(--z-nav);
         }
 
-        .nav-arrow.disabled {
-            opacity: 0.3;
-            cursor: default;
-        }
-
-        .nav-arrow.disabled:hover {
-            transform: none;
-        }
-
-        .dots-container {
+        .topics-view.active ~ .thread-nav {
             display: flex;
-            gap: 0.5rem;
-            align-items: center;
         }
 
         .thread-dot {
-            width: 5px;
-            height: 5px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: #e0e0e0;
-            transition: all 0.3s ease;
+            background: var(--border);
             cursor: pointer;
+            transition: all var(--duration-fast);
+            position: relative;
         }
 
         .thread-dot:hover {
+            background: var(--text-muted);
             transform: scale(1.2);
         }
 
         .thread-dot.active {
-            background: #808080;
-            transform: scale(1.2);
+            background: var(--accent);
+            transform: scale(1.3);
         }
 
-        .threaded-view.active ~ .thread-counter {
+        .thread-dot::before {
+            content: attr(data-topic);
+            position: absolute;
+            left: calc(100% + 12px);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity var(--duration-fast);
+            pointer-events: none;
+        }
+
+        .thread-dot:hover::before {
             opacity: 1;
         }
 
-        /* Topic thread styles */
-        .topic-thread {
-            margin-bottom: 4rem;
-            position: relative;
+        /* Footer */
+        .footer {
+            padding: var(--space-2xl) var(--space-lg);
+            border-top: 1px solid var(--border);
+            text-align: center;
         }
 
-        .topic-title::before {
-            display: none;
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .thread-line {
-            display: none;
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-md);
         }
 
-        .quote-thread::before {
-            display: none;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
         }
 
-        /* Remove padding that was accounting for the line */
-        .topic-title, .quote-thread {
-            padding-left: 0;
-        }
-
-        /* Add subtle animation for the dots */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .quote-thread::before {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        /* Back to top button styles */
-        .back-to-top {
-            display: inline-block;
-            margin-top: 2rem;
-            font-style: italic;
-            color: #000;
+        .footer-link {
+            color: var(--text-secondary);
             text-decoration: none;
-            border: none;
-            border-bottom: 1px solid #000;
-            padding-bottom: 2px;
-            transition: opacity 0.3s;
-            background: none;
+            font-size: 0.875rem;
+            transition: color var(--duration-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: var(--space-lg);
+            left: var(--space-lg);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
             cursor: pointer;
-            font-family: inherit;
-            font-size: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--duration-normal) var(--ease-out);
+            z-index: var(--z-nav);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         .back-to-top:hover {
-            opacity: 0.7;
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: var(--space-sm) var(--space-md);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .main-content {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .quote-card {
+                padding: var(--space-md);
+            }
+
+            .quote-number {
+                font-size: 2rem;
+            }
+
+            .view-toggle-container {
+                bottom: var(--space-md);
+                right: var(--space-md);
+                left: var(--space-md);
+                justify-content: center;
+            }
+
+            .thread-nav {
+                display: none !important;
+            }
+
+            .back-to-top {
+                bottom: calc(var(--space-lg) + 60px);
+                left: var(--space-md);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
         }
     </style>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSBHYL543V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CSBHYL543V');
+    </script>
+<base target="_blank">
 </head>
 <body>
-    <button class="view-toggle" id="viewToggle">
-        <i class="fa-solid fa-arrows-up-down"></i>
-        <span class="tooltip">scroll view</span>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="logo">JF</a>
+            <ul class="nav-links">
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="collaborations.html" class="nav-link">Collaborations</a></li>
+                <li><a href="r_packages.html" class="nav-link">R Packages</a></li>
+                <li><a href="podcasts.html" class="nav-link">Podcasts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Sports Science & Leadership</p>
+            <h1 class="hero-title">Insights on <em>High Performance</em></h1>
+            <p class="hero-description">
+                A collection of lessons learned from years in professional sports—on leadership, 
+                decision-making, and the pursuit of excellence.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- View Toggle -->
+    <div class="view-toggle-container" id="viewToggle">
+        <button class="view-toggle-btn active" data-view="grid">
+            <i class="fa-solid fa-grid-2"></i>
+            <span>All</span>
+        </button>
+        <button class="view-toggle-btn" data-view="topics">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Topics</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Section Header -->
+        <div class="section-header" id="sectionHeader">
+            <p class="section-label">Collection</p>
+            <h2 class="section-title">Principles & Reflections</h2>
+        </div>
+
+        <!-- Grid View -->
+        <div class="quotes-grid" id="quotesGrid"></div>
+
+        <!-- Topics View -->
+        <div class="topics-view" id="topicsView"></div>
+
+        <!-- Thread Navigation -->
+        <nav class="thread-nav" id="threadNav" aria-label="Topic navigation"></nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2024 Jose Fernandez. Built with intention.</p>
+            <div class="footer-links">
+                <a href="about.html" class="footer-link">About</a>
+                <a href="collaborations.html" class="footer-link">Collaborations</a>
+                <a href="r_packages.html" class="footer-link">R Packages</a>
+                <a href="podcasts.html" class="footer-link">Podcasts</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <div class="about-link-container">
-        <div class="site-title">Jose Fernandez</div>
-        <div class="nav-links">
-            <a href="about.html" class="nav-link">About me</a>
-            <a href="collaborations.html" class="nav-link">Collabs</a>
-            <a href="r_packages.html" class="nav-link">R Packages</a>
-            <a href="podcasts.html" class="nav-link">Podcasts</a>
-        </div>
-    </div>
-    
-    <!-- Parallax background elements -->
-    <div class="parallax-bg">
-        <div class="bg-element bg-element-1"></div>
-        <div class="bg-element bg-element-2"></div>
-    </div>
-    
-    <main>
-        <div class="quotes-container" id="quotes-container">
-            <p class="quote-paragraph" id="quote-1">Success comes from mastering the basics and being consistent. After that, experiment, adapt and reintegrate what works.</p>
-            <p class="quote-paragraph" id="quote-2">You are only as good as what you can get your athletes (or others) to do. Carl Valle</p>
-            <p class="quote-paragraph" id="quote-3">Technology and data don't make the difference. Decisions and implementation do.</p>
-            <p class="quote-paragraph" id="quote-4">Avoiding hiring people who may be more skilled than you out of fear is much more detrimental in the long run.</p>
-            <p class="quote-paragraph" id="quote-5">Perhaps, the most important analytical skill is understanding what data CANNOT tell you. Peter Weyand</p>
-            <p class="quote-paragraph" id="quote-6">When working with athletes, health is a requirement, not a goal.</p>
-            <p class="quote-paragraph" id="quote-7">At certain times, prioritize growth and learning over a higher pay if you can. This paid dividends later for me.</p>
-            <p class="quote-paragraph" id="quote-8">My biggest opportunities came from sports I didn't know well. What helped was staying critical, collaborate with those with more specific knowledge to adapt ideas, and leaving room to experiment.</p>
-            <p class="quote-paragraph" id="quote-9">Work on your ability to communicate well-founded opinions to address current challenges.</p>
-            <p class="quote-paragraph" id="quote-10">An easy win after joining a new organization is identifying ways to help others save time in their daily tasks.</p>
-            <p class="quote-paragraph" id="quote-51">Don't overpromise. Deliver first, talk later. Show through actions, not words.</p>
-            <p class="quote-paragraph" id="quote-11">Signs of good leadership: clear direction, empowerment, and quality feedback loops.</p>
-            <p class="quote-paragraph" id="quote-12">Providing direction is mainly about defining the boundaries within which your team members can find possible solutions.</p>
-            <p class="quote-paragraph" id="quote-13">Regarding direction, finding the balance between setting clear boundaries and allowing enough space for creativity is key to let new ideas to emerge.</p>
-            <p class="quote-paragraph" id="quote-14">Oldie but goodie: Direction before speed.</p>
-            <p class="quote-paragraph" id="quote-15">Master the 3Cs: code, coach, and communicate.</p>
-            <p class="quote-paragraph" id="quote-16">Specialization got me into pro sports; general knowledge moved my career forward.</p>
-            <p class="quote-paragraph" id="quote-17">Monitor less but more relevant aspects in order to accelerate learning.</p>
-            <p class="quote-paragraph" id="quote-18">Assessments must be relevant, actionable, and integrated into training.</p>
-            <p class="quote-paragraph" id="quote-19">The more complex the environment, the simpler the solution must be.</p>
-            <p class="quote-paragraph" id="quote-52">Complexity kills adoption.The role of a sport scientist is to make things easier, not harder.</p>
-            <p class="quote-paragraph" id="quote-20">Lifting heavy and often in-season is non-negotiable. Even the busiest schedules offer windows of opportunity.</p>
-            <p class="quote-paragraph" id="quote-21">Trial and error, not just years, is the foundation for meaningful experience.</p>
-            <p class="quote-paragraph" id="quote-22">Limited information is the norm in most high performance settings. Be good at communicating uncertainty.</p>
-            <p class="quote-paragraph" id="quote-23">The main limitation in injury prediction is our ability to collect meaningful data.</p>
-            <p class="quote-paragraph" id="quote-56">Advantages are temporary. Keep iterating.</p>
-            <p class="quote-paragraph" id="quote-24">Athletes don't care about the rings on your shelf. They care about how you can help them today.</p>
-            <p class="quote-paragraph" id="quote-25">Skill acquisition often comes second to other routine sports science tasks. Focus on building systems that streamline decision-making, freeing up time to work on higher ROI areas.</p>
-            <p class="quote-paragraph" id="quote-26">Learning to interview is essential early in your career. Networking matters more after you've proven your value.</p>
-            <p class="quote-paragraph" id="quote-28">When hiring, advertise job vacancies, even if you have candidates in mind. You never know what talent is out there.</p>
-            <p class="quote-paragraph" id="quote-29">When someone asks about your philosophy, they want to know your values, beliefs and priorities as they will drive decisions and ensure consistency.</p>
-            <p class="quote-paragraph" id="quote-30">Clearly explaining your philosophy matters more than being 'right'. Break concepts into smaller areas, document your beliefs, and revisit them often for clarity and direction.</p>
-            <p class="quote-paragraph" id="quote-31">Focus on establishing good operational processes; talent, coaching and luck handle the rest.</p>
-            <p class="quote-paragraph" id="quote-32">Arbitrary number but four years in one organization seems like the minimum time for someone to go through meaningful implementation, iteration, and learning.</p>
-            <p class="quote-paragraph" id="quote-58">Measure only what you can't see. For everything else, observe.</p>
-            <p class="quote-paragraph" id="quote-33">Good proof that your team is setting the standard is when your coaches become sought after by other organizations.</p>
-            <p class="quote-paragraph" id="quote-34">The sports world is small. I once interviewed someone who had interviewed me six years earlier. Be kind; you never know when you'll cross paths again.</p>
-            <p class="quote-paragraph" id="quote-35">Many problems we solved in sport have commercial value. Think bigger.</p>
-            <p class="quote-paragraph" id="quote-36">Ask five people in your organization what 'Player X' has to improve. Lack of agreement signals opportunity.</p>
-            <p class="quote-paragraph" id="quote-37">When people are overpaid relative to their value, every idea, opinion, and person becomes a threat to them.</p>
-            <p class="quote-paragraph" id="quote-53">Being clear and direct earns more respect than being liked.</p>
-            <p class="quote-paragraph" id="quote-38">Keep delaying those difficult conversations if you want to kill trust and allow small issues to grow.</p>
-            <p class="quote-paragraph" id="quote-39">If an organization needs a Head of Innovation; it's probably not truly innovative.</p>
-            <p class="quote-paragraph" id="quote-40">'Winning Culture' is an overhyped term. (Winning) culture is the consequence of people aligning with a purpose and finding personal value in the process.</p>
-            <p class="quote-paragraph" id="quote-41">Better data at meaningful times outweights continuous monitoring.</p>
-            <p class="quote-paragraph" id="quote-42">Practice design is often overlooked by sport scientists, yet it's one of the most impactful areas for coach and athlete development.</p>
-            <p class="quote-paragraph" id="quote-43">Break performance into smaller, measurable components whenever possible. Athletes are more likely to buy in when they see clear, tangible links to their performance.</p>
-            <p class="quote-paragraph" id="quote-44">Training theory and principles are ethernal. Courses and certifications are not.</p>
-            <p class="quote-paragraph" id="quote-45">As a sport scientist, one of the most lasting things I can leave behind for an organization is good data. Not much else survives staff turnover.</p>
-            <p class="quote-paragraph" id="quote-46">In many fields, especially sport science, it's better to be hyperskeptic at first.</p>
-            <p class="quote-paragraph" id="quote-47">Exposing yourself to environments that require you to learn and adapt will do more for your growth than any paid mentorship.</p>
-            <p class="quote-paragraph" id="quote-48">Affordable, reliable, and practical: you can pick two, but rarely all three.</p>
-            <p class="quote-paragraph" id="quote-49">Talent adjusts through exposure and pressure, not just more training hours.</p>
-            <p class="quote-paragraph" id="quote-50">Driving organisational change is hard. People may not know what they want, but they want what they know.</p>
-            <p class="quote-paragraph" id="quote-54">Process compounds. In high performance and sport science, real impact takes time.</p>
-            <p class="quote-paragraph" id="quote-55">The difference between practitioners and consultants is someone who has been there and done it, not just someone who knows how to do it. Geoff McGrath</p>
-            <p class="quote-paragraph" id="quote-57">Recovery is more about training than about resting.</p>
-            <p class="quote-paragraph" id="quote-59">When designing or assessing processes, prioritise clarity, practicality, and data-informed decision-making.</p>
-        <br>
-        <br>
-            <button type="button" class="back-to-top" id="backToTop">↑ Back to top</button>
-        </div>
-        
-        <div class="threaded-view" id="threaded-view">
-            <!-- Topic cards will be dynamically inserted here -->
-        </div>
-    </main>
-    
-    <script src="static/js/scroll.js"></script>
+    <script>
+        // Quote Data
+        const quotes = [
+            { text: "Success comes from mastering the basics and being consistent. After that, experiment, adapt and reintegrate what works.", category: "fundamentals" },
+            { text: "You are only as good as what you can get your athletes (or others) to do.", author: "Carl Valle", category: "coaching" },
+            { text: "Technology and data don't make the difference. Decisions and implementation do.", category: "data" },
+            { text: "Avoiding hiring people who may be more skilled than you out of fear is much more detrimental in the long run.", category: "leadership" },
+            { text: "Perhaps, the most important analytical skill is understanding what data CANNOT tell you.", author: "Peter Weyand", category: "data" },
+            { text: "When working with athletes, health is a requirement, not a goal.", category: "health" },
+            { text: "At certain times, prioritize growth and learning over a higher pay if you can. This paid dividends later for me.", category: "career" },
+            { text: "My biggest opportunities came from sports I didn't know well. What helped was staying critical, collaborate with those with more specific knowledge to adapt ideas, and leaving room to experiment.", category: "career" },
+            { text: "Work on your ability to communicate well-founded opinions to address current challenges.", category: "communication" },
+            { text: "An easy win after joining a new organization is identifying ways to help others save time in their daily tasks.", category: "leadership" },
+            { text: "Don't overpromise. Deliver first, talk later. Show through actions, not words.", category: "integrity" },
+            { text: "Signs of good leadership: clear direction, empowerment, and quality feedback loops.", category: "leadership" },
+            { text: "Providing direction is mainly about defining the boundaries within which your team members can find possible solutions.", category: "leadership" },
+            { text: "Regarding direction, finding the balance between setting clear boundaries and allowing enough space for creativity is key to let new ideas to emerge.", category: "leadership" },
+            { text: "Oldie but goodie: Direction before speed.", category: "leadership" },
+            { text: "Master the 3Cs: code, coach, and communicate.", category: "skills" },
+            { text: "Specialization got me into pro sports; general knowledge moved my career forward.", category: "career" },
+            { text: "Monitor less but more relevant aspects in order to accelerate learning.", category: "data" },
+            { text: "Assessments must be relevant, actionable, and integrated into training.", category: "assessment" },
+            { text: "The more complex the environment, the simpler the solution must be.", category: "simplicity" },
+            { text: "Complexity kills adoption. The role of a sport scientist is to make things easier, not harder.", category: "simplicity" },
+            { text: "Lifting heavy and often in-season is non-negotiable. Even the busiest schedules offer windows of opportunity.", category: "training" },
+            { text: "Trial and error, not just years, is the foundation for meaningful experience.", category: "experience" },
+            { text: "Limited information is the norm in most high performance settings. Be good at communicating uncertainty.", category: "communication" },
+            { text: "The main limitation in injury prediction is our ability to collect meaningful data.", category: "data" },
+            { text: "Advantages are temporary. Keep iterating.", category: "improvement" },
+            { text: "Athletes don't care about the rings on your shelf. They care about how you can help them today.", category: "coaching" },
+            { text: "Skill acquisition often comes second to other routine sports science tasks. Focus on building systems that streamline decision-making, freeing up time to work on higher ROI areas.", category: "systems" },
+            { text: "Learning to interview is essential early in your career. Networking matters more after you've proven your value.", category: "career" },
+            { text: "When hiring, advertise job vacancies, even if you have candidates in mind. You never know what talent is out there.", category: "hiring" },
+            { text: "When someone asks about your philosophy, they want to know your values, beliefs and priorities as they will drive decisions and ensure consistency.", category: "philosophy" },
+            { text: "Clearly explaining your philosophy matters more than being 'right'. Break concepts into smaller areas, document your beliefs, and revisit them often for clarity and direction.", category: "philosophy" },
+            { text: "Focus on establishing good operational processes; talent, coaching and luck handle the rest.", category: "systems" },
+            { text: "Arbitrary number but four years in one organization seems like the minimum time for someone to go through meaningful implementation, iteration, and learning.", category: "career" },
+            { text: "Measure only what you can't see. For everything else, observe.", category: "assessment" },
+            { text: "Good proof that your team is setting the standard is when your coaches become sought after by other organizations.", category: "leadership" },
+            { text: "The sports world is small. I once interviewed someone who had interviewed me six years earlier. Be kind; you never know when you'll cross paths again.", category: "relationships" },
+            { text: "Many problems we solved in sport have commercial value. Think bigger.", category: "business" },
+            { text: "Ask five people in your organization what 'Player X' has to improve. Lack of agreement signals opportunity.", category: "assessment" },
+            { text: "When people are overpaid relative to their value, every idea, opinion, and person becomes a threat to them.", category: "culture" },
+            { text: "Being clear and direct earns more respect than being liked.", category: "communication" },
+            { text: "Keep delaying those difficult conversations if you want to kill trust and allow small issues to grow.", category: "leadership" },
+            { text: "If an organization needs a Head of Innovation; it's probably not truly innovative.", category: "culture" },
+            { text: "'Winning Culture' is an overhyped term. (Winning) culture is the consequence of people aligning with a purpose and finding personal value in the process.", category: "culture" },
+            { text: "Better data at meaningful times outweights continuous monitoring.", category: "data" },
+            { text: "Practice design is often overlooked by sport scientists, yet it's one of the most impactful areas for coach and athlete development.", category: "training" },
+            { text: "Break performance into smaller, measurable components whenever possible. Athletes are more likely to buy in when they see clear, tangible links to their performance.", category: "assessment" },
+            { text: "Training theory and principles are eternal. Courses and certifications are not.", category: "fundamentals" },
+            { text: "As a sport scientist, one of the most lasting things I can leave behind for an organization is good data. Not much else survives staff turnover.", category: "data" },
+            { text: "In many fields, especially sport science, it's better to be hyperskeptic at first.", category: "critical-thinking" },
+            { text: "Exposing yourself to environments that require you to learn and adapt will do more for your growth than any paid mentorship.", category: "growth" },
+            { text: "Affordable, reliable, and practical: you can pick two, but rarely all three.", category: "systems" },
+            { text: "Talent adjusts through exposure and pressure, not just more training hours.", category: "training" },
+            { text: "Driving organisational change is hard. People may not know what they want, but they want what they know.", category: "change" },
+            { text: "Process compounds. In high performance and sport science, real impact takes time.", category: "systems" },
+            { text: "The difference between practitioners and consultants is someone who has been there and done it, not just someone who knows how to do it.", author: "Geoff McGrath", category: "experience" },
+            { text: "Recovery is more about training than about resting.", category: "training" },
+            { text: "When designing or assessing processes, prioritise clarity, practicality, and data-informed decision-making.", category: "systems" }
+        ];
+
+        // Topic Groupings
+        const topics = [
+            { id: 'leadership', title: 'Leadership & Direction', description: 'Guiding teams with clarity and purpose' },
+            { id: 'data', title: 'Data & Decision Making', description: 'Using information effectively in high-performance settings' },
+            { id: 'systems', title: 'Systems & Processes', description: 'Building sustainable operational frameworks' },
+            { id: 'career', title: 'Career & Growth', description: 'Personal development and professional evolution' },
+            { id: 'training', title: 'Training & Performance', description: 'Practical insights for athlete development' },
+            { id: 'culture', title: 'Culture & Communication', description: 'Building environments for success' }
+        ];
+
+        // DOM Elements
+        const nav = document.getElementById('nav');
+        const progressBar = document.getElementById('progressBar');
+        const viewToggle = document.getElementById('viewToggle');
+        const quotesGrid = document.getElementById('quotesGrid');
+        const topicsView = document.getElementById('topicsView');
+        const threadNav = document.getElementById('threadNav');
+        const sectionHeader = document.getElementById('sectionHeader');
+        const backToTop = document.getElementById('backToTop');
+
+        // State
+        let currentView = 'grid';
+        let observer;
+
+        // Initialize
+        function init() {
+            renderGridView();
+            renderTopicsView();
+            renderThreadNav();
+            setupEventListeners();
+            setupIntersectionObserver();
+            setupScrollEffects();
+        }
+
+        // Render Grid View
+        function renderGridView() {
+            quotesGrid.innerHTML = quotes.map((quote, index) => `
+                <article class="quote-card" data-index="${index}">
+                    <span class="quote-number">${String(index + 1).padStart(2, '0')}</span>
+                    <p class="quote-text">${quote.text}</p>
+                    ${quote.author ? `<p class="quote-author">— ${quote.author}</p>` : ''}
+                </article>
+            `).join('');
+        }
+
+        // Render Topics View
+        function renderTopicsView() {
+            topicsView.innerHTML = topics.map(topic => {
+                const topicQuotes = quotes.filter(q => q.category === topic.id);
+                if (topicQuotes.length === 0) return '';
+                
+                return `
+                    <section class="topic-section" id="topic-${topic.id}">
+                        <div class="topic-header">
+                            <h3 class="topic-title">${topic.title}</h3>
+                            <span class="topic-count">${topicQuotes.length} insights</span>
+                        </div>
+                        <div class="topic-quotes">
+                            ${topicQuotes.map(quote => `
+                                <div class="topic-quote-card">
+                                    <p class="topic-quote-text">${quote.text}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }).join('');
+        }
+
+        // Render Thread Navigation
+        function renderThreadNav() {
+            threadNav.innerHTML = topics.map(topic => `
+                <div class="thread-dot" data-topic="${topic.title}" data-target="topic-${topic.id}"></div>
+            `).join('');
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // View Toggle
+            viewToggle.querySelectorAll('.view-toggle-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const view = btn.dataset.view;
+                    if (view === currentView) return;
+                    
+                    currentView = view;
+                    viewToggle.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    if (view === 'topics') {
+                        quotesGrid.classList.add('hidden');
+                        topicsView.classList.add('active');
+                        threadNav.style.display = 'flex';
+                    } else {
+                        quotesGrid.classList.remove('hidden');
+                        topicsView.classList.remove('active');
+                        threadNav.style.display = 'none';
+                    }
+                    
+                    // Re-observe elements
+                    setupIntersectionObserver();
+                });
+            });
+
+            // Thread Navigation
+            threadNav.addEventListener('click', (e) => {
+                if (e.target.classList.contains('thread-dot')) {
+                    const targetId = e.target.dataset.target;
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+
+            // Back to Top
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Nav scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    nav.classList.add('scrolled');
+                    viewToggle.classList.add('visible');
+                } else {
+                    nav.classList.remove('scrolled');
+                    viewToggle.classList.remove('visible');
+                }
+
+                // Progress bar
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / docHeight) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                // Back to top visibility
+                if (scrollTop > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }, { passive: true });
+        }
+
+        // Intersection Observer for animations
+        function setupIntersectionObserver() {
+            if (observer) observer.disconnect();
+
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observe quote cards
+            document.querySelectorAll('.quote-card').forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.05}s`;
+                observer.observe(card);
+            });
+
+            // Observe section header
+            observer.observe(sectionHeader);
+
+            // Observe topic sections
+            document.querySelectorAll('.topic-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Scroll Effects
+        function setupScrollEffects() {
+            // Update active thread dot
+            window.addEventListener('scroll', () => {
+                if (currentView !== 'topics') return;
+
+                const scrollPos = window.scrollY + window.innerHeight / 3;
+                
+                topics.forEach((topic, index) => {
+                    const section = document.getElementById(`topic-${topic.id}`);
+                    if (!section) return;
+
+                    const top = section.offsetTop;
+                    const bottom = top + section.offsetHeight;
+
+                    if (scrollPos >= top && scrollPos < bottom) {
+                        document.querySelectorAll('.thread-dot').forEach((dot, i) => {
+                            dot.classList.toggle('active', i === index);
+                        });
+                    }
+                });
+            }, { passive: true });
+        }
+
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
 </body>
 </html>
