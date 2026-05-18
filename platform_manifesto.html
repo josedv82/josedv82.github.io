@@ -182,29 +182,10 @@
 
   main { flex: 1; min-width: 0; padding: 0 clamp(2rem, 6vw, 6rem); }
 
-  /* ── BREADCRUMB ──────────────────────────────────────── */
-
-  .breadcrumb {
-    padding: 2rem 0 0;
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    color: var(--text-faint);
-  }
-
-  .breadcrumb a {
-    color: var(--text-faint);
-    text-decoration: none;
-    transition: color 0.12s;
-  }
-
-  .breadcrumb a:hover { color: var(--text-muted); }
-  .breadcrumb .sep { margin: 0 0.4rem; }
-
   /* ── DOCUMENT HEADER ─────────────────────────────────── */
 
   .doc-header {
-    padding: 3rem 0 4rem;
+    padding: 5rem 0 4rem;
     max-width: var(--content-max);
     border-bottom: 1px solid var(--rule);
     margin-bottom: 1rem;
@@ -421,12 +402,6 @@
 </nav>
 
 <main>
-
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="index.html">Jose Fernandez</a>
-    <span class="sep">/</span>
-    <span>The Platform</span>
-  </nav>
 
   <header class="doc-header">
     <span class="kicker">A Design Manifesto for Performance Intelligence Software</span>
