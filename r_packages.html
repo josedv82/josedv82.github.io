@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>R Packages — Jose Fernandez</title>
+  <script src="static/js/theme.js"></script>
   <link rel="stylesheet" href="static/css/style.css">
   <style>
     .pkg-grid {
@@ -27,7 +28,7 @@
     }
 
     .pkg-card:hover {
-      border-color: #bbb;
+      border-color: var(--text-muted);
     }
 
     .pkg-card img {
@@ -51,9 +52,16 @@
 </head>
 <body>
 
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">dark</button>
   <a href="index.html" class="site-title">Jose Fernandez</a>
 
-  <main style="padding-top: 3rem;">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Jose Fernandez</a>
+    <span class="sep">/</span>
+    <span>R Packages</span>
+  </nav>
+
+  <main style="padding-top: 2.5rem;">
     <h3>R Packages</h3>
     <div class="pkg-grid">
 

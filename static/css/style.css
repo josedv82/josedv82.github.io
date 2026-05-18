@@ -8,12 +8,21 @@
   --bg: #fafaf8;
   --text: #1a1a1a;
   --text-muted: #666;
-  --text-faint: #999;
+  --text-faint: #aaa;
   --border: #e8e8e4;
   --link: #1a1a1a;
   --max-w: 640px;
   --font: Georgia, 'Times New Roman', serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg: #111110;
+  --text: #e0dcd6;
+  --text-muted: #888;
+  --text-faint: #555;
+  --border: #2a2a28;
+  --link: #e0dcd6;
 }
 
 html {
@@ -28,10 +37,59 @@ body {
   line-height: 1.7;
   padding: 0 1.5rem;
   min-height: 100vh;
+  transition: background 0.2s, color 0.2s;
 }
 
 /* Parallax bg elements (decorative, kept for sub-pages) */
 .parallax-bg { display: none; }
+
+/* ── Theme toggle ─────────────────────────────────────── */
+
+.theme-toggle {
+  position: fixed;
+  top: 1.4rem;
+  right: 1.5rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+  padding: 0.25rem 0.55rem;
+  letter-spacing: 0.06em;
+  z-index: 100;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+/* ── Breadcrumb ───────────────────────────────────────── */
+
+.breadcrumb {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  padding: 2rem 0 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.breadcrumb a {
+  color: var(--text-faint);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--text-muted);
+}
+
+.breadcrumb .sep {
+  margin: 0 0.4rem;
+}
 
 /* ── Site header ─────────────────────────────────────── */
 
@@ -74,10 +132,10 @@ h2 {
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
   font-family: var(--font-sans);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-faint);
   margin-bottom: 1.2rem;
@@ -123,7 +181,7 @@ section {
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  padding: 0.6rem 0;
+  padding: 0.65rem 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -144,7 +202,6 @@ section {
   line-height: 1.45;
   color: var(--text);
   text-decoration: none;
-  text-decoration-color: var(--border);
   text-underline-offset: 3px;
 }
 
@@ -189,11 +246,11 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .card {
-  background: #fff;
+  background: var(--bg);
   border: 1px solid var(--border);
   padding: 1.4rem;
   border-radius: 4px;
@@ -205,7 +262,7 @@ section {
 }
 
 .card:hover {
-  border-color: #bbb;
+  border-color: var(--text-muted);
 }
 
 .card-title {
@@ -260,9 +317,9 @@ section {
 .section-title,
 .section-header {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-faint);
   margin-bottom: 1.5rem;

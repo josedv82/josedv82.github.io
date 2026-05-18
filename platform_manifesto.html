@@ -4,92 +4,395 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Platform — A Design Manifesto</title>
+<script src="static/js/theme.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --bg: #0e0f13;
-    --bg-nav: #0a0b0e;
-    --text: #dedad4;
-    --text-muted: #7a7570;
-    --text-faint: #38352f;
-    --accent: #5b8af0;
-    --accent-dim: #2d4a8a;
-    --rule: #1e1d1a;
-    --rule-bright: #2e2c28;
-    --field: #13151c;
+    --bg: #fafaf8;
+    --bg-nav: #f4f4f1;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --text-faint: #aaa;
+    --accent: #2563eb;
+    --accent-dim: #93c5fd;
+    --rule: #e8e8e4;
+    --rule-bright: #d0d0cc;
+    --field: #f0f0ec;
     --nav-width: 260px;
     --content-max: 720px;
     --mono: 'DM Mono', monospace;
   }
-  html { scroll-behavior: smooth; font-size: 17px; }
-  body { background: var(--bg); color: var(--text); font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; line-height: 1.78; display: flex; min-height: 100vh; }
 
-  /* NAV */
-  nav { width: var(--nav-width); flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--bg-nav); border-right: 1px solid var(--rule); padding: 2.5rem 0 3rem; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+  [data-theme="dark"] {
+    --bg: #111110;
+    --bg-nav: #0d0d0c;
+    --text: #e0dcd6;
+    --text-muted: #7a7570;
+    --text-faint: #444;
+    --accent: #5b8af0;
+    --accent-dim: #2d4a8a;
+    --rule: #2a2a28;
+    --rule-bright: #3a3a36;
+    --field: #181816;
+  }
+
+  html { scroll-behavior: smooth; font-size: 17px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.78;
+    display: flex;
+    min-height: 100vh;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────── */
+
+  nav {
+    width: var(--nav-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--bg-nav);
+    border-right: 1px solid var(--rule);
+    padding: 2.5rem 0 3rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
+  }
+
   nav::-webkit-scrollbar { width: 3px; }
   nav::-webkit-scrollbar-thumb { background: var(--rule-bright); }
-  .nav-brand { padding: 0 1.6rem 2rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.5rem; }
-  .nav-brand .eyebrow { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem; }
-  .nav-brand h1 { font-family: 'Fraunces', Georgia, serif; font-size: 1rem; font-weight: 300; line-height: 1.3; color: var(--text); }
-  .nav-section-label { padding: 0 1.6rem; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.3rem; margin-top: 1.4rem; }
+
+  .nav-brand {
+    padding: 0 1.6rem 2rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-back {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    text-decoration: none;
+    margin-bottom: 1.2rem;
+    transition: color 0.12s;
+  }
+
+  .nav-back:hover { color: var(--text-muted); }
+
+  .nav-brand .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-brand h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .nav-toggle {
+    display: block;
+    margin-top: 1rem;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    padding: 0.2rem 0.5rem;
+    transition: color 0.12s, border-color 0.12s;
+  }
+
+  .nav-toggle:hover { color: var(--text-muted); border-color: var(--text-faint); }
+
+  .nav-section-label {
+    padding: 0 1.6rem;
+    font-family: var(--mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.3rem;
+    margin-top: 1.4rem;
+  }
+
   .nav-items { list-style: none; }
-  .nav-items a { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.28rem 1.6rem; text-decoration: none; font-size: 0.76rem; color: var(--text-muted); line-height: 1.4; transition: color 0.12s, background 0.12s; border-left: 2px solid transparent; margin-left: -2px; font-family: 'Source Serif 4', serif; font-weight: 300; }
-  .nav-items a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-  .nav-items a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(91,138,240,0.06); }
-  .nav-items .num { font-family: var(--mono); font-size: 0.6rem; color: var(--text-faint); flex-shrink: 0; width: 1.4rem; text-align: right; }
+
+  .nav-items a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.28rem 1.6rem;
+    text-decoration: none;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    transition: color 0.12s, background 0.12s;
+    border-left: 2px solid transparent;
+    margin-left: -2px;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+  }
+
+  .nav-items a:hover { color: var(--text); background: rgba(128,128,128,0.05); }
+
+  .nav-items a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(37,99,235,0.05);
+  }
+
+  [data-theme="dark"] .nav-items a.active {
+    background: rgba(91,138,240,0.06);
+  }
+
+  .nav-items .num {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    width: 1.4rem;
+    text-align: right;
+  }
+
   .nav-items a.active .num { color: var(--accent-dim); }
 
-  /* MAIN */
+  /* ── MAIN ────────────────────────────────────────────── */
+
   main { flex: 1; min-width: 0; padding: 0 clamp(2rem, 6vw, 6rem); }
 
-  .doc-header { padding: 5rem 0 4rem; max-width: var(--content-max); border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
-  .doc-header .kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.6rem; display: block; }
-  .doc-header h1 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; color: var(--text); margin-bottom: 1.8rem; }
-  .doc-header .lede { font-size: 1.1rem; color: var(--text-muted); line-height: 1.72; max-width: 58ch; }
+  /* ── BREADCRUMB ──────────────────────────────────────── */
 
-  /* CHAPTERS */
-  .chapter { max-width: var(--content-max); padding: 5rem 0; border-bottom: 1px solid var(--rule); }
-  .chapter:last-child { border-bottom: none; }
-  .chapter-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.2rem; }
-  .chapter-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; }
-  .chapter-rule { height: 1px; background: var(--rule); flex: 1; }
-  .chapter h2 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.45rem, 2.8vw, 2rem); font-weight: 300; line-height: 1.22; letter-spacing: -0.01em; color: var(--text); margin-bottom: 2rem; }
-  .chapter-body p { margin-bottom: 1.4em; max-width: 68ch; color: var(--text); }
+  .breadcrumb {
+    padding: 2rem 0 0;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  .breadcrumb a {
+    color: var(--text-faint);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+
+  .breadcrumb a:hover { color: var(--text-muted); }
+  .breadcrumb .sep { margin: 0 0.4rem; }
+
+  /* ── DOCUMENT HEADER ─────────────────────────────────── */
+
+  .doc-header {
+    padding: 3rem 0 4rem;
+    max-width: var(--content-max);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.6rem;
+    display: block;
+  }
+
+  .doc-header h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1.8rem;
+  }
+
+  .doc-header .lede {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.72;
+    max-width: 58ch;
+  }
+
+  /* ── CHAPTERS ────────────────────────────────────────── */
+
+  .chapter {
+    max-width: var(--content-max);
+    padding: 5rem 0;
+    /* no border-bottom — only the chapter-meta line at top separates chapters */
+  }
+
+  .chapter-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .chapter-num {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .chapter-rule {
+    height: 1px;
+    background: var(--rule);
+    flex: 1;
+  }
+
+  .chapter h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.45rem, 2.8vw, 2rem);
+    font-weight: 300;
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  .chapter-body p {
+    margin-bottom: 1.4em;
+    max-width: 68ch;
+    color: var(--text);
+  }
+
   .chapter-body p:last-child { margin-bottom: 0; }
-  .chapter-body hr { border: none; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
 
-  /* Field schema blocks */
-  .schema { background: var(--field); border: 1px solid var(--rule-bright); border-left: 3px solid var(--accent-dim); padding: 1.8rem 2rem; margin: 2.2rem 0; max-width: 64ch; }
+  .chapter-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.6rem 0;
+  }
+
+  /* ── SCHEMA BLOCKS ───────────────────────────────────── */
+
+  .schema {
+    background: var(--field);
+    border: 1px solid var(--rule-bright);
+    border-left: 3px solid var(--accent-dim);
+    padding: 1.8rem 2rem;
+    margin: 2.2rem 0;
+    max-width: 64ch;
+  }
+
   .schema-item { margin-bottom: 1.4rem; }
   .schema-item:last-child { margin-bottom: 0; }
-  .field-name { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--accent); display: block; margin-bottom: 0.3rem; text-transform: uppercase; }
-  .schema-item p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.65; max-width: none; }
 
-  /* Callout */
-  .callout { border-left: 3px solid var(--rule-bright); padding: 0.7rem 0 0.7rem 1.5rem; margin: 2.2rem 0; font-style: italic; font-size: 1.02rem; color: var(--text-muted); max-width: 56ch; }
+  .field-name {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+  }
 
-  /* Tier list */
+  .schema-item p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+    line-height: 1.65;
+    max-width: none;
+  }
+
+  /* ── CALLOUT ─────────────────────────────────────────── */
+
+  .callout {
+    border-left: 3px solid var(--rule-bright);
+    padding: 0.7rem 0 0.7rem 1.5rem;
+    margin: 2.2rem 0;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    max-width: 56ch;
+  }
+
+  /* ── TIER LIST ───────────────────────────────────────── */
+
   .tier-list { margin: 2rem 0; max-width: 64ch; }
-  .tier { border-top: 1px solid var(--rule); padding: 1.2rem 0; }
-  .tier-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: block; }
-  .tier p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.65; }
 
-  .doc-footer { max-width: var(--content-max); padding: 4rem 0 6rem; font-family: var(--mono); font-size: 0.66rem; color: var(--text-faint); letter-spacing: 0.08em; }
+  .tier {
+    border-top: 1px solid var(--rule);
+    padding: 1.2rem 0;
+  }
 
-  @media (max-width: 900px) { nav { display: none; } main { padding: 0 1.6rem; } }
-  @media print { nav { display: none; } main { padding: 0; } }
+  .tier-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .tier p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────── */
+
+  .doc-footer {
+    max-width: var(--content-max);
+    padding: 4rem 0 6rem;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+
+  @media (max-width: 900px) {
+    nav { display: none; }
+    main { padding: 0 1.6rem; }
+  }
+
+  @media print {
+    nav { display: none; }
+    main { padding: 0; }
+  }
 </style>
 </head>
 <body>
 
 <nav id="sidebar">
   <div class="nav-brand">
-    <a href="index.html" style="display:block;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:#7a7570;text-decoration:none;margin-bottom:0.8rem;">← Jose Fernandez</a>
+    <a href="index.html" class="nav-back">← Jose Fernandez</a>
     <span class="eyebrow">Design Manifesto</span>
     <h1>The Platform</h1>
+    <button class="nav-toggle theme-toggle" onclick="toggleTheme()">dark</button>
   </div>
   <p class="nav-section-label">Foundations</p>
   <ul class="nav-items">
@@ -118,13 +421,18 @@
 </nav>
 
 <main>
-<header class="doc-header">
-<main>
-<header class="doc-header">
-  <span class="kicker">A Design Manifesto for Performance Intelligence Software</span>
-  <h1>The Platform</h1>
-  <p class="lede">Performance data systems record what happened. GPS sessions, force plate outputs, injury events: years of observation data in platforms built to hold exactly that. What none of them record is what was done about it: the intervention, the reasoning, the expected outcome, whether it held. This document describes a platform built around that gap. It is an argument for a particular architecture, and each design decision here has an explanation.</p>
-</header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Jose Fernandez</a>
+    <span class="sep">/</span>
+    <span>The Platform</span>
+  </nav>
+
+  <header class="doc-header">
+    <span class="kicker">A Design Manifesto for Performance Intelligence Software</span>
+    <h1>The Platform</h1>
+    <p class="lede">Performance data systems record what happened. GPS sessions, force plate outputs, injury events: years of observation data in platforms built to hold exactly that. What none of them record is what was done about it: the intervention, the reasoning, the expected outcome, whether it held. This document describes a platform built around that gap. It is an argument for a particular architecture, and each design decision here has an explanation.</p>
+  </header>
 
 <!-- CH01 -->
 <section class="chapter" id="ch01">
@@ -227,6 +535,7 @@
 <p>Three fields are prohibited from the process event schema: diagnosis, medication, and any field constituting protected health information under applicable data protection law. The process event holds the rationale and the decision. It does not hold the consultation. Those belong in the clinical record system, a separate application with separate access controls. The platform does not replicate or interface with the clinical record. The boundary is hard, and it is enforced at the schema level.</p>
   </div>
 </section>
+
 <!-- CH05 -->
 <section class="chapter" id="ch05">
   <div class="chapter-meta"><span class="chapter-num">05</span><div class="chapter-rule"></div></div>
@@ -279,6 +588,7 @@
 <p>There is no manual data entry for observation events. If data matters enough to be in the store, it matters enough to have a provenance trail. A provenance trail requires a contract. The ingestion layer is the only entry point.</p>
   </div>
 </section>
+
 <!-- CH08 -->
 <section class="chapter" id="ch08">
   <div class="chapter-meta"><span class="chapter-num">08</span><div class="chapter-rule"></div></div>
@@ -422,22 +732,27 @@
 <footer class="doc-footer">
   <p>The Platform — A Design Manifesto for Performance Intelligence Software</p>
 </footer>
+
 </main>
 
 <script>
   const chapters = document.querySelectorAll('.chapter');
   const navLinks = document.querySelectorAll('.nav-items a');
+
   function getActive() {
     let a = null;
     chapters.forEach(c => { if (c.getBoundingClientRect().top <= 120) a = c.id; });
     return a;
   }
+
   function update() {
     const a = getActive();
     navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + a));
   }
+
   window.addEventListener('scroll', update, { passive: true });
   update();
 </script>
+
 </body>
 </html>
