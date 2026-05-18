@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Platform — A Design Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0e0f13;
+    --bg-nav: #0a0b0e;
+    --text: #dedad4;
+    --text-muted: #7a7570;
+    --text-faint: #38352f;
+    --accent: #5b8af0;
+    --accent-dim: #2d4a8a;
+    --rule: #1e1d1a;
+    --rule-bright: #2e2c28;
+    --field: #13151c;
+    --nav-width: 260px;
+    --content-max: 720px;
+    --mono: 'DM Mono', monospace;
+  }
+  html { scroll-behavior: smooth; font-size: 17px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; line-height: 1.78; display: flex; min-height: 100vh; }
+
+  /* NAV */
+  nav { width: var(--nav-width); flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--bg-nav); border-right: 1px solid var(--rule); padding: 2.5rem 0 3rem; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+  nav::-webkit-scrollbar { width: 3px; }
+  nav::-webkit-scrollbar-thumb { background: var(--rule-bright); }
+  .nav-brand { padding: 0 1.6rem 2rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.5rem; }
+  .nav-brand .eyebrow { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem; }
+  .nav-brand h1 { font-family: 'Fraunces', Georgia, serif; font-size: 1rem; font-weight: 300; line-height: 1.3; color: var(--text); }
+  .nav-section-label { padding: 0 1.6rem; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.3rem; margin-top: 1.4rem; }
+  .nav-items { list-style: none; }
+  .nav-items a { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.28rem 1.6rem; text-decoration: none; font-size: 0.76rem; color: var(--text-muted); line-height: 1.4; transition: color 0.12s, background 0.12s; border-left: 2px solid transparent; margin-left: -2px; font-family: 'Source Serif 4', serif; font-weight: 300; }
+  .nav-items a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .nav-items a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(91,138,240,0.06); }
+  .nav-items .num { font-family: var(--mono); font-size: 0.6rem; color: var(--text-faint); flex-shrink: 0; width: 1.4rem; text-align: right; }
+  .nav-items a.active .num { color: var(--accent-dim); }
+
+  /* MAIN */
+  main { flex: 1; min-width: 0; padding: 0 clamp(2rem, 6vw, 6rem); }
+
+  .doc-header { padding: 5rem 0 4rem; max-width: var(--content-max); border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
+  .doc-header .kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.6rem; display: block; }
+  .doc-header h1 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; color: var(--text); margin-bottom: 1.8rem; }
+  .doc-header .lede { font-size: 1.1rem; color: var(--text-muted); line-height: 1.72; max-width: 58ch; }
+
+  /* CHAPTERS */
+  .chapter { max-width: var(--content-max); padding: 5rem 0; border-bottom: 1px solid var(--rule); }
+  .chapter:last-child { border-bottom: none; }
+  .chapter-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.2rem; }
+  .chapter-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; }
+  .chapter-rule { height: 1px; background: var(--rule); flex: 1; }
+  .chapter h2 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.45rem, 2.8vw, 2rem); font-weight: 300; line-height: 1.22; letter-spacing: -0.01em; color: var(--text); margin-bottom: 2rem; }
+  .chapter-body p { margin-bottom: 1.4em; max-width: 68ch; color: var(--text); }
+  .chapter-body p:last-child { margin-bottom: 0; }
+  .chapter-body hr { border: none; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
+
+  /* Field schema blocks */
+  .schema { background: var(--field); border: 1px solid var(--rule-bright); border-left: 3px solid var(--accent-dim); padding: 1.8rem 2rem; margin: 2.2rem 0; max-width: 64ch; }
+  .schema-item { margin-bottom: 1.4rem; }
+  .schema-item:last-child { margin-bottom: 0; }
+  .field-name { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--accent); display: block; margin-bottom: 0.3rem; text-transform: uppercase; }
+  .schema-item p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.65; max-width: none; }
+
+  /* Callout */
+  .callout { border-left: 3px solid var(--rule-bright); padding: 0.7rem 0 0.7rem 1.5rem; margin: 2.2rem 0; font-style: italic; font-size: 1.02rem; color: var(--text-muted); max-width: 56ch; }
+
+  /* Tier list */
+  .tier-list { margin: 2rem 0; max-width: 64ch; }
+  .tier { border-top: 1px solid var(--rule); padding: 1.2rem 0; }
+  .tier-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: block; }
+  .tier p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.65; }
+
+  .doc-footer { max-width: var(--content-max); padding: 4rem 0 6rem; font-family: var(--mono); font-size: 0.66rem; color: var(--text-faint); letter-spacing: 0.08em; }
+
+  @media (max-width: 900px) { nav { display: none; } main { padding: 0 1.6rem; } }
+  @media print { nav { display: none; } main { padding: 0; } }
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="nav-brand">
+    <span class="eyebrow">Design Manifesto</span>
+    <h1>The Platform</h1>
+  </div>
+  <p class="nav-section-label">Foundations</p>
+  <ul class="nav-items">
+    <li><a href="#ch01"><span class="num">01</span>Two Event Types</a></li>
+    <li><a href="#ch02"><span class="num">02</span>The Unit of Data</a></li>
+    <li><a href="#ch03"><span class="num">03</span>The Observation Event</a></li>
+    <li><a href="#ch04"><span class="num">04</span>The Process Event</a></li>
+  </ul>
+  <p class="nav-section-label">Architecture</p>
+  <ul class="nav-items">
+    <li><a href="#ch05"><span class="num">05</span>Trigger Embedding</a></li>
+    <li><a href="#ch06"><span class="num">06</span>The Event Store</a></li>
+    <li><a href="#ch07"><span class="num">07</span>The Ingestion Layer</a></li>
+  </ul>
+  <p class="nav-section-label">Interfaces</p>
+  <ul class="nav-items">
+    <li><a href="#ch08"><span class="num">08</span>The Query Interface</a></li>
+    <li><a href="#ch09"><span class="num">09</span>Access Architecture</a></li>
+    <li><a href="#ch10"><span class="num">10</span>The Compliance Layer</a></li>
+    <li><a href="#ch11"><span class="num">11</span>The Athlete Interface</a></li>
+  </ul>
+  <p class="nav-section-label">Scope</p>
+  <ul class="nav-items">
+    <li><a href="#ch12"><span class="num">12</span>What This Is Not</a></li>
+  </ul>
+</nav>
+
+<main>
+<header class="doc-header">
+<main>
+<header class="doc-header">
+  <span class="kicker">A Design Manifesto for Performance Intelligence Software</span>
+  <h1>The Platform</h1>
+  <p class="lede">Performance data systems record what happened. GPS sessions, force plate outputs, injury events: years of observation data in platforms built to hold exactly that. What none of them record is what was done about it: the intervention, the reasoning, the expected outcome, whether it held. This document describes a platform built around that gap. It is an argument for a particular architecture, and each design decision here has an explanation.</p>
+</header>
+
+<!-- CH01 -->
+<section class="chapter" id="ch01">
+  <div class="chapter-meta"><span class="chapter-num">01</span><div class="chapter-rule"></div></div>
+  <h2>Two event types</h2>
+  <div class="chapter-body">
+<p>Every design decision in this platform follows from one. Not a framework choice. Not a deployment model. The question is: what types of events exist?</p>
+<p>Every athlete management system on the market answers this with one type. The observation. A test was run, a session was delivered, an injury occurred. The platform records it. That was the right call when those systems were built, and it still works for what they were designed to do. The observation record is complete, searchable, longitudinal.</p>
+<p>What it cannot hold is the intervention. The decision made in response to an observation. The expected outcome. Whether that expectation held. These are not observations, and a platform with one event type cannot hold them properly. Putting a decision into a notes field on an observation record is like keeping meeting minutes in the margin of a balance sheet. The document accepts the text. The structure cannot use it.</p>
+<p>This platform has two event types: observation events and process events. They have different schemas, different query surfaces, different access controls, and different trigger conditions. They live in the same store, indexed to the same player identifier, queryable together. But they are not the same type, and the architecture reflects that from the ground up.</p>
+<p>Everything else in this document follows from this.</p>
+  </div>
+</section>
+
+<!-- CH02 -->
+<section class="chapter" id="ch02">
+  <div class="chapter-meta"><span class="chapter-num">02</span><div class="chapter-rule"></div></div>
+  <h2>The unit of data</h2>
+  <div class="chapter-body">
+<p>The second foundational decision: what is the unit of data?</p>
+<p>Every AMS answers with the session, the assessment, or the squad. Data is organized around what happened at a given club on a given date. The player is a reference inside a larger structure, not a first-class entity. That works until a player transfers, a staff member leaves, or a season ends. At that point the architecture reveals its premise: it was built to record what the club observed, not what the player accumulated.</p>
+<p>This platform's unit is the player event.</p>
+<p>Everything, from a CMJ test to a GPS session to a rehabilitation stage-gate decision, is an event attached to that player's record. The record does not belong to a season, a squad, or a club. It travels with the player. It can be queried as it existed at any point in time, showing what was known on a specific date with everything that happened before it and nothing that happened after.</p>
+<p>Event sourcing is the implementation model. The store is append-only. Nothing is deleted or updated in place. A correction is a new event: typed as a correction, pointing to the original, carrying the reason and the practitioner's name. The original stays in the store. Every query that touches a corrected event surfaces the correction alongside the original, not instead of it.</p>
+<p>The player identifier is stable across transfers, contracts, and system migrations. It is not the club's ID or the AMS player ID. It is the platform's own identifier, issued at first ingestion and never reassigned. When a player's record moves to another deployment of the platform, the identifier travels with it.</p>
+<p>Build the player model first. If the unit is the session, you have an operational record. If the unit is the player event, you have something that grows.</p>
+  </div>
+</section>
+
+<!-- CH03 -->
+<section class="chapter" id="ch03">
+  <div class="chapter-meta"><span class="chapter-num">03</span><div class="chapter-rule"></div></div>
+  <h2>The observation event</h2>
+  <div class="chapter-body">
+<p>Observation events are the familiar type. What GPS platforms, force plates, video tools, and wellness applications produce. A test result, a session metric, a physical assessment, a subjective score. This platform ingests them, normalizes them against a canonical metric definition, and stores them as player events. In this it does what every AMS already does.</p>
+<p>The difference is not what observation events contain. It is where they sit in the store.</p>
+<p>In an AMS, the observation is the terminal event. It is the primary fact, and everything else hangs off it as secondary data. In this platform, an observation is a potential trigger. One half of a relationship whose other half may or may not exist: the process event that responded to it, the expected outcome attached to that response, the outcome event that eventually resolved the prediction. An observation that never triggered a process event carries a null link. One that did carries a pointer. The query layer uses this to answer questions the AMS cannot: not just what the score was, but what it caused.</p>
+<p>Observation events carry four fields that AMS platforms do not require:</p>
+
+<div class="schema">
+  <div class="schema-item">
+    <span class="field-name">source_system</span>
+    <p>The external system that produced this observation, versioned to the ingestion contract active at the time of ingestion.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">metric_definition_version</span>
+    <p>The canonical metric definition applied when this observation was ingested. Immutable after ingestion. Queries crossing a version boundary surface the change.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">ingestion_timestamp</span>
+    <p>When the event entered the store, distinct from when the observation was made. Both are stored. Both are queryable.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">process_event_links</span>
+    <p>Foreign keys to process events that referenced this observation as a trigger. Null until a process event is created. Updated as a new event when a link is established; the observation record itself is never modified.</p>
+  </div>
+</div>
+
+<p>Observation events are ingested from external systems through versioned ingestion contracts. They are never entered manually. If data is in the store, it has provenance. If provenance cannot be established, the data is not in the store.</p>
+<p>One subtype needs special treatment: observer-sourced observations. Data the athlete inputs directly, from wellness scores to self-reported pain, is stored with a distinct source type. It surfaces in the query interface alongside instrument data, flagged as self-reported in any result that includes it. It is not less valid. It is differently valid, and the query layer makes that distinction rather than flattening it.</p>
+  </div>
+</section>
+
+<!-- CH04 -->
+<section class="chapter" id="ch04">
+  <div class="chapter-meta"><span class="chapter-num">04</span><div class="chapter-rule"></div></div>
+  <h2>The process event</h2>
+  <div class="chapter-body">
+<p>The process event does not exist in any current AMS. It is not a notes field, a tag, or a flag. It is a first-class event type with its own schema, storage structure, query surface, and access controls.</p>
+<p>A process event records an intervention: a decision made in response to one or more observation events, the rationale for that decision, the expected outcome, the accountable practitioner, and the resolution window within which the expected outcome should materialise.</p>
+<p>The schema has six required fields:</p>
+
+<div class="schema">
+  <div class="schema-item">
+    <span class="field-name">decision</span>
+    <p>What was done. A structured field with a constrained vocabulary: load modified, return-to-play delayed, protocol advanced, session cancelled, threshold adjusted, and similar types, extended by a plain-language rationale field. The vocabulary is configurable per deployment. The structure is not.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">trigger_links</span>
+    <p>Foreign keys to the observation events that prompted this decision. Required. A process event with no trigger link is not a process event; it is an unanchored note, and the platform does not store unanchored notes. The link is what makes the record queryable in both directions: from observation to decision, from decision to outcome.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">rationale</span>
+    <p>The practitioner's reasoning in plain language. Free text. One to four sentences. Deliberately unstructured because the reasoning does not fit a dropdown. This is the field that outlasts the practitioner who wrote it. It is what the query interface surfaces when someone asks what happened the last time this pattern appeared.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">expected_outcome</span>
+    <p>What the practitioner believed would happen, expressed as a typed outcome with a timeframe. Structured, not free text. The platform evaluates this field against the observation record when the resolution window closes and records whether the expectation held, partially held, or did not hold. This is the calibration data.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">accountable_practitioner</span>
+    <p>The one person whose clinical judgment this entry represents. Not a log of everyone who contributed. The query interface surfaces this field so incoming practitioners know whose reasoning they are reading. It is a clinical continuity field, not a performance management field.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">resolution_window</span>
+    <p>The date by which the expected outcome should be evaluable. When this date passes, the platform creates an outcome evaluation event: did the observation record, in the period following the decision, match the expectation? The evaluation is automatic where the expected outcome is structured against a measurable observation type. Where it is not, it surfaces for practitioner review.</p>
+  </div>
+</div>
+
+<p>Three fields are prohibited from the process event schema: diagnosis, medication, and any field constituting protected health information under applicable data protection law. The process event holds the rationale and the decision. It does not hold the consultation. Those belong in the clinical record system, a separate application with separate access controls. The platform does not replicate or interface with the clinical record. The boundary is hard, and it is enforced at the schema level.</p>
+  </div>
+</section>
+<!-- CH05 -->
+<section class="chapter" id="ch05">
+  <div class="chapter-meta"><span class="chapter-num">05</span><div class="chapter-rule"></div></div>
+  <h2>Trigger embedding</h2>
+  <div class="chapter-body">
+<p>The process event schema defines what gets captured. Trigger embedding defines when and how. It is the most consequential design decision in the platform, and most systems get it wrong for the same reason: they treat the reasoning log as documentation rather than workflow.</p>
+<p>Documentation happens after the work. It asks practitioners to remember and reconstruct, to retrieve from memory the reasoning behind a decision made earlier, perhaps hours earlier, perhaps during a session that has since closed. The entries these systems produce are post-hoc. They describe decisions. By the time a practitioner opens a documentation form, the clinical context has shifted and the reasoning has compressed into a summary of itself.</p>
+<p>A workflow layer is different. It appears at the moment of decision, inside an action the practitioner is already taking. The entry is made before they move to the next task, because the template is in front of them, pre-populated with the linked observation. The reasoning is captured fresh. Nothing needs to be reconstructed.</p>
+<p>Trigger embedding is how the platform implements that difference. The system watches the event stream for workflow events that indicate a clinical decision is being made. When it detects one, it surfaces the process event template inline in whatever interface the practitioner is already using. Pre-populated. Two required fields. Sixty seconds.</p>
+
+<div class="callout">A trigger that fires at the right moment and takes sixty seconds produces more useful data than a form that is always available and used once a quarter.</div>
+
+<p>Default triggers are defined by the platform. They can be configured but not disabled:</p>
+<p>Any observation event where the measured value crosses a threshold defined for that metric and that player. Any return-to-play status change. Any load deviation above a configurable percentage from the planned session value. Any stage-gate outcome in a rehabilitation pathway.</p>
+<p>Deployment-specific triggers are added by the organisation. The platform provides the trigger framework. The organisation configures which events in their context represent a decision worth capturing.</p>
+<p>There is no end-of-day logging reminder. There is no end-of-week summary form. If the trigger moment passed without a process event, the moment passed. A process event written hours after the decision carries a flag showing the elapsed time between the triggering observation and the entry creation. Queries can filter on it. A practitioner reading an entry written six hours after the fact should know that. The platform tells them.</p>
+  </div>
+</section>
+
+<!-- CH06 -->
+<section class="chapter" id="ch06">
+  <div class="chapter-meta"><span class="chapter-num">06</span><div class="chapter-rule"></div></div>
+  <h2>The event store</h2>
+  <div class="chapter-body">
+<p>Both event types live in the same store. Here is why that matters.</p>
+<p>A system that separates observation events and process events into different databases with a join layer between them will eventually allow the two to drift. Schema changes on one side break the join. Migrations run at different times against different engines. The link that makes the system useful, the chain from observation to decision to expected outcome to resolution, becomes fragile across the boundary. The canonical event store keeps both types in the same structure, indexed to the same player identifier, queryable in a single pass. The link is a foreign key within the store, not a cross-system join maintained by a service with its own failure modes.</p>
+<p>The store is append-only, and this matters epistemologically rather than technically. If events can be modified in place, the system loses the ability to answer its most important question: what was known at the moment a specific decision was made? An append-only store preserves the temporal record exactly. A mutable store introduces ambiguity about whether the record reflects what was known then or what is known now. These are different things, and confusing them destroys the value of the record.</p>
+<p>Metric versioning is a first-class event type, not a configuration setting. When a metric definition changes, whether a threshold moves, a vendor recalibrates, or a team aligns with published norms, that change is recorded as a metric version event: timestamp, old definition, new definition, reason, practitioner who authorized it. Every observation ingested after the change carries the new metric definition version. Every observation ingested before it retains the old one. Queries spanning the version boundary surface the change prominently.</p>
+
+<div class="callout">A comparison of sprint volumes across seasons that does not surface a metric definition change is not a comparison. It is a confound presented as evidence.</div>
+
+<p>The store does not enforce schema validation at ingestion. It enforces it at query. A malformed observation that enters through a broken ingestion contract is flagged when queried, not silently dropped or accepted. Dropping data at ingestion makes it invisible. Accepting it silently corrupts the record. Surfacing it at query gives the organisation the information needed to fix the ingestion contract without destroying data that may have other valid uses.</p>
+<p>Retention is indefinite by default. Data protection rules requiring deletion are handled through logical deletion: a deletion event is appended, and all queries treat events prior to that deletion event as inaccessible for that player. The events remain physically in the store for audit purposes. The deletion event is the access control. The underlying data is the audit trail.</p>
+  </div>
+</section>
+
+<!-- CH07 -->
+<section class="chapter" id="ch07">
+  <div class="chapter-meta"><span class="chapter-num">07</span><div class="chapter-rule"></div></div>
+  <h2>The ingestion layer</h2>
+  <div class="chapter-body">
+<p>The platform does not replace GPS platforms, force plates, or video analysis tools. It connects to them via API and ingests their output as observation events. The ingestion layer translates between external systems and the store. Its primary obligation: refuse bad data clearly rather than accept it quietly.</p>
+<p>Each external source connects through an ingestion contract: a versioned document specifying the metrics the source produces, the units they use, the refresh cadence, and the normalisation function mapping source-specific field names to the platform's canonical schema. The contract is versioned independently of both the source system and the platform. When a source updates its API and field names change, the ingestion layer detects the mismatch against the active contract and raises a reconciliation alert before ingesting anything. It does not silently remap fields it cannot match. It does not drop fields the contract expects. It stops and surfaces the discrepancy.</p>
+<p>This conservatism is intentional. A system that ingests silently and maps best-effort produces a clean-looking record carrying hidden errors. Catching bad data at ingestion is the ingestion layer's job.</p>
+<p>Canonical metric definitions live at the platform level. The GPS vendor calls it "high-speed running distance." The platform has a canonical definition: speed threshold, minimum bout duration, time window, unit. When the ingestion contract maps the vendor field to the canonical metric, it records which version of the canonical definition applied. When the canonical definition changes, observations ingested before the change retain the old version marker. The change propagates forward, not backward into the existing record.</p>
+<p>Three ingestion modes are supported:</p>
+<p><strong>Push.</strong> The external system sends events to the platform's ingestion endpoint when they are produced. Low latency. Requires the external system to implement webhook delivery. Preferred for high-frequency sources like GPS session events and real-time load flags.</p>
+<p><strong>Pull.</strong> The platform polls the external system's API on a configurable cadence. Higher latency, no changes required to the external system. Preferred for lower-frequency assessment sources like force plate testing and periodic wellness surveys.</p>
+<p><strong>File import.</strong> A structured file in the platform's canonical format, validated against the ingestion contract before acceptance. Used for historical data migration and sources without an API. Rejected if validation fails. Never accepted with a warning.</p>
+<p>There is no manual data entry for observation events. If data matters enough to be in the store, it matters enough to have a provenance trail. A provenance trail requires a contract. The ingestion layer is the only entry point.</p>
+  </div>
+</section>
+<!-- CH08 -->
+<section class="chapter" id="ch08">
+  <div class="chapter-meta"><span class="chapter-num">08</span><div class="chapter-rule"></div></div>
+  <h2>The query interface</h2>
+  <div class="chapter-body">
+<p>The query interface lets practitioners ask questions in plain language against the accumulated record. It is the most visible part of the platform and the part that most invites over-engineering. What follows is what it does, what it always surfaces, and what it does not do.</p>
+<p>The query interface is a translation layer. A practitioner asks a natural-language question. The LLM translates it into a structured query against the event store. The event store executes the query and returns records. The interface assembles those records into a readable result. The LLM never holds athlete data. It never processes clinical records. It receives the query and the store schema. It returns a query structure. That structure goes to the event store. The records go directly to the interface assembly layer. Athlete data does not pass through the LLM. This matters for compliance, and the chapter on the compliance layer explains why it is enforced architecturally rather than by policy.</p>
+<p>Three elements appear in every query result. They cannot be suppressed or styled away by any deployment configuration:</p>
+
+<div class="schema">
+  <div class="schema-item">
+    <span class="field-name">dataset_size</span>
+    <p>The number of matching events in the underlying dataset. Displayed prominently. A result based on two matching events looks structurally identical to one based on two hundred, and a practitioner who does not see the difference will treat both with the same confidence. A system that appears equally certain about everything will be trusted about nothing once practitioners find the samples behind the answers.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">date_range</span>
+    <p>The earliest and latest event dates in the matching dataset. Three instances of a pattern is different information depending on whether those instances span one season or five years. The temporal distribution matters and the result surfaces it.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">metric_version_changes</span>
+    <p>Any metric definition version changes falling within the query's date range. Displayed as a warning when the result includes observations from both sides of a version boundary. The result is not withheld; the practitioner needs it. But the caveat is prominent.</p>
+  </div>
+</div>
+
+<p>The query interface does not produce recommendations. It surfaces what happened, what was decided, what was expected, and what resulted. The inference belongs to the practitioner. A query interface that generates clinical recommendations is a medical device in most jurisdictions and requires regulatory approval this platform is not designed to meet. This is not a missing feature. It is a deliberate scope boundary.</p>
+<p>The query interface does not aggregate across players without explicit squad-level access. A query about one player returns that player's record. A query comparing across the squad requires squad-level access for the relevant event types. Any query that uses one player's record to inform decisions about another is logged in the audit trail: practitioner identifier, query, timestamp. All cross-player queries are auditable.</p>
+<p>Pre-loaded results surface before the practitioner asks. The system runs standing queries continuously against the event store: which players are on return-to-play pathways and at which stage, which threshold breaches fired in the last 48 hours without producing a process event, which resolution windows close in the next 72 hours. Before a multi-disciplinary team meeting (MDT), the interface assembles a pre-built result for each player on the agenda: the most recent process events, open expected outcomes, observation trends, unresolved athlete disputes. The practitioner arrives with context. The query interface does not wait to be asked for what the system already has.</p>
+  </div>
+</section>
+
+<!-- CH09 -->
+<section class="chapter" id="ch09">
+  <div class="chapter-meta"><span class="chapter-num">09</span><div class="chapter-rule"></div></div>
+  <h2>Access architecture</h2>
+  <div class="chapter-body">
+<p>Access is defined at the event-type and field level, not the feature level. A feature-level access model restricts menu items and dashboards. An event-type access model restricts data. The distinction matters because the same data can surface across multiple features, and feature-level control cannot prevent it from appearing in one place if it is permitted in another.</p>
+<p>Four access tiers, each defined by what data they reach rather than by what functions they unlock:</p>
+
+<div class="tier-list">
+  <div class="tier">
+    <span class="tier-label">Clinical</span>
+    <p>Full observation event access. Full process event access including the complete rationale field. Outcome evaluation events. Athlete dispute flags. Audit trail for the player's record. Granted to medical staff whose role requires the complete record to make clinical decisions. Not the default tier. Granted explicitly and reviewed annually.</p>
+  </div>
+  <div class="tier">
+    <span class="tier-label">Performance</span>
+    <p>Full observation event access. Process event access with the rationale field surfaced as a summary: the decision type and expected outcome, but not the practitioner's clinical reasoning narrative. For coaching and performance staff who need to know what was decided and when, without access to the clinical thinking behind it.</p>
+  </div>
+  <div class="tier">
+    <span class="tier-label">Analytics</span>
+    <p>Aggregate observation event access — event counts, metric distributions, population trends, all anonymised at the player level unless clinical or performance access has been granted for a specific query. Process event access limited to aggregate calibration data: outcome rates by decision type, prediction accuracy by resolution window. No individual process event rationale. No individual player identification without additional explicit access.</p>
+  </div>
+  <div class="tier">
+    <span class="tier-label">Athlete</span>
+    <p>The athlete's own observation events in full. A summary layer of process events affecting their training and availability. Their own subjective wellness inputs. Export function for their own record. No access to any other player's data under any query under any circumstance.</p>
+  </div>
+</div>
+
+<p>Access tier assignment is not inferred from role title. A head physio holds clinical access because their role requires it, and that access is granted explicitly with a documented justification and a review date. A performance scientist holds analytics access by default and requests additional access through a formal process that creates an audit event. The system does not guess. It requires explicit grants, logs every grant, and enforces expiry.</p>
+<p>Every access grant carries an expiry date. When a practitioner's employment ends, access is revoked at the point the platform receives the termination event from the HR integration. Revocation is instantaneous and logged. It does not depend on someone remembering to do it.</p>
+<p>Every query executed against the event store produces an audit event: who queried, what they queried, which access tier they held, how many records were returned. The audit trail is immutable, held for the period defined by the applicable regulatory regime, and accessible only to system administrators and compliance officers. It is not a management tool. It is a compliance record.</p>
+  </div>
+</section>
+
+<!-- CH10 -->
+<section class="chapter" id="ch10">
+  <div class="chapter-meta"><span class="chapter-num">10</span><div class="chapter-rule"></div></div>
+  <h2>The compliance layer</h2>
+  <div class="chapter-body">
+<p>The compliance layer sits between the event store and the query interface. Its job: ensure that no personally identifiable or clinically sensitive data reaches the LLM component, regardless of what a practitioner queries. This is not configurable. The architecture enforces it structurally rather than by policy, because a policy can be overridden and a structural constraint cannot.</p>
+<p>The minimum-necessary principle governs everything here. The LLM receives the minimum required to translate a natural-language query into a structure the event store can execute: the query itself and the store schema. It returns a query structure. It does not receive the records those queries return. It does not receive names, dates of birth, diagnoses, or any field that would identify a person. The LLM is not in the return path.</p>
+<p>Three deployment models satisfy this constraint:</p>
+
+<div class="schema">
+  <div class="schema-item">
+    <span class="field-name">Self-hosted</span>
+    <p>A local LLM running on the organisation's own infrastructure. Data never leaves the organisation's servers. No external API call is made at any point in the query process. The capability gap between open-weight models and commercial APIs has closed sufficiently that this is a practical choice for the translation task the compliance layer requires. The right model for environments where data sovereignty is non-negotiable and where the engineering capacity to run a local model exists.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">Private cloud</span>
+    <p>A commercial LLM hosted in a tenant-isolated cloud environment under a Data Processing Agreement for GDPR compliance and a Business Associate Agreement for HIPAA compliance. Data is processed in the deployment's contracted region, not used for model training, and subject to the same contractual obligations as any other cloud service the organisation operates. The right model for most professional clubs that do not have the engineering capacity for self-hosting. Requires the compliance agreements to be in place before the query interface connects to live data.</p>
+  </div>
+  <div class="schema-item">
+    <span class="field-name">Anonymisation layer</span>
+    <p>A pre-processing step that strips all identifying fields, player names, dates of birth, diagnoses, anything that could identify a person, before any query structure passes to an external LLM. The model sees the structure of the question and the schema of the store. It does not see the data the question asks about. The right model when neither self-hosting nor a private cloud agreement is viable and when query complexity is low enough that the anonymised structure is sufficient for translation.</p>
+  </div>
+</div>
+
+<p>The compliance layer is built before the query interface connects to live data. Not as a later phase. If it is not in place, the query interface operates only against synthetic or anonymised test data. The sequencing is a hard requirement.</p>
+<p>For academy deployments, any environment holding data on athletes under 16, the self-hosted or anonymisation-layer model is required. Commercial cloud agreements, even with appropriate DPAs, introduce a degree of processing outside the organisation's direct control that heightened GDPR protections on children's data do not comfortably permit under Article 8. The platform enforces this deployment restriction when an academy dataset is detected. Configuring an academy deployment against an uncovered commercial API is not possible.</p>
+  </div>
+</section>
+
+<!-- CH11 -->
+<section class="chapter" id="ch11">
+  <div class="chapter-meta"><span class="chapter-num">11</span><div class="chapter-rule"></div></div>
+  <h2>The athlete interface</h2>
+  <div class="chapter-body">
+<p>The athlete interface is three functions. A portal or dashboard would imply more comprehensiveness than is useful here. What the athlete actually needs is three specific things, each one designed around a genuine gap in how current systems handle athlete data.</p>
+
+<hr>
+
+<p><strong>Write.</strong> The athlete inputs data the platform cannot observe instrumentally: subjective wellness score on a configurable scale, session RPE, and a free-text flag for anything they want to surface. Three fields. Thirty seconds. Completion rate is the design constraint. Every additional field reduces it, and a consistently completed minimal record is more useful than a comprehensive one that practitioners cannot rely on. Data enters the event store as observer-sourced observation events, immediately queryable by practitioners with clinical or performance access alongside the instrument-sourced record.</p>
+<p>The write interface is available within a configurable window after each session. Outside that window it is unavailable. Retroactive wellness entries are reconstructions, and the platform does not store them as equivalent to real-time entries. This constraint is enforced, not advisory.</p>
+
+<hr>
+
+<p><strong>Read.</strong> The athlete can see the decisions the platform holds that affected their training and availability. Not the raw process event and not the practitioner's clinical reasoning. The summary layer: what was decided, when, and what the expected timeline was. The clinical reasoning is protected. The decision itself belongs to the athlete, and an athlete who understands why a load modification was made is more likely to comply with it than one who does not.</p>
+<p>The read interface includes a disagreement flag on any process event in the athlete's summary layer. The flag creates a dispute event in the store, attached to the relevant process event by foreign key. It does not modify the process event. It does not reverse the clinical decision. It becomes part of the record, queryable by practitioners with clinical access. A pattern of disputes from a specific athlete about a specific decision type is information the department should have. The flag is a signal. The platform makes that clear in the interface copy.</p>
+
+<hr>
+
+<p><strong>Export.</strong> The athlete can request a portable export of their record at any time: all observation events from their time in the deployment, the summary layer of process events that affected them, and all subjective data they submitted. The format is human-readable and machine-parseable. It is not a database dump.</p>
+<p>The export is available at any time, not only at departure, and it is not conditional on the club's agreement. Under GDPR Article 20, the right to data portability exists independently of the organisation's operational interests in retaining the data. An athlete who requests their record mid-contract receives it on the same terms as one who requests it after leaving.</p>
+<p>The export does not include practitioner rationale from process events. The summary layer is included. The clinical reasoning is not. This is the same boundary established in the process event schema. The export enforces it structurally.</p>
+  </div>
+</section>
+
+<!-- CH12 -->
+<section class="chapter" id="ch12">
+  <div class="chapter-meta"><span class="chapter-num">12</span><div class="chapter-rule"></div></div>
+  <h2>Scope and limits</h2>
+  <div class="chapter-body">
+<p>A design document without stated limits gets pulled in every direction. Each of the following is a deliberate boundary, not a missing feature.</p>
+
+<hr>
+
+<p><strong>This platform runs alongside the AMS, not instead of it.</strong> Existing athlete management platforms were built on the premise that an observation is the primary event. Every feature they have shipped rests on that premise, and it is now load-bearing. Adding the process event as a first-class type requires a different foundational premise, which is a different data model, which is a rebuild rather than a feature update. The AMS continues doing what it does well. This platform adds the layer that architecture cannot add without dismantling itself.</p>
+
+<p><strong>The process event is not a clinical record.</strong> Diagnosis, medication, treatment notes, and protected health information belong in a dedicated clinical record system with its own compliance architecture. The process event holds the rationale and the decision. It does not hold the consultation. The boundary is enforced at the schema level through prohibited fields, not maintained by practitioner discipline.</p>
+
+<p><strong>The query interface does not make recommendations.</strong> It surfaces what happened, what was decided, what was expected, and what resulted. A system that generates clinical recommendations is a medical device in most jurisdictions and would require regulatory approval this platform is not designed to meet. The inference belongs to the practitioner. The platform's job is to make that inference as well-informed as possible.</p>
+
+<p><strong>The process event record is not an evaluation instrument.</strong> The calibration data produced by the outcome evaluation system is for the department's understanding of its own clinical model. The moment process event data is used in a performance review, practitioners write for the evaluator rather than for the next clinician, and the record loses the signal it was built to capture. There is no feature in this platform that surfaces process event data in a form designed for managerial evaluation. This is intentional.</p>
+
+<p><strong>The platform does not replace the MDT or the corridor conversation.</strong> It makes those conversations more useful by ensuring participants already have the context the platform can provide. The meeting is not eliminated. The information transfer that currently consumes most of it is.</p>
+
+<p><strong>The platform does not maintain itself.</strong> Ingestion contracts need updating when source systems change. Metric definitions need versioning when thresholds move. Access grants need review when practitioners leave. Log quality needs periodic audit as entry habits degrade over time. What the platform offers in return for that maintenance is a record that compounds, one that becomes more useful over time rather than simply larger. Whether that return justifies the maintenance is a decision each organisation makes for itself. The platform does not make the decision easier by pretending the maintenance does not exist.</p>
+  </div>
+</section>
+
+<footer class="doc-footer">
+  <p>The Platform — A Design Manifesto for Performance Intelligence Software</p>
+</footer>
+</main>
+
+<script>
+  const chapters = document.querySelectorAll('.chapter');
+  const navLinks = document.querySelectorAll('.nav-items a');
+  function getActive() {
+    let a = null;
+    chapters.forEach(c => { if (c.getBoundingClientRect().top <= 120) a = c.id; });
+    return a;
+  }
+  function update() {
+    const a = getActive();
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + a));
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+</script>
+</body>
+</html>
