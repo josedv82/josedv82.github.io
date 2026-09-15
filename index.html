@@ -9,13 +9,24 @@
 </head>
 <body>
 
-  <div class="card">
+  <main class="card">
     <h1 class="name">Jose Fernandez</h1>
-    <p class="field">Sports Science &amp; Human Performance</p>
-    <p class="bio">Grew up in Vigo, Spain.<br>Ended up in dugouts and locker rooms across three continents. Somewhere between sport, data and people.</p>
-  </div>
+    <p class="field">Sports science and human performance</p>
+    <p class="bio">Grew up in Vigo, Spain. Ended up in dugouts and locker rooms across three continents. Somewhere between sport, data and people.</p>
 
-  <button class="toggle theme-toggle" onclick="toggleTheme()">dark</button>
+    <div class="projects">
+      <div class="project">
+        <a href="https://plryer.dev" target="_blank" rel="noopener noreferrer">plryer.dev</a>
+        <p>Player development without the spreadsheet.</p>
+      </div>
+      <div class="project">
+        <a href="https://develupp.app" target="_blank" rel="noopener noreferrer">develupp.app</a>
+        <p>Athlete growth, measured.</p>
+      </div>
+    </div>
+  </main>
+
+  <button class="toggle theme-toggle" onclick="toggleTheme()" aria-label="Switch colour theme">dark</button>
 
 </body>
 </html>
