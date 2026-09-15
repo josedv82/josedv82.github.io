@@ -1,22 +1,33 @@
-// Apply saved theme immediately (runs sync in <head>) to prevent flash
-(function () {
-  var t = localStorage.getItem('theme');
-  if (t) document.documentElement.setAttribute('data-theme', t);
-})();
-
-function toggleTheme() {
-  var current = document.documentElement.getAttribute('data-theme') || 'light';
-  var next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-    btn.textContent = next === 'dark' ? 'light' : 'dark';
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  var theme = document.documentElement.getAttribute('data-theme') || 'light';
-  document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-    btn.textContent = theme === 'dark' ? 'light' : 'dark';
-  });
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jose Fernandez</title>
+  <script src="static/js/theme.js"></script>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+ 
+  <main class="card">
+    <h1 class="name">Jose Fernandez</h1>
+    <p class="field">Sports science and human performance</p>
+    <p class="bio">Grew up in Vigo, Spain. Ended up in dugouts and locker rooms across three continents. Somewhere between sport, data and people.</p>
+ 
+    <div class="projects">
+      <div class="project">
+        <a href="https://plryer.dev" target="_blank" rel="noopener noreferrer">plryer.dev</a>
+        <p>Player development without the spreadsheet.</p>
+      </div>
+      <div class="project">
+        <a href="https://develupp.app" target="_blank" rel="noopener noreferrer">develupp.app</a>
+        <p>Athlete growth, measured.</p>
+      </div>
+    </div>
+  </main>
+ 
+  <button class="toggle theme-toggle" onclick="toggleTheme()" aria-label="Switch colour theme">dark</button>
+ 
+</body>
+</html>
+ 
