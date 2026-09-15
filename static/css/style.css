@@ -3,58 +3,100 @@
 :root {
   --bg: #f7f7f5;
   --text: #141413;
-  --muted: #999;
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --muted: #8a8a85;
+  --rule: #d8d8d2;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #0f0f0e; --text: #e2ddd8; --muted: #666; }
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f0e; --text: #e2ddd8; --muted: #7a756f; --rule: #2a2a27;
+  }
 }
-:root[data-theme="dark"]  { --bg: #0f0f0e; --text: #e2ddd8; --muted: #666; }
-:root[data-theme="light"] { --bg: #f7f7f5; --text: #141413; --muted: #999; }
+:root[data-theme="dark"] {
+  --bg: #0f0f0e; --text: #e2ddd8; --muted: #7a756f; --rule: #2a2a27;
+}
+:root[data-theme="light"] {
+  --bg: #f7f7f5; --text: #141413; --muted: #8a8a85; --rule: #d8d8d2;
+}
 
 html, body { height: 100%; }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-sans);
+  font-family: var(--sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100%;
-  transition: background 0.2s, color 0.2s;
+  padding: 2rem 1.5rem 4rem;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 .card {
-  text-align: center;
-  padding: 2rem;
+  width: 100%;
+  max-width: 34rem;
+  text-align: left;
 }
 
 .name {
-  font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
   font-weight: normal;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
 }
 
 .field {
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
   color: var(--muted);
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
 }
 
 .bio {
-  font-size: 0.95rem;
-  line-height: 1.65;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 38ch;
+  margin-bottom: 2.75rem;
+}
+
+.projects {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.75rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.project a {
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.project a:hover { text-decoration-color: var(--text); }
+
+.project a:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.project p {
+  font-size: 0.85rem;
+  line-height: 1.5;
   color: var(--muted);
-  max-width: 34ch;
-  margin: 0 auto;
+  margin-top: 0.3rem;
+  max-width: 40ch;
 }
 
 .toggle {
@@ -64,12 +106,21 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 0.72rem;
-  font-family: var(--font-sans);
-  letter-spacing: 0.06em;
+  font-family: var(--sans);
+  font-size: 0.8rem;
   color: var(--muted);
-  padding: 0.4rem;
-  transition: color 0.15s;
+  padding: 0.5rem;
+  transition: color 0.15s ease;
 }
 
 .toggle:hover { color: var(--text); }
+
+.toggle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
