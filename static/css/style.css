@@ -83,7 +83,7 @@ body {
   flex: none;
   width: clamp(3.5rem, 9vw, 5rem);
   height: clamp(3.5rem, 9vw, 5rem);
-  border-radius: 50%;
+  border-radius: 0.625rem;
   object-fit: cover;
   /* source is portrait (186x221); centre-cropping clipped the top of the head */
   object-position: center top;
