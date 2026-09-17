@@ -166,6 +166,15 @@ body {
   color: var(--text);
 }
 
+.item-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-left: 0.7rem;
+  white-space: nowrap;
+}
+
 .item-desc {
   font-size: 0.875rem;
   line-height: 1.55;
