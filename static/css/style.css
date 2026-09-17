@@ -84,6 +84,8 @@ body {
   height: clamp(3.5rem, 9vw, 5rem);
   border-radius: 50%;
   object-fit: cover;
+  /* source is portrait (186x221); centre-cropping clipped the top of the head */
+  object-position: center top;
   /* inert: not a link, not draggable, not a click target */
   pointer-events: none;
   user-select: none;
