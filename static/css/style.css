@@ -97,6 +97,8 @@ body {
   text-wrap: pretty;
 }
 
+.role .sep { opacity: 0.55; margin: 0 0.15em; }
+
 /* ---------- section label ---------- */
 
 .label {
@@ -158,6 +160,11 @@ body {
 }
 
 /* ---------- footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+}
 
 .links {
   list-style: none;
