@@ -72,6 +72,26 @@ body {
 
 .intro { display: grid; gap: 0.6rem; }
 
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.avatar {
+  flex: none;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  /* inert: not a link, not draggable, not a click target */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.identity-text { display: grid; gap: 0.5rem; }
+
 .name {
   font-family: var(--serif);
   font-size: clamp(2.5rem, 8vw, 3.75rem);
