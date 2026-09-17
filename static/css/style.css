@@ -80,8 +80,8 @@ body {
 
 .avatar {
   flex: none;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: clamp(3.5rem, 9vw, 5rem);
+  height: clamp(3.5rem, 9vw, 5rem);
   border-radius: 50%;
   object-fit: cover;
   /* inert: not a link, not draggable, not a click target */
