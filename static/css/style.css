@@ -101,6 +101,11 @@ body {
 /* ---------- section label ---------- */
 
 .label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.5rem;
+
   font-family: var(--mono);
   font-size: 0.7rem;
   font-weight: 400;
@@ -109,6 +114,13 @@ body {
   color: var(--muted);
   padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--rule);
+}
+
+.label-note {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 /* ---------- lists ---------- */
