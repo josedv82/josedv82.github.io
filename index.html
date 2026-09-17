@@ -2,31 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jose Fernandez</title>
-  <script src="static/js/theme.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Jose Fernandez — Sports science &amp; human performance</title>
+  <meta name="description" content="Jose Fernandez. Sports science and human performance. Building plryer.dev and develupp.app.">
+  <link rel="canonical" href="https://josedv82.github.io/">
+
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://josedv82.github.io/">
+  <meta property="og:title" content="Jose Fernandez">
+  <meta property="og:description" content="Sports science and human performance. Somewhere between sport, data and people.">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="static/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="static/css/style.css" as="style">
   <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/theme.js"></script>
 </head>
 <body>
 
-  <main class="card">
-    <h1 class="name">Jose Fernandez</h1>
-    <p class="field">Sports science and human performance</p>
-    <p class="bio">Grew up in Vigo, Spain. Ended up in dugouts and locker rooms across three continents. Somewhere between sport, data and people.</p>
+  <main class="page">
 
-    <div class="projects">
-      <div class="project">
-        <a href="https://plryer.dev" target="_blank" rel="noopener noreferrer">plryer.dev</a>
-        <p>A platform for player IDPs across departments.</p>
-      </div>
-      <div class="project">
-        <a href="https://launch.develupp.app" target="_blank" rel="noopener noreferrer">develupp.app</a>
-        <p>Growth, maturation analysis from an phone scan.</p>
-      </div>
-    </div>
+    <header class="intro">
+      <h1 class="name">Jose Fernandez</h1>
+      <p class="role">Sports science &amp; human performance</p>
+      <p class="bio">
+        Grew up in Vigo, Spain. Ended up in dugouts and locker rooms across
+        three continents. Somewhere between sport, data and people.
+      </p>
+    </header>
+
+    <section class="section" aria-labelledby="work">
+      <h2 class="label" id="work">Building</h2>
+      <ul class="list">
+
+        <li class="item">
+          <a class="item-link" href="https://plryer.dev" target="_blank" rel="noopener noreferrer">
+            <span class="item-name">plryer.dev</span>
+            <svg class="arrow" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true" focusable="false">
+              <path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <p class="item-desc">A platform for player IDPs across departments.</p>
+        </li>
+
+        <li class="item">
+          <a class="item-link" href="https://launch.develupp.app" target="_blank" rel="noopener noreferrer">
+            <span class="item-name">develupp.app</span>
+            <svg class="arrow" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true" focusable="false">
+              <path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <p class="item-desc">Growth and maturation analysis from a phone scan.</p>
+        </li>
+
+      </ul>
+    </section>
+
+    <footer class="section footer">
+      <h2 class="label">Elsewhere</h2>
+      <ul class="links">
+        <li><a href="https://github.com/josedv82" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <!-- Add your own: uncomment and fill in.
+        <li><a href="https://www.linkedin.com/in/USERNAME" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:YOU@EXAMPLE.COM">Email</a></li>
+        -->
+      </ul>
+    </footer>
+
   </main>
 
-  <button class="toggle theme-toggle" onclick="toggleTheme()" aria-label="Switch colour theme">dark</button>
+  <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+    <svg class="icon icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="icon icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2Z"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jose Fernandez",
+    "url": "https://josedv82.github.io/",
+    "jobTitle": "Sports science and human performance",
+    "sameAs": ["https://github.com/josedv82"]
+  }
+  </script>
 
 </body>
 </html>
