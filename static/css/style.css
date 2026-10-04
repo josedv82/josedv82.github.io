@@ -121,34 +121,17 @@ body {
 
 .sep { opacity: 0.55; margin: 0 0.15em; }
 
-/* ---------- section label ---------- */
+/* ---------- projects section ---------- */
 
-.label {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.35rem 0.85rem;
-
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--rule);
+.section {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.75rem;
 }
 
-.label-note {
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-/* below this the label row wraps, which would strand the separator */
-@media (max-width: 23.5rem) {
-  .label .sep { display: none; }
+.section-intro {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
 /* ---------- lists ---------- */
@@ -189,14 +172,6 @@ body {
   color: var(--text);
 }
 
-.item-meta {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  margin-left: 0.7rem;
-  white-space: nowrap;
-}
 
 .item-desc {
   font-size: 0.875rem;
@@ -204,6 +179,26 @@ body {
   color: var(--muted);
   margin-top: 0.3rem;
   text-wrap: pretty;
+}
+
+.more {
+  justify-self: start;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+
+.more:hover,
+.more:focus-visible { color: var(--text); }
+
+.more:hover .arrow,
+.more:focus-visible .arrow {
+  transform: translate(2px, -2px);
+  color: var(--text);
 }
 
 /* ---------- footer ---------- */
