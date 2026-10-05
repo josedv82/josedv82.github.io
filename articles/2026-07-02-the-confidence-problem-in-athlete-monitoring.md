@@ -2,8 +2,7 @@
 
 <!-- excerpt: More information can increase confidence without improving decisions. What does that mean for athlete monitoring? -->
 
-**Date**: 2026-07-02  
-**Source**: <https://x.com/the_hidden_game/status/2072652939286704524>
+<div class="item-desc">Published: <time datetime="2026-07-02">2026-07-02</time><br><a href="https://x.com/the_hidden_game/status/2072652939286704524">Original article on X</a></div>
 
 ---
 
