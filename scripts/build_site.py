@@ -6,6 +6,7 @@ from datetime import date
 from pathlib import Path
 import re
 import shutil
+from hashlib import sha256
 
 import markdown
 
@@ -28,6 +29,15 @@ def plain(html):
 
 
 def build(root=ROOT):
+    def version_assets(html):
+        # Static hosting can cache CSS separately from newly deployed HTML/JS.
+        for asset in ('css/style.css', 'js/theme.js', 'js/reader.js'):
+            path = root / 'static' / asset
+            if path.exists():
+                digest = sha256(path.read_bytes()).hexdigest()[:12]
+                html = html.replace(f'static/{asset}"', f'static/{asset}?v={digest}"')
+        return html
+
     articles = []
     for path in sorted((root / "articles").glob("*.md"), reverse=True):
         if path.name.lower() == "readme.md" or path.name.startswith("_"):
@@ -85,7 +95,7 @@ def build(root=ROOT):
         shutil.rmtree(output)
     output.mkdir()
     shutil.copytree(root / "static", output / "static")
-    (output / "index.html").write_text(homepage, encoding="utf-8")
+    (output / "index.html").write_text(version_assets(homepage), encoding="utf-8")
     (output / ".nojekyll").touch()
     (output / "essays").mkdir()
     if (root / "articles/images").exists():
@@ -100,7 +110,7 @@ def build(root=ROOT):
         page = re.sub(r"\{\{(TITLE|DESCRIPTION|BODY|META)\}\}",
                       lambda m: {"TITLE": escape(title), "DESCRIPTION": escape(summary, quote=True),
                                  "BODY": body, "META": metadata_html}[m.group(1)], template)
-        (output / "essays" / filename).write_text(page, encoding="utf-8")
+        (output / "essays" / filename).write_text(version_assets(page), encoding="utf-8")
     print(f"Built {len(articles)} essay(s) into {output}")
 
 

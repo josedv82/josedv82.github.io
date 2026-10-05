@@ -1,4 +1,4 @@
-// Read essays using the best English voice available on the visitor's device.
+// Prefer a natural male English voice available on the visitor's device.
 (function () {
   'use strict';
 
@@ -8,8 +8,8 @@
   var speech = window.speechSynthesis;
   var listen = document.getElementById('essay-listen');
   var label = listen.querySelector('span');
-  var stop = document.getElementById('essay-stop');
-  var status = controls.querySelector('.audio-status');
+  var playbackIcon = listen.querySelector('.audio-playback-icon');
+  var status = document.querySelector('.audio-status');
   var body = document.getElementById('essay-content').cloneNode(true);
   body.querySelectorAll('script, style, figure, .twitter-tweet, [hidden]').forEach(function (el) { el.remove(); });
   body.querySelectorAll('br').forEach(function (el) { el.replaceWith(document.createTextNode(' ')); });
@@ -45,15 +45,18 @@
   }
 
   function score(voice) {
+    // SpeechSynthesisVoice has no gender field; recognize known voice names.
+    var male = /\b(male|daniel|alex|david|guy|ryan|andrew|christopher|eric|george|brian|thomas|oliver|liam|arthur|james|fred|rishi|mark|roger|stephen)\b/i.test(voice.name) ? 1000 : 0;
     var natural = /natural|neural|enhanced|premium/i.test(voice.name) ? 100 : 0;
-    var preferred = /google|samantha|ava|daniel|serena|aria|jenny|guy/i.test(voice.name) ? 20 : 0;
-    return natural + preferred + (voice.default ? 5 : 0);
+    var preferred = /google|microsoft|apple/i.test(voice.name) ? 20 : 0;
+    return male + natural + preferred + (voice.default ? 5 : 0);
   }
 
   function update(message) {
-    label.textContent = state === 'playing' ? 'Pause' : state === 'paused' ? 'Resume' : 'Listen';
-    stop.hidden = state === 'idle';
+    label.textContent = state === 'playing' ? 'Stop' : 'Play';
+    if (playbackIcon) playbackIcon.setAttribute('d', state === 'playing' ? 'M4 4h8v8H4Z' : 'M5 3.5 12 8l-7 4.5Z');
     status.textContent = message || '';
+    status.className = 'audio-status' + (message && /unavailable/.test(message) ? ' audio-error' : '');
   }
 
   function reset(message) {
@@ -88,12 +91,7 @@
 
   listen.addEventListener('click', function () {
     if (state === 'playing') {
-      // Cancel rather than native pause, which can leave mobile speech stuck.
-      // Resume restarts the current short passage.
-      generation++;
-      state = 'paused';
-      speech.cancel();
-      update('Paused.');
+      reset();
     } else {
       if (state === 'idle') { speech.cancel(); index = 0; }
       state = 'playing';
@@ -101,7 +99,6 @@
       speak();
     }
   });
-  stop.addEventListener('click', function () { reset(); listen.focus(); });
   window.addEventListener('pagehide', function () { reset(); });
   if (speech.addEventListener) speech.addEventListener('voiceschanged', refreshVoices);
   refreshVoices();

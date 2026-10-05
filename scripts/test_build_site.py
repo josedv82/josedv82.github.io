@@ -71,6 +71,21 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(page.count('Original article on X'), 1)
         self.assertNotIn('Published:', page)
 
+    def test_changed_css_gets_new_url_on_homepage_and_essays(self):
+        (self.root / 'articles/test.md').write_text('# Test\n\nContent.')
+        (self.root / 'static/css').mkdir()
+        css = self.root / 'static/css/style.css'
+        css.write_text('body { color: black; }')
+        build(self.root)
+        first = (self.root / '_site/index.html').read_text()
+        import re
+        version = re.search(r'static/css/style.css\?v=([a-f0-9]+)', first)[1]
+        self.assertIn('style.css?v=' + version, (self.root / '_site/essays/test.html').read_text())
+        css.write_text('body { color: white; }')
+        build(self.root)
+        second = (self.root / '_site/index.html').read_text()
+        self.assertNotIn('style.css?v=' + version, second)
+
 
 if __name__ == "__main__":
     unittest.main()
