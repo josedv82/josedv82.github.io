@@ -251,18 +251,18 @@ body {
   justify-content: center;
   gap: 0.5rem;
   min-height: 2.75rem;
-  padding: 0 1rem;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
+  padding: 0 0 0 0.5rem;
+  border: 0;
+  border-radius: 0;
   background: none;
   color: var(--text);
   font: 0.8125rem var(--sans);
   line-height: 1;
   letter-spacing: 0.01em;
   cursor: pointer;
-  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+  transition: color 0.2s var(--ease);
 }
-.audio-button:hover { border-color: var(--muted); }
+.audio-button:hover { color: var(--muted); }
 .audio-button svg { display: block; flex: none; }
 .audio-status {
   position: absolute;
