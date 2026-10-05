@@ -14,7 +14,7 @@ More text, with **bold**, *italics*, or [a link](https://example.com).
 ![Describe the image](images/your-photo.jpg)
 ```
 
-The homepage shows titles and dates only. To customize the essay's search-engine
+The homepage shows titles only. To customize the essay's search-engine
 description, add `<!-- excerpt: Your short introduction. -->` beneath the title.
 Otherwise, the build uses the first paragraph for that description.
 
@@ -29,7 +29,7 @@ Put images in `articles/images/`. Optional captions can use HTML:
 
 Use lowercase filenames with hyphens, such as `2026-10-05-coaching-decisions.md`.
 Essays appear in reverse filename order, so date-prefixed names put newer essays first.
-Use a full `YYYY-MM-DD` prefix to display a date on the homepage and essay page.
+Use a full `YYYY-MM-DD` prefix to display a date on the individual essay page.
 Each filename becomes its page URL: `essays/2026-10-05-coaching-decisions.html`.
 Only `.md` files directly in this folder are published. `README.md` and files
 starting with `_` are ignored, so `_draft.md` can hold an unpublished draft.

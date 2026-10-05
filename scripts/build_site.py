@@ -72,14 +72,11 @@ def build(root=ROOT):
     listing = '<p class="item-desc">Coming soon.</p>'
     if articles:
         items = []
-        for filename, title, _, _, published, _ in articles:
-            stamp = (f'<time class="essay-date" datetime="{published.isoformat()}" '
-                     f'aria-label="Published {published.strftime("%d %B %Y")}">'
-                     f'{published.strftime("%b %d")}</time>') if published else ''
+        for filename, title, _, _, _, _ in articles:
             items.append(
                 '<li class="essay-row"><a class="essay-link" href="essays/'
                 + escape(filename, quote=True) + '"><span class="item-name">'
-                + escape(title) + '</span>' + stamp + '</a></li>'
+                + escape(title) + '</span></a></li>'
             )
         listing = '<ul class="essay-list">\n' + '\n'.join(items) + '\n</ul>'
     homepage, count = re.subn(
