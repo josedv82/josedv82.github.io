@@ -14,6 +14,9 @@ More text, with **bold**, *italics*, or [a link](https://example.com).
 ![Describe the image](images/your-photo.jpg)
 ```
 
+If your article starts with author information or you want a different homepage
+introduction, add `<!-- excerpt: Your short introduction. -->` beneath the title.
+
 Put images in `articles/images/`. Optional captions can use HTML:
 
 ```html

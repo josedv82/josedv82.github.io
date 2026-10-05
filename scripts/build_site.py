@@ -39,8 +39,10 @@ def build(root=ROOT):
         if not title:
             raise ValueError(f"{path.name}: essay title must not be empty")
         body = markdown.markdown(source[heading.end():], extensions=["extra", "sane_lists"])
-        paragraph = re.search(r"<p>(.*?)</p>", body, re.S)
-        summary = plain(paragraph.group(1)) if paragraph else ""
+        excerpt = re.search(r"<!--\s*excerpt:\s*(.*?)\s*-->", source, re.S)
+        summary = plain(excerpt.group(1)) if excerpt else next(
+            (plain(p) for p in re.findall(r"<p>(.*?)</p>", body, re.S) if plain(p)), ""
+        )
         if len(summary) > 180:
             summary = summary[:177].rsplit(" ", 1)[0] + "…"
         articles.append((path.stem + ".html", title, summary, body))

@@ -243,6 +243,7 @@ body {
 .essay-body a { color: inherit; text-underline-offset: 0.2em; }
 .essay-body :is(ul, ol) { padding-left: 1.5rem; }
 .essay-body blockquote { border-left: 1px solid var(--rule); padding-left: 1.5rem; }
+.essay-body hr { border: 0; border-top: 1px solid var(--rule); }
 .essay-body figure { display: grid; gap: 0.75rem; margin-block: 0.5rem; }
 .essay-body img { display: block; width: 100%; height: auto; }
 .essay-body figcaption {

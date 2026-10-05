@@ -45,6 +45,15 @@ class BuildTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "start the essay"):
             build(self.root)
 
+    def test_explicit_excerpt_before_author_information(self):
+        (self.root / "articles/essay.md").write_text(
+            '# An essay\n\n<!-- excerpt: Decisions & confidence. -->\n\n**Author**: Someone\n\nThe essay.'
+        )
+        build(self.root)
+        home = (self.root / "_site/index.html").read_text()
+        self.assertIn('Decisions &amp; confidence.', home)
+        self.assertNotIn('Someone', home)
+
 
 if __name__ == "__main__":
     unittest.main()
