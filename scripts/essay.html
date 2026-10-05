@@ -9,20 +9,39 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <script src="../static/js/theme.js"></script>
 </head>
-<body>
+<body class="essay-page">
   <main class="page">
-    <nav aria-label="Back to essays">
+    <nav class="essay-nav" aria-label="Essay navigation">
+      <a class="site-name" href="../index.html">Jose Fernandez</a>
       <a class="more" href="../index.html#essays-heading">← All essays</a>
     </nav>
-    <article class="essay-body">
+    <article class="essay">
       <header class="essay-header">
+        <p class="section-title">Essay</p>
         <h1 class="essay-title">{{TITLE}}</h1>
+        {{META}}
       </header>
-      {{BODY}}
+      <div class="essay-body">
+        {{BODY}}
+      </div>
     </article>
-  </main>
+    <footer class="footer">
+      <ul class="links">
+        <li><a href="https://x.com/the_hidden_game" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+        <li><a href="https://www.linkedin.com/in/josefernandez1/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      </ul>
   <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
-    <span aria-hidden="true">◐</span>
+    <svg class="icon icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="icon icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2Z"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
   </button>
+    </footer>
+  </main>
 </body>
 </html>

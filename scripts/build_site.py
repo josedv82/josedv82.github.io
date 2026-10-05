@@ -2,6 +2,7 @@
 
 from html import escape
 from html.parser import HTMLParser
+from datetime import date
 from pathlib import Path
 import re
 import shutil
@@ -45,22 +46,32 @@ def build(root=ROOT):
         )
         if len(summary) > 180:
             summary = summary[:177].rsplit(" ", 1)[0] + "…"
-        articles.append((path.stem + ".html", title, summary, body))
+        metadata = re.search(
+            r'<div class="item-desc">Published: <time datetime="([^"]+)">[^<]*</time><br>'
+            r'<a href="([^"]+)">Original article on X</a></div>', body
+        )
+        date_prefix = re.match(r'\d{4}-\d{2}-\d{2}(?=-)', path.stem)
+        published = date.fromisoformat(metadata[1] if metadata else date_prefix[0]) if metadata or date_prefix else None
+        source_url = metadata[2] if metadata else None
+        if metadata:
+            body = body[:metadata.start()] + body[metadata.end():]
+        articles.append((path.stem + ".html", title, summary, body, published, source_url))
 
     homepage = (root / "index.html").read_text(encoding="utf-8")
     template = (root / "scripts/essay.html").read_text(encoding="utf-8")
     listing = '<p class="item-desc">Coming soon.</p>'
     if articles:
         items = []
-        for filename, title, summary, _ in articles:
+        for filename, title, _, _, published, _ in articles:
+            stamp = (f'<time class="essay-date" datetime="{published.isoformat()}" '
+                     f'aria-label="Published {published.strftime("%d %B %Y")}">'
+                     f'{published.strftime("%b %d")}</time>') if published else ''
             items.append(
-                '<li class="item"><a class="item-link" href="essays/'
+                '<li class="essay-row"><a class="essay-link" href="essays/'
                 + escape(filename, quote=True) + '"><span class="item-name">'
-                + escape(title) + '</span></a>'
-                + ('<p class="item-desc">' + escape(summary) + '</p>' if summary else '')
-                + '</li>'
+                + escape(title) + '</span>' + stamp + '</a></li>'
             )
-        listing = '<ul class="list">\n' + '\n'.join(items) + '\n</ul>'
+        listing = '<ul class="essay-list">\n' + '\n'.join(items) + '\n</ul>'
     homepage, count = re.subn(
         r"<!-- ESSAYS:START -->.*?<!-- ESSAYS:END -->",
         lambda _: '<!-- ESSAYS:START -->\n' + listing + '\n<!-- ESSAYS:END -->',
@@ -79,10 +90,16 @@ def build(root=ROOT):
     (output / "essays").mkdir()
     if (root / "articles/images").exists():
         shutil.copytree(root / "articles/images", output / "essays/images")
-    for filename, title, summary, body in articles:
-        page = re.sub(r"\{\{(TITLE|DESCRIPTION|BODY)\}\}",
+    for filename, title, summary, body, published, source_url in articles:
+        meta = []
+        if published:
+            meta.append(f'<time datetime="{published.isoformat()}">{published.strftime("%d %B %Y")}</time>')
+        if source_url:
+            meta.append(f'<a href="{escape(source_url, quote=True)}">Original article on X</a>')
+        metadata_html = '<div class="essay-meta">' + ''.join(meta) + '</div>' if meta else ''
+        page = re.sub(r"\{\{(TITLE|DESCRIPTION|BODY|META)\}\}",
                       lambda m: {"TITLE": escape(title), "DESCRIPTION": escape(summary, quote=True),
-                                 "BODY": body}[m.group(1)], template)
+                                 "BODY": body, "META": metadata_html}[m.group(1)], template)
         (output / "essays" / filename).write_text(page, encoding="utf-8")
     print(f"Built {len(articles)} essay(s) into {output}")
 

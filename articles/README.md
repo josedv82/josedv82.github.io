@@ -5,7 +5,7 @@ Create one `.md` file per essay directly in this folder. Paste the article benea
 ```markdown
 # Your essay title
 
-Your opening paragraph. This also becomes the short introduction on the homepage.
+Your opening paragraph.
 
 ## A section heading
 
@@ -14,8 +14,9 @@ More text, with **bold**, *italics*, or [a link](https://example.com).
 ![Describe the image](images/your-photo.jpg)
 ```
 
-If your article starts with author information or you want a different homepage
-introduction, add `<!-- excerpt: Your short introduction. -->` beneath the title.
+The homepage shows titles and dates only. To customize the essay's search-engine
+description, add `<!-- excerpt: Your short introduction. -->` beneath the title.
+Otherwise, the build uses the first paragraph for that description.
 
 Put images in `articles/images/`. Optional captions can use HTML:
 
@@ -28,6 +29,7 @@ Put images in `articles/images/`. Optional captions can use HTML:
 
 Use lowercase filenames with hyphens, such as `2026-10-05-coaching-decisions.md`.
 Essays appear in reverse filename order, so date-prefixed names put newer essays first.
+Use a full `YYYY-MM-DD` prefix to display a date on the homepage and essay page.
 Each filename becomes its page URL: `essays/2026-10-05-coaching-decisions.html`.
 Only `.md` files directly in this folder are published. `README.md` and files
 starting with `_` are ignored, so `_draft.md` can hold an unpublished draft.
