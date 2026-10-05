@@ -2,7 +2,7 @@
 
 <!-- excerpt: Back in 2013, the first time I met @spikesonly in person at a bar in Boston, he dropped a quote I had heard many times before and in many different ways, but somehow that one stayed with me: &quot;You are only as good as -->
 
-<div class="item-desc">Author: <a href="https://x.com/the_hidden_game">The Hidden Game</a><br>Published: <time datetime="2026-07-09">2026-07-09</time><br><a href="https://x.com/the_hidden_game/status/2075210981534490883">Original article on X</a></div>
+<div class="item-desc">Published: <time datetime="2026-07-09">2026-07-09</time><br><a href="https://x.com/the_hidden_game/status/2075210981534490883">Original article on X</a></div>
 
 <figure><img src="https://pbs.twimg.com/media/HMh17ztaUAAZsMg?format=jpg&amp;name=small" alt="Cover image for The most useful thing Sport Science Degrees don&#x27;t teach" loading="lazy" decoding="async"></figure>
 

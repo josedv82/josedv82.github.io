@@ -2,7 +2,6 @@
 
 <!-- excerpt: More information can increase confidence without improving decisions. What does that mean for athlete monitoring? -->
 
-**Author**: The Hidden Game ([@the_hidden_game](https://x.com/the_hidden_game))  
 **Date**: 2026-07-02  
 **Source**: <https://x.com/the_hidden_game/status/2072652939286704524>
 

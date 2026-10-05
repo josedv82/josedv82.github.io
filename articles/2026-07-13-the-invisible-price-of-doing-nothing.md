@@ -2,7 +2,7 @@
 
 <!-- excerpt: If you&#x27;ve worked in sport long enough, you&#x27;ve probably seen a club or a person keeping processes that everyone knows do not make sense. Routine meetings that could&#x27;ve been an email. Reports that nobody reads. Tech and -->
 
-<div class="item-desc">Author: <a href="https://x.com/the_hidden_game">The Hidden Game</a><br>Published: <time datetime="2026-07-13">2026-07-13</time><br><a href="https://x.com/the_hidden_game/status/2076609436018463163">Original article on X</a></div>
+<div class="item-desc">Published: <time datetime="2026-07-13">2026-07-13</time><br><a href="https://x.com/the_hidden_game/status/2076609436018463163">Original article on X</a></div>
 
 <figure><img src="https://pbs.twimg.com/media/HLZ7-CLbYAAzn3g?format=jpg&amp;name=small" alt="Cover image for The invisible price of doing nothing" loading="lazy" decoding="async"></figure>
 

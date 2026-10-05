@@ -2,7 +2,7 @@
 
 <!-- excerpt: Pick one player...let’s call him Player X. Go around and separately ask five different people what he needs to improve most right now: the strength coach, the technical coach, the scout, the academy coordinator and the -->
 
-<div class="item-desc">Author: <a href="https://x.com/the_hidden_game">The Hidden Game</a><br>Published: <time datetime="2026-07-04">2026-07-04</time><br><a href="https://x.com/the_hidden_game/status/2073430081364787243">Original article on X</a></div>
+<div class="item-desc">Published: <time datetime="2026-07-04">2026-07-04</time><br><a href="https://x.com/the_hidden_game/status/2073430081364787243">Original article on X</a></div>
 
 <figure><img src="https://pbs.twimg.com/media/HLe4DukbkAA34ls?format=jpg&amp;name=small" alt="Cover image for The five-person test" loading="lazy" decoding="async"></figure>
 

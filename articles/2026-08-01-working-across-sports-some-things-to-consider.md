@@ -2,7 +2,7 @@
 
 <!-- excerpt: I grew up playing and coaching basketball. Even though I&#x27;ve spent much less of my career working in basketball than in other sports, I&#x27;m still somehow labelled as &quot;the basketball guy&quot; everywhere else I go. In 2015, I -->
 
-<div class="item-desc">Author: <a href="https://x.com/the_hidden_game">The Hidden Game</a><br>Published: <time datetime="2026-08-01">2026-08-01</time><br><a href="https://x.com/the_hidden_game/status/2083560593261531491">Original article on X</a></div>
+<div class="item-desc">Published: <time datetime="2026-08-01">2026-08-01</time><br><a href="https://x.com/the_hidden_game/status/2083560593261531491">Original article on X</a></div>
 
 <figure><img src="https://pbs.twimg.com/media/HOpBMV0acAAXBib?format=jpg&amp;name=small" alt="Cover image for Working Across Sports: Some Things to Consider" loading="lazy" decoding="async"></figure>
 

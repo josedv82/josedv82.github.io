@@ -2,7 +2,7 @@
 
 <!-- excerpt: Forget football for a second. Imagine you’re running a venture capital fund. You have hundreds of opportunities to invest and each of those investments is fighting for the same limited capital and resources. You have to -->
 
-<div class="item-desc">Author: <a href="https://x.com/the_hidden_game">The Hidden Game</a><br>Published: <time datetime="2026-07-07">2026-07-07</time><br><a href="https://x.com/the_hidden_game/status/2074504629954683249">Original article on X</a></div>
+<div class="item-desc">Published: <time datetime="2026-07-07">2026-07-07</time><br><a href="https://x.com/the_hidden_game/status/2074504629954683249">Original article on X</a></div>
 
 <figure><img src="https://pbs.twimg.com/media/HLkkagdWAAAY2Xj?format=jpg&amp;name=small" alt="Cover image for The economics of talent identification" loading="lazy" decoding="async"></figure>
 
