@@ -8,6 +8,7 @@
   <link rel="icon" href="../static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../static/css/style.css">
   <script src="../static/js/theme.js"></script>
+  <script src="../static/js/reader.js" defer></script>
 </head>
 <body class="essay-page">
   <main class="page">
@@ -20,8 +21,16 @@
         <p class="section-title">Essay</p>
         <h1 class="essay-title">{{TITLE}}</h1>
         {{META}}
+        <div class="essay-audio" hidden>
+          <button class="audio-button" id="essay-listen" type="button" aria-controls="essay-content">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 3.5 12 8l-7 4.5Z" fill="currentColor"/></svg>
+            <span>Listen</span>
+          </button>
+          <button class="audio-button" id="essay-stop" type="button" hidden>Stop</button>
+          <span class="audio-status" role="status" aria-live="polite"></span>
+        </div>
       </header>
-      <div class="essay-body">
+      <div class="essay-body" id="essay-content">
         {{BODY}}
       </div>
     </article>
