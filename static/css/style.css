@@ -316,7 +316,8 @@ body {
 .essay-body hr { border: 0; border-top: 1px solid var(--rule); }
 .essay-body figure { display: grid; gap: 0.75rem; margin-block: 0.5rem; }
 .essay-body img { display: block; width: 100%; height: auto; }
-.essay-body .lesson-figure img { width: auto; max-width: 100%; justify-self: center; }
+.essay-body .lesson-figure { width: 100%; max-width: var(--illustration-width); justify-self: center; min-width: 0; }
+.essay-body .lesson-figure img { width: 100%; }
 .essay-body figcaption {
   font-family: var(--sans);
   font-size: 0.8125rem;
