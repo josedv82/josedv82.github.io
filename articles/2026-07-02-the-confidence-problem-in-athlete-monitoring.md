@@ -27,15 +27,15 @@ Open whatever athlete monitoring platform you're using and look at one of your d
 
 I've gone through this myself and in many cases the answer is "*no*". That's what we often get wrong about data. We assume more information makes us "*more right*" when most times all it does is to make us "*more certain*". 
 
-There is a study from the 1970s where researchers gave professional horse-race handicappers progressively more data on each horse. They started with five variables, then ten, then twenty, then forty. What they found was that accuracy plateaued after the first five. The only thing that kept climbing with more information was confidence. With forty metrics they were more confident in their judgement, but not more accurate (Slovic, 1973).
+There is a study from the 1970s where researchers gave professional horse-race handicappers progressively more data on each horse. They started with five variables, then ten, then twenty, then forty. What they found was that accuracy plateaued after the first five. The only thing that kept climbing with more information was confidence. With forty metrics they were more confident in their judgement, but not more accurate ([Slovic, 1973](https://scholarsbank.uoregon.edu/items/1a910394-ad9e-4af2-8967-d743f046ae6a)).
 
-Of course, that's an old study with methods that would probably be questioned today. But Tsai and colleagues did something similar in 2008, asking people to predict football games (among other things) and reached the same conclusion. More information increased confidence, but not accuracy (Tsai et al., 2008). 
+Of course, that's an old study with methods that would probably be questioned today. But Tsai and colleagues did something similar in 2008, asking people to predict football games (among other things) and reached the same conclusion. More information increased confidence, but not accuracy ([Tsai et al., 2008](https://www.sciencedirect.com/science/article/abs/pii/S0749597808000460)).
 
 I'll share a personal anecdote. 
 
 A few years ago I started including the acute:chronic workload ratio in my reports. It seemed like an obvious win. It was easy to report and quickly showed whether a player was in the "safe" or "danger" zone. I liked it because it was clean. It took weeks of training load data and squeezed them into a single number a coach could understand in two seconds.
 
-Then social media started filling up with critiques. Lolli and colleagues showed in 2019 that the maths behind the ratio is flawed. The acute load sits inside the chronic load, so the two aren't independent. As a result, the calculation produces a correlation whether or not anything real is there (Lolli et al., 2019). Then, a year later, a paper from Impellizzeri's group went further, arguing that there was no evidence the ratio should be used to make load decisions at all, and that the way it is constructed makes it unreliable to begin with (Impellizzeri et al., 2020).
+Then social media started filling up with critiques. Lolli and colleagues showed in 2019 that the maths behind the ratio is flawed. The acute load sits inside the chronic load, so the two aren't independent. As a result, the calculation produces a correlation whether or not anything real is there ([Lolli et al., 2019](https://bjsm.bmj.com/content/53/15/921)). Then, a year later, a paper from Impellizzeri's group went further, arguing that there was no evidence the ratio should be used to make load decisions at all, and that the way it is constructed makes it unreliable to begin with ([Impellizzeri et al., 2020](https://journals.humankinetics.com/view/journals/ijspp/15/6/article-p907.xml)).
 
 Despite all this, I kept using it for longer than I should have. The only reason was that it made me feel more confident in my decisions. And giving that up turned out to be harder than admitting the metric was wrong.
 
@@ -45,9 +45,9 @@ I'm not saying data is useless. Don't get me wrong. But we have to optimise the 
 
 The goal isn't to have fewer metrics or metrics that are easy to collect. The goal is to have the right metrics. Just as the horse handicappers still beat random chance with only five variables. We need to identify our "five" metrics.
 
-And there's one more thing I'd like to touch on. Gerd Gigerenzer (a German psychologist who has done extensive research on the use of heuristics in decision making) has spent decades showing that a few well-chosen cues often outperform more complicated models. He calls this the "*less-is-more* effect". As you pile on variables you start fitting noise, so a simple rule that ignores most of the available information often generalises better to the next case (Gigerenzer & Goldstein, 1996).
+And there's one more thing I'd like to touch on. Gerd Gigerenzer (a German psychologist who has done extensive research on the use of heuristics in decision making) has spent decades showing that a few well-chosen cues often outperform more complicated models. He calls this the "*less-is-more* effect". As you pile on variables you start fitting noise, so a simple rule that ignores most of the available information often generalises better to the next case ([Gigerenzer & Goldstein, 1996](https://psycnet.apa.org/record/1996-06397-002)).
 
-Take one example from medicine. Emergency doctors trying to identify a heart attack did better with a simple tree of three *yes/no* questions than with a complex risk score and even better than their own judgement (Green & Mehr, 1997). Just three questions beat an assessment that used for more information.
+Take one example from medicine. Emergency doctors trying to identify a heart attack did better with a simple tree of three *yes/no* questions than with a complex risk score and even better than their own judgement ([Green & Mehr, 1997](https://www.thefreelibrary.com/What+alters+physicians%27+decisions+to+admit+to+the+coronary+care+unit%3F-a019891677)). Just three questions beat an assessment that used for more information.
 
 Playing devil's advocate, at this point you might be thinking: *if less is more, why do some of the most data-led organisations in the world keep collecting more?*
 
