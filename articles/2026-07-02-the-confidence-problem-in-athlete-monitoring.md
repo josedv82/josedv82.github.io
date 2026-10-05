@@ -12,7 +12,12 @@
 
 There's a clip of Luis Enrique going around at the moment. In it he explains that part of his job is to give players the minimum information possible. He says coaches say too much at times, and that if he hands a player five ideas the player can't use, then he's given him nothing.
 
-> *here is a shorter version with English subtitles*
+<blockquote class="twitter-tweet" data-conversation="none">
+  <p><a href="https://x.com/kikollan/status/2072253032922861871?s=20">Watch the Luis Enrique clip on X</a></p>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+> *[Here is another version with English subtitles](https://youtube.com/shorts/z0Dgc1sfaWk?is=jN-uQA02DLW6eKbd)*
 
 People are sharing it as a coaching insight, but it is also a data problem. Something I've seen often in high-performance departments.
 
@@ -75,4 +80,3 @@ Lolli, L., Batterham, A. M., Hawkins, R., Kelly, D. M., Strudwick, A. J., Thorpe
 Slovic, P. (1973). "Behavioral Problems of Adhering to a Decision Policy." Paper presented at the Institute for Quantitative Research in Finance.
 
 Tsai, C. I., Klayman, J., & Hastie, R. (2008). "Effects of amount of information on judgment accuracy and confidence." Organizational Behavior and Human Decision Processes, 107(2), 97–105.
-
