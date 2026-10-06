@@ -160,23 +160,16 @@ body {
   transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
 }
 .project-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.projects .item:hover .project-icon,
 .projects .item-link:focus-visible .project-icon {
   opacity: 1;
   transform: translate(0, -50%);
 }
-@media (hover: hover) {
-  .projects .item:hover .project-icon {
-    opacity: 1;
-    transform: translate(0, -50%);
-  }
-}
 @media (max-width: 650px) {
   .project-icon { left: 0; }
   .projects .item-name { display: inline-block; transition: transform 0.18s var(--ease); }
+  .projects .item:hover .item-name,
   .projects .item-link:focus-visible .item-name { transform: translateX(2.75rem); }
-}
-@media (max-width: 650px) and (hover: hover) {
-  .projects .item:hover .item-name { transform: translateX(2.75rem); }
 }
 
 .essay-link:hover .item-name,
