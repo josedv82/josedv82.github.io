@@ -15,7 +15,7 @@
   --sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', sans-serif;
   --mono:  ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
-  --measure: 40rem;
+  --measure: 35rem;
   --gap:     clamp(3rem, 7vw, 4rem);
   --ease:    cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -83,23 +83,23 @@ body {
 
 .name {
   font-family: var(--serif);
-  font-size: clamp(2.5rem, 8vw, 3.25rem);
+  font-size: clamp(2rem, 7.5vw, 2.75rem);
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.02;
 }
 
 .role {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.13em;
+  font-family: var(--sans);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
 .bio {
-  font-size: 1.0625rem;
-  line-height: 1.75;
+  font-size: 1rem;
+  line-height: 1.7;
   margin-top: 1.5rem;
   text-wrap: pretty;
 }
@@ -122,38 +122,21 @@ body {
   align-items: baseline;
   gap: 0.4em;
   color: var(--text);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
   font-family: var(--serif);
-  font-size: 1.5rem;
+  font-size: 1.3125rem;
   line-height: 1.3;
 }
 
 .item-name {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size 0.3s var(--ease);
-  padding-bottom: 2px;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
 }
 
-.item-link:hover .item-name,
-.item-link:focus-visible .item-name,
 .essay-link:hover .item-name,
-.essay-link:focus-visible .item-name { background-size: 100% 1px; }
-
-.arrow {
-  flex: none;
-  color: var(--muted);
-  transform: translate(0, 0);
-  transition: transform 0.3s var(--ease), color 0.3s var(--ease);
-}
-
-.item-link:hover .arrow,
-.item-link:focus-visible .arrow {
-  transform: translate(2px, -2px);
-  color: var(--text);
-}
+.essay-link:focus-visible .item-name { text-decoration: underline; }
 
 
 .item-desc {
@@ -178,53 +161,36 @@ body {
 .more:hover,
 .more:focus-visible { color: var(--text); }
 
-.more:hover .arrow,
-.more:focus-visible .arrow {
-  transform: translate(2px, -2px);
-  color: var(--text);
-}
+.projects .more { text-decoration: underline; text-underline-offset: 0.2em; }
 
 /* ---------- essays ---------- */
 
 .section-title {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: normal;
   color: var(--muted);
 }
 
 .essays > .item-desc { margin-top: 0; }
+.essays { border-top: 0; padding-top: 0; }
 
-.essay-list { list-style: none; }
-.essay-row + .essay-row { border-top: 1px solid var(--rule); }
+.essay-list { list-style: none; display: grid; gap: 1.25rem; }
 .essay-link {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 1.5rem;
-  padding: 1.125rem 0;
+  padding: 0;
   color: var(--text);
   font-family: var(--serif);
-  font-size: 1.3125rem;
+  font-size: 1.1875rem;
   line-height: 1.35;
   text-decoration: none;
 }
-.essay-row:first-child .essay-link { padding-top: 0; }
-.essay-row:last-child .essay-link { padding-bottom: 0; }
 .essay-link .item-name { min-width: 0; }
-.essay-date {
-  flex: none;
-  font-family: var(--mono);
-  font-size: 0.625rem;
-  line-height: 1.5;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
 .essay-nav { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .site-name { color: var(--text); font-family: var(--serif); font-size: 1.125rem; text-decoration: none; }
 .essay { display: grid; gap: 2.5rem; }
@@ -285,7 +251,7 @@ body {
 
 .essay-title {
   font-family: var(--serif);
-  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-size: clamp(2rem, 6vw, 2.75rem);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -346,7 +312,8 @@ body {
 .links a {
   font-size: 0.875rem;
   color: var(--muted);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
   transition: color 0.2s var(--ease);
 }
 
@@ -392,21 +359,6 @@ body {
   outline-offset: 4px;
   border-radius: 2px;
 }
-
-/* ---------- entrance ---------- */
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(0.6rem); }
-  to   { opacity: 1; transform: none; }
-}
-
-.intro, .section, .theme-toggle {
-  animation: rise 0.7s var(--ease) backwards;
-}
-.intro            { animation-delay: 0.02s; }
-.section          { animation-delay: 0.12s; }
-.section + .section { animation-delay: 0.2s; }
-.theme-toggle     { animation-delay: 0.35s; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
