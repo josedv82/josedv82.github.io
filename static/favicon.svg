@@ -9,5 +9,5 @@
   </style>
   <rect width="32" height="32" rx="7"/>
   <text x="16" y="22.5" text-anchor="middle"
-        font-family="Palatino, Georgia, serif" font-size="19">J</text>
+        font-family="Palatino, Georgia, serif" font-size="18" letter-spacing="-0.5">JF</text>
 </svg>

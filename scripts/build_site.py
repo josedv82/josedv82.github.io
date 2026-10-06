@@ -30,8 +30,8 @@ def plain(html):
 
 def build(root=ROOT):
     def version_assets(html):
-        # Static hosting can cache CSS separately from newly deployed HTML/JS.
-        for asset in ('css/style.css', 'js/theme.js', 'js/reader.js'):
+        # Version assets so newly deployed pages use the latest styles and favicon.
+        for asset in ('css/style.css', 'js/theme.js', 'js/reader.js', 'favicon.svg'):
             path = root / 'static' / asset
             if path.exists():
                 digest = sha256(path.read_bytes()).hexdigest()[:12]

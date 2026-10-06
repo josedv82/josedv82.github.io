@@ -115,6 +115,14 @@ body {
 
 /* ---------- lists ---------- */
 
+.projects-heading { display: grid; gap: 0.5rem; }
+.projects-caption {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
 .list { list-style: none; display: grid; gap: 2rem; }
 
 .item-link {
@@ -133,6 +141,42 @@ body {
 .item-name {
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
+}
+
+.projects .item-link { position: relative; }
+.project-icon {
+  position: absolute;
+  left: -2.75rem;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 22%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), inset 0 0 0 1px rgb(0 0 0 / 6%);
+  opacity: 0;
+  transform: translate(0.25rem, -50%);
+  pointer-events: none;
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.project-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.projects .item-link:focus-visible .project-icon {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+@media (hover: hover) {
+  .projects .item:hover .project-icon {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+@media (max-width: 650px) {
+  .project-icon { left: 0; }
+  .projects .item-name { display: inline-block; transition: transform 0.18s var(--ease); }
+  .projects .item-link:focus-visible .item-name { transform: translateX(2.75rem); }
+}
+@media (max-width: 650px) and (hover: hover) {
+  .projects .item:hover .item-name { transform: translateX(2.75rem); }
 }
 
 .essay-link:hover .item-name,
