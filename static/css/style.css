@@ -10,6 +10,7 @@
   --muted:   #5d5d56;
   --rule:    #e2e2dc;
   --accent:  #141413;
+  --contribution-empty: #e2e2dc;
 
   --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
   --sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', sans-serif;
@@ -23,13 +24,16 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0f0f0e; --text: #e8e4de; --muted: #aaa69e; --rule: #30302c; --accent: #e8e4de;
+    --contribution-empty: #30302c;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0f0f0e; --text: #e8e4de; --muted: #aaa69e; --rule: #30302c; --accent: #e8e4de;
+  --contribution-empty: #30302c;
 }
 :root[data-theme="light"] {
   --bg: #f7f7f5; --text: #141413; --muted: #5d5d56; --rule: #e2e2dc; --accent: #141413;
+  --contribution-empty: #e2e2dc;
 }
 
 /* ---------- base ---------- */
@@ -199,6 +203,41 @@ body {
 .more:focus-visible { color: var(--text); }
 
 .projects .more { text-decoration: underline; text-underline-offset: 0.2em; }
+
+.github-projects { position: relative; justify-self: start; }
+.contribution-preview {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  width: min(35rem, calc(100vw - 3rem));
+  padding-top: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.25rem);
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease), visibility 0.18s;
+}
+.github-projects:not(.preview-dismissed):hover .contribution-preview,
+.github-projects:not(.preview-dismissed):focus-within .contribution-preview {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.contribution-card {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
+}
+.contribution-summary { color: var(--muted); font-size: 0.75rem; margin-bottom: 0.75rem; }
+.contribution-card svg { display: block; width: 100%; height: auto; }
+.contribution-card text { fill: var(--muted); font: 9px var(--sans); }
+.contribution-day[data-level="0"] { fill: var(--contribution-empty); }
+.contribution-day[data-level="1"] { fill: #9be9a8; }
+.contribution-day[data-level="2"] { fill: #40c463; }
+.contribution-day[data-level="3"] { fill: #30a14e; }
+.contribution-day[data-level="4"] { fill: #216e39; }
 
 /* ---------- essays ---------- */
 
@@ -415,6 +454,6 @@ body {
 /* ---------- print ---------- */
 
 @media print {
-  .theme-toggle, .essay-audio { display: none; }
+  .theme-toggle, .essay-audio, .contribution-preview { display: none; }
   body { padding: 0; display: block; color: #000; background: #fff; }
 }

@@ -21,6 +21,7 @@
   <link rel="preload" href="static/css/style.css" as="style">
   <link rel="stylesheet" href="static/css/style.css">
   <script src="static/js/theme.js"></script>
+  <script src="static/js/projects.js" defer></script>
 </head>
 <body>
 
@@ -68,9 +69,16 @@
 
       </ul>
 
-      <a class="more" href="https://github.com/josedv82" target="_blank" rel="noopener noreferrer">
-        <span>More projects on GitHub</span>
-      </a>
+      <div class="github-projects">
+        <a class="more" href="https://github.com/josedv82" target="_blank" rel="noopener noreferrer" aria-describedby="github-contributions">
+          <span>More projects on GitHub</span>
+        </a>
+        <div class="contribution-preview" id="github-contributions" role="tooltip">
+          <div class="contribution-card">
+            <!-- CONTRIBUTIONS -->
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section essays" aria-labelledby="essays-heading">

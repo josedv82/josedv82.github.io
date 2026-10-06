@@ -31,7 +31,7 @@ def plain(html):
 def build(root=ROOT):
     def version_assets(html):
         # Version assets so newly deployed pages use the latest styles and favicon.
-        for asset in ('css/style.css', 'js/theme.js', 'js/reader.js', 'favicon.svg'):
+        for asset in ('css/style.css', 'js/theme.js', 'js/reader.js', 'js/projects.js', 'favicon.svg'):
             path = root / 'static' / asset
             if path.exists():
                 digest = sha256(path.read_bytes()).hexdigest()[:12]
@@ -68,6 +68,11 @@ def build(root=ROOT):
         articles.append((path.stem + ".html", title, summary, body, published, source_url))
 
     homepage = (root / "index.html").read_text(encoding="utf-8")
+    contributions = root / "scripts/contributions.html"
+    homepage = homepage.replace(
+        '<!-- CONTRIBUTIONS -->',
+        contributions.read_text(encoding="utf-8") if contributions.exists() else '',
+    )
     template = (root / "scripts/essay.html").read_text(encoding="utf-8")
     listing = '<p class="item-desc">Coming soon.</p>'
     if articles:
